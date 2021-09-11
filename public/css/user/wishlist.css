@@ -1,0 +1,57 @@
+.container-fluid .table tbody tr th li{
+    list-style-type: none;
+}
+.wishlist-page{
+	margin-top: 35px;
+}
+.wishlist-page .f-row i{
+	font-size: 60px;
+	margin: auto;
+}
+.wishlist-page h1{
+	padding-top: 10px;
+}
+
+
+.table{
+	margin-top: 30px;
+}
+.table td{
+	font-weight: 700;
+}
+.table th{
+	vertical-align: inherit;
+	font-weight: 400;
+}
+.table thead tr{
+	width: 200px;
+}
+.table tbody tr td{
+	width: 100%;
+	text-align: center;
+}
+.table tbody tr td input{
+	width: 50px;
+}
+.wishlist-page div table tbody tr th li{
+	text-decoration: none;
+	color: white;
+}
+.wishlist-page div table tbody tr th li a .btn{
+	width: 200px;
+}
+.wishlist-page div table tbody tr th a{
+	color: lightgray;
+}
+.wishlist-page div table tbody tr th a i{
+	    font-size: 25px;
+    padding-right: 10px;
+}
+.btn-secondary{
+    background-color: #171d65;
+}
+.btn-secondary:hover{
+    background-color: #85c442;
+    border: 1px solid #85c442;
+}
+

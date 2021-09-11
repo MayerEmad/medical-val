@@ -1,0 +1,34 @@
+@import url('https://fonts.googleapis.com/css2?family=KoHo:ital,wght@1,300&display=swap');
+  .contact-title{
+    font-family: 'KoHo', sans-serif;
+  }
+  .cover{
+    background-size: cover;
+    margin-top: 60px;
+  }
+  section{
+    background-color: #F5F7FA;
+  }
+  .form-control{
+    background-color: white;
+  }
+  .form-group .btn-primary{
+      background-color: #2a316e;
+      border-color: #2a316e;
+  }
+  .form-group .btn-primary:hover{
+    background-color: #6dae21;
+    border-color: #6dae21;
+}
+  .mapouter{
+      position:relative;
+      text-align:right;
+      height:500px;
+      width:600px;
+}
+.gmap_canvas {
+    overflow:hidden;
+    background:none!important;
+    height:500px;
+    width:600px;
+}

@@ -1,0 +1,13 @@
+.cart-container{
+    padding: 30px;
+    margin-top: 10px;
+}
+.cart-btn{
+    background-color: #00594c;
+    color: white;
+}
+.cart-btn:hover{
+    background-color: #00e498;
+    color: black;
+
+}

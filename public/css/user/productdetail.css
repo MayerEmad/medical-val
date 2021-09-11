@@ -1,0 +1,395 @@
+html, body {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+  }
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 15px;
+  }
+  /* Columns */
+.left-column {
+    position: relative;
+  }
+  .right-column {
+    width: 35%;
+    margin-top: 60px;
+  }
+  /* Left Column */
+.left-column img {
+    width: 100%;
+    position: relative;
+    left: 0;
+    top: 0;
+    opacity: 0;
+  }
+   .container-fluid .row .col-lg-7 .piclist li .pro-image{
+        border-style: ridge;
+        border-radius: 10px;
+        border-top: 0px;
+        border-bottom: 0px;
+        width: 20%;
+        margin-right: 20px;
+   }
+  /* Product Description */
+.product-description {
+    border-bottom: 1px solid #E1E8EE;
+    margin-bottom: 20px;
+  }
+  .product-description span {
+    font-size: 12px;
+    color: #358ED7;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    text-decoration: none;
+  }
+  .product-description h1 {
+    font-weight: 300;
+    font-size: 52px;
+    color: #43484D;
+    letter-spacing: -2px;
+  }
+  .product-description p {
+    font-size: 16px;
+    font-weight: 300;
+    color: #86939E;
+    line-height: 24px;
+  }
+  /* Product Color */
+.product-color {
+    margin-bottom: 30px;
+  }
+
+  .color-choose div {
+    display: inline-block;
+  }
+  /* head-pro-details */
+  .head-pro-details a{
+      color: gray;
+  }
+  /* Cable Configuration */
+.cable-choose {
+    margin-bottom: 20px;
+  }
+
+  .cable-choose button {
+    border: 2px solid #E1E8EE;
+    border-radius: 6px;
+    padding: 13px 20px;
+    font-size: 14px;
+    color: #5E6977;
+    background-color: #fff;
+    cursor: pointer;
+    transition: all .5s;
+  }
+
+  .cable-choose button:hover,
+  .cable-choose button:active,
+  .cable-choose button:focus {
+    border: 2px solid #86939E;
+    outline: none;
+  }
+
+  .pro-price {
+    border-bottom: 1px solid #E1E8EE;
+    margin-bottom: 20px;
+  }
+
+  /* .cable-config a {
+    color: #358ED7;
+    text-decoration: none;
+    font-size: 12px;
+    position: relative;
+    margin: 10px 0;
+    display: inline-block;
+  } */
+  /* .cable-config a:before {
+    height: 15px;
+    width: 15px;
+    border-radius: 50%;
+    border: 2px solid rgba(53, 142, 215, 0.5);
+    display: inline-block;
+    text-align: center;
+    line-height: 16px;
+    opacity: 0.5;
+    margin-right: 5px;
+  } */
+  /* Product Price */
+.product-price {
+    display: flex;
+    align-items: center;
+  }
+
+  .product-price span {
+    font-size: 26px;
+    font-weight: 300;
+    color: #43474D;
+    margin-right: 20px;
+  }
+
+  .cart-btn {
+    display: inline-block;
+    background-color: #2a316e;
+    border-radius: 6px;
+    font-size: 16px;
+    color: #FFFFFF;
+    text-decoration: none;
+    padding: 12px 30px;
+    transition: all .5s;
+
+  }
+  .cart-btn:hover {
+    background-color: #6dae21;
+    color: #FFFFFF;
+    text-decoration: none;
+  }
+  /* Responsive */
+@media (max-width: 940px) {
+    .container {
+      flex-direction: column;
+      margin-top: 60px;
+    }
+
+    .left-column,
+    .right-column {
+      width: 100%;
+    }
+
+    .left-column img {
+      width: 300px;
+      right: 0;
+      top: -65px;
+      left: initial;
+    }
+  }
+
+  @media (max-width: 535px) {
+    .left-column img {
+      width: 220px;
+      top: -85px;
+    }
+  }
+
+
+  /* rating stars */
+  .rating {
+    float:left;
+}
+
+/* :not(:checked) is a filter, so that browsers that don’t support :checked don’t
+   follow these rules. Every browser that supports :checked also supports :not(), so
+   it doesn’t make the test unnecessarily selective */
+.rating:not(:checked) > input {
+    position:absolute;
+    top:-9999px;
+    clip:rect(0,0,0,0);
+}
+
+.rating:not(:checked) > label {
+    float:right;
+    width:1em;
+    padding:0 .1em;
+    overflow:hidden;
+    white-space:nowrap;
+    cursor:pointer;
+    font-size:200%;
+    line-height:1.2;
+    color:#ddd;
+    text-shadow:1px 1px #bbb, 2px 2px #666, .1em .1em .2em rgba(0,0,0,.5);
+}
+
+.rating:not(:checked) > label:before {
+    content: '★ ';
+}
+
+.rating > input:checked ~ label {
+    color: #eedc00;
+    text-shadow:1px 1px #eedc00, 2px 2px #eedc00, .1em .1em .2em rgba(0,0,0,.5);
+}
+
+.rating:not(:checked) > label:hover,
+.rating:not(:checked) > label:hover ~ label {
+    color: gold;
+    text-shadow:1px 1px goldenrod, 2px 2px #eedc00, .1em .1em .2em rgba(0,0,0,.5);
+}
+
+.rating > input:checked + label:hover,
+.rating > input:checked + label:hover ~ label,
+.rating > input:checked ~ label:hover,
+.rating > input:checked ~ label:hover ~ label,
+.rating > label:hover ~ input:checked ~ label {
+    color: #eedc00;
+    text-shadow:1px 1px goldenrod, 2px 2px #eedc00, .1em .1em .2em rgba(0,0,0,.5);
+}
+
+.rating > label:active {
+    position:relative;
+    top:2px;
+    left:2px;
+}
+
+/* end of Lea's code */
+
+/*
+ * Clearfix from html5 boilerplate
+ */
+
+.clearfix:before,
+.clearfix:after {
+    content: " "; /* 1 */
+    display: table; /* 2 */
+}
+
+.clearfix:after {
+    clear: both;
+}
+
+/*
+ * For IE 6/7 only
+ * Include this rule to trigger hasLayout and contain floats.
+ */
+
+.clearfix {
+    *zoom: 1;
+}
+
+/* my stuff */
+#status, button {
+    margin: 20px 0;
+}
+/* plus and minus */
+.number-input input[type="number"] {
+  -webkit-appearance: textfield;
+  -moz-appearance: textfield;
+  appearance: textfield;
+  }
+
+  .number-input input[type=number]::-webkit-inner-spin-button,
+  .number-input input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  }
+
+  .number-input {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
+
+  .number-input button {
+  -webkit-appearance: none;
+  background-color: transparent;
+  border: none;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  margin: 0;
+  position: relative;
+  }
+
+  .number-input button:before,
+  .number-input button:after {
+  /* display: inline-block; */
+  position: absolute;
+  content: '';
+  height: 2px;
+  transform: translate(-50%, -50%);
+  }
+
+  .number-input button.plus:after {
+  transform: translate(-50%, -50%) rotate(90deg);
+  }
+
+  .number-input input[type=number] {
+  text-align: center;
+  }
+
+  .number-input.number-input {
+  border: 1px solid #ced4da;
+  width: 10rem;
+  border-radius: .25rem;
+  }
+
+  .number-input.number-input button {
+  width: 2.6rem;
+  height: .7rem;
+  }
+
+  .number-input.number-input button.minus {
+  padding-left: 10px;
+  }
+
+  .number-input.number-input button:before,
+  .number-input.number-input button:after {
+  width: .7rem;
+  background-color: #495057;
+  }
+
+  .number-input.number-input input[type=number] {
+  max-width: 4rem;
+  padding: .5rem;
+  border: 1px solid #ced4da;
+  border-width: 0 1px;
+  font-size: 1rem;
+  height: 2rem;
+  color: #495057;
+  }
+
+  @media not all and (min-resolution:.001dpcm) {
+  @supports (-webkit-appearance: none) and (stroke-color:transparent) {
+
+  .number-input.def-number-input.safari_only button:before,
+  .number-input.def-number-input.safari_only button:after {
+  margin-top: -.3rem;
+  }
+  }
+  }
+/* nav-link description */
+.container-fluid .container .nav-tabs .nav-item a{
+    text-align: center;
+    border-top: 0;
+    border-right: 0;
+    border-left: 0;
+    border-bottom: 1px solid #dee2e6;
+    background-color: #2a316e;
+    color: #fff;
+}
+.container-fluid .container .nav-tabs .nav-item a:hover{
+    color: #9bcc62;
+}
+.container-fluid .container .nav-tabs .nav-item a.active{
+    color: #9bcc62;
+}
+/* Information of product */
+.container-fluid .container .tab-content .tab-pane ul .pro-info{
+    list-style-type: disc;
+}
+/* buttoms */
+.container-fluid .container .tab-content .tab-pane .review .text-right .btn-primary{
+    background-color: #2a316e;
+    border-color: #2a316e;
+}
+.container-fluid .container .tab-content .tab-pane .review .text-right .btn-primary:hover{
+    background-color: #6dae21;
+    border-color: #6dae21;
+}
+/* btn-dis */
+.row .col-lg-4 .card .btn-dis{
+    display:none;
+    position: absolute;
+    top:40px;
+    left:30px;
+    color: white;;
+}
+.row .col-lg-4 .card:hover .btn-dis{
+    display:table-cell;
+}
+.row .col-lg-4 .card .buttons{
+    color:white;
+    background-color: #2a316e;
+}
+.row .col-lg-4 .card .buttons:hover{
+    background-color:#6dae21;
+    color:white;
+}
