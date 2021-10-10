@@ -65,3 +65,33 @@ Route::get('cart', [CartController::class, 'cart']);
 Route::get('wishlist', [WishListController::class, 'wishlist']);
 //wishlist
 Route::get('compare', [CompareController::class, 'compare']);
+// about page
+Route::get('/about', function () {
+    return view('about');
+});
+// contact page
+Route::get('/contact', function () {
+    return view('contact');
+});
+//home page
+Route::get('/index', function () {
+    return view('index');
+});
+//Product details page
+Route::get('/details', function () {
+    return view('shop-single');
+});
+//Product details page
+Route::get('/shop', function () {
+    return view('shop');
+});
+//Product details page
+Route::get('/wishlist', function () {
+    return view('wishlist');
+});
+//Product details page
+Route::get('/checkout', function () {
+    return view('checkout');
+});
+
+
