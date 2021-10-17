@@ -68,7 +68,7 @@
             var search_text=$("#search_text").val();
             fetch_parent_category_data(search_text);
         }
-       // categorysearch();
+        categorysearch();
 
         function fetch_parent_category_data(searchtext='')
         {
