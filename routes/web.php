@@ -7,6 +7,8 @@ use App\Http\Controllers\MailController;
 use App\Http\Controllers\Client\CartController;
 use App\Http\Controllers\Client\WishListController;
 use App\Http\Controllers\Client\CompareController;
+use App\Http\Controllers\Client\HomeController;
+
 use App\Models\Category;
 
 /*
@@ -74,9 +76,12 @@ Route::get('/contact', function () {
     return view('contact');
 });
 //home page
-Route::get('/index', function () {
-    return view('index');
-});
+// Route::get('/index', function () {
+//     return view('index');
+// });
+Route::get('/index', [HomeController::class, 'index'])->name('index');
+Route::get('/search',[HomeController::class, 'search'])->name('search');
+
 //Product details page
 Route::get('/details', function () {
     return view('shop-single');

@@ -41,9 +41,13 @@
             <div class="search-wrap">
                 <div class="container">
                 <a href="#" class="search-close js-search-close"><span class="icon-close2"></span></a>
-                <form action="#" method="post">
+                <!-- <form action="#" method="post">
                     <input type="text" class="form-control" placeholder="Search keyword and hit enter...">
-                </form>
+                </form> -->
+                <form action="{{ route('search') }}" method="GET" class="search-form">
+                        <input type="text" name="query1" id="query1" value="{{ request()->input('query1') }}" class="form-control" placeholder="Search keyword and hit enter...">
+
+                    </form>
                 </div>
             </div>
 
@@ -124,7 +128,9 @@
                         </nav>
                     </div>
                     <div class="icons">
-                        <a href="#" class="icons-btn d-inline-block js-search-open"><span class="icon-search"></span></a>
+                        <!-- <a href="search" class="icons-btn d-inline-block js-search-open"><span class="icon-search"></span></a> -->
+                        <a href="'.route('search').'" class="icons-btn d-inline-block js-search-open" type="button"><span class="icon-search"></span></a>
+
                         <a href="cart" class="icons-btn d-inline-block bag">
                             <span class="icon-shopping-bag"></span>
                             <span class="number">2</span>
