@@ -81,6 +81,7 @@ Route::get('/contact', function () {
 // });
 Route::get('/index', [HomeController::class, 'index'])->name('index');
 Route::get('/search',[HomeController::class, 'search'])->name('search');
+Route::get('lang/change', [HomeController::class, 'change'])->name('changeLang');
 
 //Product details page
 Route::get('/details', function () {

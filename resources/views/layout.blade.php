@@ -18,6 +18,7 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js" integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT" crossorigin="anonymous"></script>
 
   <link rel="stylesheet" href="css/user/bootstrap.min.css">
+
   <link rel="stylesheet" href="css/user/magnific-popup.css">
   <link rel="stylesheet" href="css/user/jquery-ui.css">
   <link rel="stylesheet" href="css/user/owl.carousel.min.css">
@@ -27,7 +28,9 @@
   <link rel="stylesheet" href="css/user/aos.css">
 
   <link rel="stylesheet" href="css/user/style.css">
-
+  @if (session()->get('locale') == 'ar')
+        <link rel="stylesheet" href="{{ asset('css/bootstrap-rtl.css') }}">
+    @endif
   {{-- pop up --}}
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
@@ -50,7 +53,6 @@
                     </form>
                 </div>
             </div>
-
             <div class="container">
                 <div class="d-flex align-items-center justify-content-between">
                     <div class="logo">
@@ -61,10 +63,10 @@
                     <div class="main-nav d-none d-lg-block">
                         <nav class="site-navigation text-right text-md-center" role="navigation">
                             <ul class="site-menu js-clone-nav d-none d-lg-block">
-                                <li class="nav-item"><a href="index">Home</a></li>
-                                <li class="nav-item"><a href="shop">Store</a></li>
+                                <li class="nav-item"><a href="index">{{ __('message.HOME') }}</a></li>
+                                <li class="nav-item"><a href="shop">{{ __('message.Store') }}</a></li>
                                 <li class="dropdown dropdown-large">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Products <b class="caret"></b></a>
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ __('message.Products') }} <b class="caret"></b></a>
                                     <ul class="dropdown-menu dropdown-menu-large row" style="left: -100px;">
                                         <li class="col-lg-3 col-md-12 col-sm-12">
                                             <ul>
@@ -122,8 +124,8 @@
                                         </li>
                                     </ul>
                                 </li>
-                                <li class="nav-item"><a href="about">About</a></li>
-                                <li class="nav-item"><a href="contact">Contact</a></li>
+                                <li class="nav-item"><a href="about">{{ __('message.About') }}</a></li>
+                                <li class="nav-item"><a href="contact">{{ __('message.Contact') }}</a></li>
                             </ul>
                         </nav>
                     </div>
@@ -139,6 +141,11 @@
                             <span class="icon-heart"></span>
                             <span class="number">2</span>
                         </a>
+                <select class="selectpicker changeLang" data-width="fit">
+    <option data-content='<span class="flag-icon flag-icon-us"></span> English' value="en" {{ session()->get('locale') == 'en' ? 'selected' : '' }}>English</option>
+  <option  data-content='<span class="flag-icon flag-icon-mx"></span> Español'value="ar" {{ session()->get('locale') == 'ar' ? 'selected' : '' }}>Arabic</option>
+</select>
+            
                         <a href="#" class="site-menu-toggle js-menu-toggle ml-3 d-inline-block d-lg-none"><span
                             class="icon-menu"></span>
                         </a>
@@ -309,5 +316,14 @@
 //   // Your code
 // });
   </script>
+      <script type="text/javascript">
+  
+  var url = "{{ route('changeLang') }}";
+
+  $(".changeLang").change(function(){
+      window.location.href = url + "?lang="+ $(this).val();
+  });
+ 
+</script>
 </body>
 </html>
