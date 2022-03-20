@@ -16,6 +16,11 @@ class DatabaseSeeder extends Seeder
         // \App\Models\Category::factory(10)->create();
         
          $this->call(LaratrustSeeder::class);
-        // Model::unguard();  $this->call(CategoryTableSeeder::class);  Model::reguard();
+        // Model::unguard();
+          $this->call(CategoryTableSeeder::class); 
+          $this->call(UserTableSeeder::class); 
+          $this->call(ProductTableSeeder::class); 
+
+        //    Model::reguard();
     }
 }
