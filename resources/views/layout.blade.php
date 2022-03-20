@@ -124,6 +124,15 @@
                                 </li>
                                 <li class="nav-item"><a href="about">About</a></li>
                                 <li class="nav-item"><a href="contact">Contact</a></li>
+                                @if (Auth::check())
+                                    <li class="nav-item"><a href="profile">Profile</a></li>
+                                    @if(Auth::user()->hasRole('editoradmin') || Auth::user()->hasRole('superadmin'))
+                                         <li class="nav-item"><a href="admin">Dashboard</a></li>
+                                    @endif
+                                @else
+                                    <li class="nav-item"><a href="login">Log In</a></li>
+                                @endif
+
                             </ul>
                         </nav>
                     </div>

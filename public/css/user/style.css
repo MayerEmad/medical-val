@@ -3,7 +3,7 @@ body {
   line-height: 1.7;
   color: #8c92a0;
   font-weight: 300;
-  font-size: 16px; 
+  font-size: 16px;
   overflow-x: hidden;
 }
 
@@ -97,7 +97,7 @@ a {
    }
   @media (min-width: 768px) {
     .site-section {
-      padding: 5em 0; } }
+      padding: 1em 0; } }
   .site-section.site-section-sm {
     padding: 4em 0; }
 
@@ -279,8 +279,8 @@ a {
         width: 0;
       }
       .site-navbar .site-navigation .site-menu .nav-item a:hover:before{
-        width: 100%; 
-        left: 0; 
+        width: 100%;
+        left: 0;
       }
     .site-navbar .site-navigation .site-menu a {
       text-decoration: none !important;
@@ -1188,8 +1188,8 @@ a {
 
 .custom-table td {
   color: #000; }
-  
-  
+
+
   @media (max-width: 992px) {
     .container {
       padding: 0; }
@@ -1338,7 +1338,7 @@ a {
       height: 300px;
       perspective: 1000px;
     }
-    
+
     .flip-card-inner {
       position: relative;
       width: 100%;
@@ -1348,11 +1348,11 @@ a {
       transform-style: preserve-3d;
       box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
     }
-    
+
     .flip-card:hover .flip-card-inner {
       transform: rotateY(180deg);
     }
-    
+
     .flip-card-front, .flip-card-back {
       position: absolute;
       width: 100%;
@@ -1360,12 +1360,12 @@ a {
       -webkit-backface-visibility: hidden;
       backface-visibility: hidden;
     }
-    
+
     .flip-card-front {
       background-color: #bbb;
       color: black;
     }
-    
+
     .flip-card-back {
       background-color: #85c442;
       color: white;

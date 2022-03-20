@@ -1,6 +1,10 @@
+@extends("layout")
+@section("content")
+
 <x-guest-layout>
     <x-auth-card>
-        <x-slot name="logo">
+        <x-slot name="logo" >
+            <!----i cant delete them so i b5feha--->
             <a href="/">
                 <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
             </a>
@@ -47,10 +51,12 @@
                     </a>
                 @endif
 
-                <x-button class="ml-3">
+                <x-button class="ml-3" style="background-color:#2A326E" onmouseout="this.style.backgroundColor='#2A326E'" onmouseover="this.style.backgroundColor='#85C442'">
                     {{ __('Login') }}
                 </x-button>
             </div>
         </form>
     </x-auth-card>
 </x-guest-layout>
+
+@endsection

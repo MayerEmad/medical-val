@@ -112,7 +112,7 @@ class CategoryController extends Controller
         //return redirect('/category')->with('success','Category Created Succesfully');
     }
 
-    //FIX add table inside your page
+    //FIX add table inside your page   I think its fixed
     public function show(Category $category)
     {
         return view('Admin.category.show')->with('category',$category);
@@ -125,7 +125,7 @@ class CategoryController extends Controller
             if($request->input('id'))
                 $products= DB::table('products')->where('category_id', $request->input('id'))->get();
             else
-                $products= Product::all();
+                $products= '';
 
             return Datatables::of($products)
                 ->addIndexColumn()

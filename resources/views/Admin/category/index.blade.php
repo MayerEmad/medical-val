@@ -16,7 +16,7 @@
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="/dashboard">Home</a></li>
+                        <li class="breadcrumb-item"><a href="/admin">Home</a></li>
                         <li class="breadcrumb-item active">All Categories</li>
                         </ol>
                     </div>
@@ -44,9 +44,39 @@
                 </div>
 
                 <div class="card-body pb-0">
+                    >
                     <div class="row d-flex align-items-stretch" id="searchable_div">
-                    <h1>ok<h1>
-                   </div>
+                    @foreach($categories as $cat)
+
+                    <div class="col-12 col-sm-6 col-md-4 d-flex align-items-stretch flip-card" style="height:100%">
+                        <div class="card bg-light flip-card-inner">
+                            <p class="pt-4 lead pr-1 pl-1" style="font-size: 30px;font-weight: 400;font-family: cursive;">{{$cat->name}}</p>
+                            <div class="card-body pl-0 pt-0 pb-0">
+                                <img class="img1" src="{{ asset('/img/categories/'.$cat->image) }}" width="106.5%" style="height: 260px;">
+                            </div>
+                            <div class="flip-card-back pt-5" style="background-color:#828282;">
+                                <div class="pt-2 mb-4">
+                                    <a href="{{route('category.edit',['category'=>$cat->id])}}" class="btn btn-success mr-3" type="button">
+                                        <i class="fas fa-edit"></i> Edit
+                                    </a>
+                                    <a onclick='deletefunction({{$cat->id}})' class="btn btn-danger" type="button">
+                                        <i class="fas fa-trash-alt"></i> Delete
+                                    </a>
+                                    <form action="{{ route('category.destroy',['category'=>$cat->id]) }}" id="{{$cat->id}}" method="POST" style="display:none">
+                                    @csrf @method("DELETE")
+                                    <button type="submit"></button>
+                                    </form>
+                                </div>
+                            </div>
+                            <a href="{{ route('category.show',['category'=>$cat->id]) }}"class="btn btn-light pro-btn mb-3 mr-2 ml-2" type="button">
+                                <i class="fab fa-product-hunt"></i> View Contents
+                            </a>
+
+                        </div>
+                    </div>
+
+                    @endforeach
+                    </div>
                     <div class="row mt-2 mb-4">
                         <div class="col-lg-9"></div>
                         <div class="col-lg-3">
@@ -82,7 +112,7 @@
                     $("#searchable_div").html('');
                     $("#searchable_div").append(data);
                 }
-            })
+            });
         }
 
 </script>
