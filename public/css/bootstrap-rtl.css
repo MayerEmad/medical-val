@@ -1062,7 +1062,7 @@ padding-left: 0;
 .pl-4,
 .px-4 {
   padding-right: 1.5rem !important;
-  padding-left: 0 !important;
+  padding-left: 2rem !important;
 }
 
 .pr-5,
@@ -1074,7 +1074,7 @@ padding-left: 0;
 .pl-5,
 .px-5 {
   padding-right: 3rem !important;
-  padding-left: 0 !important;
+  padding-left: 2rem !important;
 }
 
 .mr-auto,
