@@ -1,307 +1,141 @@
+<!DOCTYPE html>
 @extends('/Admin/leftSide')
 @section('content')
 <html>
-    <head>
-        <style>
-            .cat-font{
-                font-size: 20px;
-                font-weight: 400;
-                font-family: cursive;
-            }
-            .image-size{
-                width:70%;
-            }
-            .pro-name{
-                font-size: 18px;
-                font-family: cursive;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="content-wrapper">
-            <section class="content-header">
-                <div class="container-fluid">
-                    <div class="row mb-2">
+<head>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css"/>
+    <link href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" rel="stylesheet"/>
+    <link href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="{{ asset('/css/delete.css') }}">
+
+</head>
+
+<body>
+    <div class="content-wrapper">
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>All Products</h1>
+                            <h1>Products Table</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="/dashboard">Home</a></li>
-                        <li class="breadcrumb-item active">All Products</li>
+                        <li class="breadcrumb-item"><a href="/admin">Home</a></li>
                         </ol>
                     </div>
-                    </div>
-                </div><!-- /.container-fluid -->
-            </section>
-
-            <section class="content">
-
-                <!-- Default box -->
-                <div class="card">
-                    <div class="card-header">
-                    <h3 class="card-title">Products</h3>
-
-                    <div class="card-tools">
-                        <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
-                        <i class="fas fa-minus"></i>
-                        </button>
-                    </div>
-                    </div>
-                    <div class="card-body p-0">
-                    <table class="table table-striped projects">
-                        <thead>
-                            <tr>
-                                <th style="width: 1%">
-                                    ID
-                                </th>
-                                <th style="width: 17%">
-                                    Product Name
-                                </th>
-                                <th style="width: 26%">
-                                    Image
-                                </th>
-                                <th style="width: 15%">
-                                    Category Name
-                                </th>
-                                <th style="width: 8%" class="text-center">
-                                    Quantity
-                                </th>
-                                <th style="width: 5%" class="text-center">
-                                    Price
-                                </th>
-                                <th style="width: 30%">
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>
-                                    542
-                                </td>
-                                <td>
-                                    <p class="pro-name">
-                                        LA-PRESH
-                                    </p>
-                                </td>
-                                <td>
-                                    <ul class="list-inline">
-                                        <li class="list-inline-item">
-                                            <img alt="Product Image" class="image-size" src="{{ asset('/img/skinpro1.jpg') }}">
-                                        </li>
-                                    </ul>
-                                </td>
-                                <td class="project_progress">
-                                    <p class="cat-font">SkinCare</p>
-                                </td>
-                                <td class="project-state">
-                                    <span class="badge badge-success">50</span>
-                                </td>
-                                <td class="project-state">
-                                    <span class="badge badge-dark">5$</span>
-                                </td>
-                                <td class="project-actions text-right">
-                                    <a class="btn btn-primary btn-sm" href="productdetails">
-                                        <i class="fas fa-folder">
-                                        </i>
-                                        View
-                                    </a>
-                                    <a class="btn btn-info btn-sm" href="/editproduct">
-                                        <i class="fas fa-pencil-alt">
-                                        </i>
-                                        Edit
-                                    </a>
-                                    <a class="btn btn-danger btn-sm" href="#">
-                                        <i class="fas fa-trash">
-                                        </i>
-                                        Delete
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    205
-                                </td>
-                                <td>
-                                    <p class="pro-name">
-                                        Joo Faced
-                                    </p>
-                                </td>
-                                <td>
-                                    <ul class="list-inline">
-                                        <li class="list-inline-item">
-                                            <img alt="Product Image" class="image-size" src="{{ asset('/img/makeup_pro1.jpg') }}">
-                                        </li>
-                                    </ul>
-                                </td>
-                                <td class="project_progress">
-                                    <p class="cat-font">MakeUp</p>
-                                </td>
-                                <td class="project-state">
-                                    <span class="badge badge-danger">8</span>
-                                </td>
-                                <td class="project-state">
-                                    <span class="badge badge-dark">10$</span>
-                                </td>
-                                <td class="project-actions text-right">
-                                    <a class="btn btn-primary btn-sm" href="/productdetails">
-                                        <i class="fas fa-folder">
-                                        </i>
-                                        View
-                                    </a>
-                                    <a class="btn btn-info btn-sm" href="/editproduct">
-                                        <i class="fas fa-pencil-alt">
-                                        </i>
-                                        Edit
-                                    </a>
-                                    <a class="btn btn-danger btn-sm" href="#">
-                                        <i class="fas fa-trash">
-                                        </i>
-                                        Delete
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    123
-                                </td>
-                                <td>
-                                    <p class="pro-name">
-                                        Brainy
-                                    </p>
-                                </td>
-                                <td>
-                                    <ul class="list-inline">
-                                        <li class="list-inline-item">
-                                            <img alt="Product Image" class="image-size" src="{{ asset('/img/sup_pro1.jpg') }}">
-                                        </li>
-                                    </ul>
-                                </td>
-                                <td class="project_progress">
-                                    <p class="cat-font">Food Supplements</p>
-                                </td>
-                                <td class="project-state">
-                                    <span class="badge badge-warning">23</span>
-                                </td>
-                                <td class="project-state">
-                                    <span class="badge badge-dark">8$</span>
-                                </td>
-                                <td class="project-actions text-right">
-                                    <a class="btn btn-primary btn-sm" href="/productdetails">
-                                        <i class="fas fa-folder">
-                                        </i>
-                                        View
-                                    </a>
-                                    <a class="btn btn-info btn-sm" href="/editproduct">
-                                        <i class="fas fa-pencil-alt">
-                                        </i>
-                                        Edit
-                                    </a>
-                                    <a class="btn btn-danger btn-sm" href="#">
-                                        <i class="fas fa-trash">
-                                        </i>
-                                        Delete
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    123
-                                </td>
-                                <td>
-                                    <p class="pro-name">
-                                        Brainy
-                                    </p>
-                                </td>
-                                <td>
-                                    <ul class="list-inline">
-                                        <li class="list-inline-item">
-                                            <img alt="Product Image" class="image-size" src="{{ asset('/img/sup_pro1.jpg') }}">
-                                        </li>
-                                    </ul>
-                                </td>
-                                <td class="project_progress">
-                                    <p class="cat-font">Food Supplements</p>
-                                </td>
-                                <td class="project-state">
-                                    <span class="badge badge-warning">23</span>
-                                </td>
-                                <td class="project-state">
-                                    <span class="badge badge-dark">8$</span>
-                                </td>
-                                <td class="project-actions text-right">
-                                    <a class="btn btn-primary btn-sm" href="/productdetails">
-                                        <i class="fas fa-folder">
-                                        </i>
-                                        View
-                                    </a>
-                                    <a class="btn btn-info btn-sm" href="/editproduct">
-                                        <i class="fas fa-pencil-alt">
-                                        </i>
-                                        Edit
-                                    </a>
-                                    <a class="btn btn-danger btn-sm" href="#">
-                                        <i class="fas fa-trash">
-                                        </i>
-                                        Delete
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    205
-                                </td>
-                                <td>
-                                    <p class="pro-name">
-                                        Joo Faced
-                                    </p>
-                                </td>
-                                <td>
-                                    <ul class="list-inline">
-                                        <li class="list-inline-item">
-                                            <img alt="Product Image" class="image-size" src="{{ asset('/img/makeup_pro1.jpg') }}">
-                                        </li>
-                                    </ul>
-                                </td>
-                                <td class="project_progress">
-                                    <p class="cat-font">MakeUp</p>
-                                </td>
-                                <td class="project-state">
-                                    <span class="badge badge-danger">8</span>
-                                </td>
-                                <td class="project-state">
-                                    <span class="badge badge-dark">10$</span>
-                                </td>
-                                <td class="project-actions text-right">
-                                    <a class="btn btn-primary btn-sm" href="/productdetails">
-                                        <i class="fas fa-folder">
-                                        </i>
-                                        View
-                                    </a>
-                                    <a class="btn btn-info btn-sm" href="/editproduct">
-                                        <i class="fas fa-pencil-alt">
-                                        </i>
-                                        Edit
-                                    </a>
-                                    <a class="btn btn-danger btn-sm" href="#">
-                                        <i class="fas fa-trash">
-                                        </i>
-                                        Delete
-                                    </a>
-                                </td>
-                            </tr>
-
-                        </tbody>
-                    </table>
-                    </div>
-                    <!-- /.card-body -->
                 </div>
-                <!-- /.card -->
+            </div><!-- /.container-fluid -->
+        </section>
+        <section class="content">
+            <div class="container-fluid">
+                <div class="row">
+                <!-- left column -->
+                <div class="col-md-12">
+                    <!-- jquery validation -->
+                    <div class="card card-primary">
+                        <div class="card-body">
+                            @if(count($products))  <!--add this in a new blade-->
+                                <form id="delete-form" action="" method="POST" style="display:none">
+                                    @csrf
+                                    @method('DELETE')
+                                </form>
+                                <h2 class="mb-4">products </h2>
+                                <table class="table table-bordered yajra-datatable">
+                                    <thead>
+                                        <tr>
+                                            <th>NO</th>
+                                            <th>Name</th>
+                                            <th>Price</th>
+                                            <th>Discount</th>
+                                            <th>Quantity</th>
+                                            <th>Rate</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    </tbody>
+                                </table>
 
-            </section>
+                            @else
+                               <h1>No Products</h1>
+                            @endif
 
-        </div>
 
-    </body>
+                        </div>
+                    <!-- /.card -->
+                    </div>
+                </div>
+                <!-- /.row -->
+            </div><!-- /.container-fluid -->
+        </section>
+
+    </div>
+     <!-- jquery-validation -->
+     <script src="{{ asset('/js/jquery.validate.min.js') }}"></script>
+     <script src="{{ asset('js/additional-methods.min.js') }}"></script>
+     <!-- Select2 -->
+     <script src="{{ asset('/js/select2.full.min.js') }}"></script>
+     <!-- Bootstrap4 Duallistbox -->
+     <script src="{{ asset('/js/jquery.bootstrap-duallistbox.min.js') }}"></script>
+     <!-- InputMask -->
+     <script src="{{ asset('/js/moment.min.js') }}"></script>
+     <script src="{{ asset('/js/jquery.inputmask.min.js') }}"></script>
+     <!-- date-range-picker -->
+     <script src="{{ asset('/js/daterangepicker.js') }}"></script>
+     <!-- bootstrap color picker -->
+     <script src="{{ asset('/js/bootstrap-colorpicker.min.js') }}"></script>
+     <!-- Tempusdominus Bootstrap 4 -->
+     <script src="{{ asset('/js/tempusdominus-bootstrap-4.min.js') }}"></script>
+     <!-- Bootstrap Switch -->
+     <script src="{{ asset('/js/bootstrap-switch.min.js') }}"></script>
+     <!-- BS-Stepper -->
+     <script src="{{ asset('/js/bs-stepper.min.js') }}"></script>
+     <!-- dropzonejs -->
+     <script src="{{ asset('/js/dropzone.min.js') }}"></script>
+</body>
+
+
+    <script type="text/javascript">
+        $(function () {
+          var table = $('.yajra-datatable').DataTable({
+              processing: true,
+              serverSide: true,
+              ajax:{
+                  url: "{{ route('product.productsearch') }}"
+              },
+              columns: [
+                  {data: 'DT_RowIndex', name: 'DT_RowIndex'},
+                  {data: 'name', name: 'name'},
+                  {data: 'price', name: 'price'},
+                  {data: 'discount', name: 'discount'},
+                  {data: 'quantity', name: 'quantity'},
+                  {data: 'rate', name: 'rate'},
+                  {data: 'action',  name: 'action',  orderable: true,  searchable: false},
+              ]
+          });
+
+        });
+
+         $('body').on('click', '#edit-product', function ()
+          {
+              var product_id = $(this).data("id");
+              let url="{{ route('product.edit',[':id']) }}".replace(':id',product_id );
+              $("#edit-product").attr('href',url);
+          });
+         $('body').on('click', '#show-product', function ()
+          {
+              var product_id = $(this).data("id");
+              let url="{{ route('product.show',[':id']) }}".replace(':id',product_id );
+              $("#show-product").attr('href',url);
+          });
+         $('body').on('click', '#delete-product', function ()
+          {
+              var product_id = $(this).data("id");
+              let url="{{ route('product.destroy',[':id']) }}".replace(':id',product_id );
+              $("#delete-form").attr('action',url);
+              $("#delete-form").submit();
+          });
+    </script>
 </html>
 @endsection

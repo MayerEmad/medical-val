@@ -33,24 +33,25 @@
                     <div class="card-body">
                     <div class="row">
                         <div class="col-12 col-sm-6">
-                        <h3 class="d-inline-block d-sm-none">LA-PRESH</h3>
+                        <h3 class="d-inline-block d-sm-none">{{ $product->name }}</h3>
+                        <h3 class="d-inline-block d-sm-none">{{ $product->ar_name }}</h3>
                         <div class="col-12">
-                            <img src="{{ asset('/img/skinpro1.jpg') }}" class="product-image" alt="Product Image">
+                            <img id="image-previewer"  src="{{ asset('/img/products/'.$product->image) }}"alt="preview image">
                         </div>
                         </div>
                         <div class="col-12 col-sm-6">
-                        <h3 class="my-3">LA-PRESH</h3>
-                        <p>La-Presh is a skincare line which empowers people to love the skin they are in!</p>
-
+                        <h3 class="my-3">{{ $product->name }}</h3>
+                        <p>{{ $product->description }}</p>
+                        <p>{{ $product->ar_description }}</p>
                         <hr>
                         <h4>Quantity</h4>
                         <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                            <span class="badge badge-success">50</span>
+                            <span class="badge badge-success">{{ $product->quantity }}</span>
                         </div>
 
                         <div class="bg-gray py-2 px-3 mt-4">
                             <h2 class="mb-0">
-                            $5.00
+                                {{ $product->price }}
                             </h2>
                             <h4 class="mt-0">
                             <small>Ex Tax: $5.00 </small>

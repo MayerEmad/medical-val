@@ -11,15 +11,15 @@
     <link rel="stylesheet" href="{{ asset('/css/delete.css') }}">
 
 </head>
-   
+
 <body>
     <div class="content-wrapper">
         <section class="content-header">
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        @if(count($category->subcategory))    
-                            <h1>{{$category->name}}</h1> 
+                        @if(count($category->subcategory))
+                            <h1>{{$category->name}}</h1>
                         @elseif(count($category->products))
                             <h1>Products Table</h1>
                         @endif
@@ -41,7 +41,7 @@
                     <!-- jquery validation -->
                     <div class="card card-primary">
                         <div class="card-body">
-                            @if(count($category->subcategory))             
+                            @if(count($category->subcategory))
                                 @foreach($category->subcategory as $cat)
                                 <div class="col-12 col-sm-6 col-md-4 d-flex align-items-stretch flip-card" style="height:100%">
                                         <div class="card bg-light flip-card-inner">
@@ -67,13 +67,18 @@
                                             <a href="{{ route('category.show',['category'=>$cat->id]) }}" class="btn btn-light pro-btn mb-3 mr-2 ml-2" type="button">
                                                 <i class="fab fa-product-hunt"></i> View Contents
                                             </a>
-                                            
+
                                         </div>
                                 </div>
                                 @endforeach
+                                <div class="col-lg-3">
+                                    <a href="{{ route('category.subcategory',['category'=>$category]) }}" class="btn btn-sm btn-success">
+                                        <i class="fas fa-plus"></i> Add Sub Category
+                                    </a>
+                                </div>
                             @elseif(count($category->products))  <!--add this in a new blade-->
-                                <form id="delete-form" action="" method="POST" style="display:none"> 
-                                    @csrf 
+                                <form id="delete-form" action="" method="POST" style="display:none">
+                                    @csrf
                                     @method('DELETE')
                                 </form>
                                 <h2 class="mb-4">{{$category->name}} products </h2>
@@ -97,7 +102,7 @@
                                         <i class="fas fa-plus"></i> Add New Product
                                     </a>
                                 </div>
-                            @else 
+                            @else
                                 @if($category->parent_id==0)
                                     <div class="col-lg-3">
                                         <a href="{{ route('category.subcategory',['category'=>$category]) }}" class="btn btn-sm btn-success">
@@ -111,7 +116,7 @@
                                     </a>
                                 </div>
                             @endif
-                            
+
                         </div>
                     <!-- /.card -->
                     </div>
@@ -119,7 +124,7 @@
                 <!-- /.row -->
             </div><!-- /.container-fluid -->
         </section>
-              
+
     </div>
      <!-- jquery-validation -->
      <script src="{{ asset('/js/jquery.validate.min.js') }}"></script>
@@ -144,7 +149,7 @@
      <!-- dropzonejs -->
      <script src="{{ asset('/js/dropzone.min.js') }}"></script>
 </body>
-    
+
 
 <script type="text/javascript">
   $(function () {
@@ -166,27 +171,27 @@
             {data: 'action',  name: 'action',  orderable: true,  searchable: false},
         ]
     });
-    
+
   });
 
-   $('body').on('click', '#edit-product', function () 
+   $('body').on('click', '#edit-product', function ()
     {
         var product_id = $(this).data("id");
-        let url="{{ route('product.edit',[':id']) }}".replace(':id',product_id ); 
-        $("#edit-product").attr('href',url);                        
+        let url="{{ route('product.edit',[':id']) }}".replace(':id',product_id );
+        $("#edit-product").attr('href',url);
     });
-   $('body').on('click', '#show-product', function () 
+   $('body').on('click', '#show-product', function ()
     {
         var product_id = $(this).data("id");
-        let url="{{ route('product.show',[':id']) }}".replace(':id',product_id ); 
-        $("#show-product").attr('href',url);                        
+        let url="{{ route('product.show',[':id']) }}".replace(':id',product_id );
+        $("#show-product").attr('href',url);
     });
-   $('body').on('click', '#delete-product', function () 
+   $('body').on('click', '#delete-product', function ()
     {
         var product_id = $(this).data("id");
-        let url="{{ route('product.destroy',[':id']) }}".replace(':id',product_id ); 
-        $("#delete-form").attr('action',url);       
-        $("#delete-form").submit();                       
+        let url="{{ route('product.destroy',[':id']) }}".replace(':id',product_id );
+        $("#delete-form").attr('action',url);
+        $("#delete-form").submit();
     });
 </script>
 </html>

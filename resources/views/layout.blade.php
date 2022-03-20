@@ -126,6 +126,15 @@
                                 </li>
                                 <li class="nav-item"><a href="about">{{ __('message.About') }}</a></li>
                                 <li class="nav-item"><a href="contact">{{ __('message.Contact') }}</a></li>
+                                @if (Auth::check())
+                                    <li class="nav-item"><a href="profile">Profile</a></li>
+                                    @if(Auth::user()->hasRole('editoradmin') || Auth::user()->hasRole('superadmin'))
+                                         <li class="nav-item"><a href="admin">Dashboard</a></li>
+                                    @endif
+                                @else
+                                    <li class="nav-item"><a href="login">Log In</a></li>
+                                @endif
+
                             </ul>
                         </nav>
                     </div>
@@ -145,7 +154,7 @@
     <option data-content='<span class="flag-icon flag-icon-us"></span> English' value="en" {{ session()->get('locale') == 'en' ? 'selected' : '' }}>English</option>
   <option  data-content='<span class="flag-icon flag-icon-mx"></span> Español'value="ar" {{ session()->get('locale') == 'ar' ? 'selected' : '' }}>Arabic</option>
 </select>
-            
+
                         <a href="#" class="site-menu-toggle js-menu-toggle ml-3 d-inline-block d-lg-none"><span
                             class="icon-menu"></span>
                         </a>
@@ -317,13 +326,13 @@
 // });
   </script>
       <script type="text/javascript">
-  
+
   var url = "{{ route('changeLang') }}";
 
   $(".changeLang").change(function(){
       window.location.href = url + "?lang="+ $(this).val();
   });
- 
+
 </script>
 </body>
 </html>

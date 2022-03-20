@@ -15,14 +15,14 @@ class ProductController extends Controller
 {
     public function onlysuperadmin()
     {
-        if (Auth::user()->hasRole('superadmin')==false) 
-            return view('errors.401'); 
+        if (Auth::user()->hasRole('superadmin')==false)
+            return view('errors.401');
         return;
     }
     public function editoradmin()
     {
-        if (Auth::user()->hasRole('superadmin')==false && Auth::user()->hasRole('editoradmin')==false) 
-            return view('errors.401'); 
+        if (Auth::user()->hasRole('superadmin')==false && Auth::user()->hasRole('editoradmin')==false)
+            return view('errors.401');
         return;
     }
     public function uploadImage(Request $request)
@@ -32,13 +32,33 @@ class ProductController extends Controller
         ]);
         $image_name      =       time().'.'.$request->image->extension();
         $request->image->move(public_path('/img/products'), $image_name);
-        return $image_name; 
+        return $image_name;
     }
 
 
     public function index()
     {
-       // return view('Admin.product.productDetails');      
+           $products= Product::all();
+            return view('Admin.product.allProducts')->with('products',$products);;
+    }
+
+    public function getproducts(Request $request)
+    {
+        if ($request->ajax())
+        {
+            $products= Product::all();
+            return Datatables::of($products)
+                ->addIndexColumn()
+                ->addColumn('action', function($row){
+                        $action = '<a id="show-product" data-id='.$row->id.' class="btn btn-info">Show</a>';
+                    if(Auth::user()->hasRole('editoradmin'))
+                        $action.= ' <a id="edit-product" data-id='.$row->id.' class="btn btn-success">Edit</a>';
+                    if(Auth::user()->hasRole('superadmin'))
+                        $action.= ' <a id="edit-product" data-id='.$row->id.' class="btn btn-success">Edit</a> <a id="delete-product" data-id='.$row->id.' class="btn btn-danger delete-user">Delete</a>';
+                    return $action;
+                })
+                ->rawColumns(['action'])->make(true);
+        }
     }
 
     public function create(Request $category)
@@ -51,7 +71,7 @@ class ProductController extends Controller
     public function store(ProductStoreUpdateRequest $request)
     {
         $this->onlysuperadmin();
-        $validated = $request->validated(); 
+        $validated = $request->validated();
         $image_name=$this->uploadImage($request);
 
         $product=new Product;
@@ -67,7 +87,7 @@ class ProductController extends Controller
         $product->save();
         return back()->with('success', 'Successful create operation.');
     }
-   
+
     public function show(Product $product)
     {
         //dd("show ".$product->id);
@@ -80,11 +100,11 @@ class ProductController extends Controller
         $product=Product::find($product->id);
         return view('Admin.product.edit')->with('product',$product);
     }
-   
+
     public function update(ProductStoreUpdateRequest $request, Product $product)
     {
         $this->editoradmin();
-        $validated = $request->validated(); 
+        $validated = $request->validated();
         if($request->image!=null)
         {
             dd($request->image);
@@ -103,7 +123,7 @@ class ProductController extends Controller
         return back()->with('success', 'Successful update product operation.');
     }
 
-    
+
     public function destroy(Product $product)
     {
         $this->onlysuperadmin();

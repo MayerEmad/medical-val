@@ -3,11 +3,14 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\MailController;
 use App\Http\Controllers\Client\CartController;
 use App\Http\Controllers\Client\WishListController;
 use App\Http\Controllers\Client\CompareController;
 use App\Http\Controllers\Client\HomeController;
+use App\Http\Controllers\Client\ProfileController;
+
 
 use App\Models\Category;
 
@@ -42,10 +45,11 @@ Route::group(['middleware' => ['auth', 'role:superadmin|editoradmin|admin']], fu
             return view('Admin.category.create')->with('category', $category);
         })->name('subcategory');
     });
+    Route::get('product/table', [ProductController::class, 'getproducts'])->name('product.productsearch');
 
     //resource routes
     Route::resource('category', \CategoryController::class);
-    Route::resource('product', ProductController::class);
+    Route::resource('product', \ProductController::class);
     Route::resource('admin', \AdminController::class);
 });
 
@@ -61,6 +65,9 @@ Route::get('/order', function () {
 Route::get('/home', function () {
     return view('home');
 });
+Route::get('/index', [HomeController::class, 'index'])->name('index');
+Route::get('/search',[HomeController::class, 'search'])->name('search');
+
 //cart page
 Route::get('cart', [CartController::class, 'cart']);
 //wishlist
@@ -83,6 +90,10 @@ Route::get('/index', [HomeController::class, 'index'])->name('index');
 Route::get('/search',[HomeController::class, 'search'])->name('search');
 Route::get('lang/change', [HomeController::class, 'change'])->name('changeLang');
 
+// profile page
+Route::get('/profile', [ProfileController::class, 'show']);// i think we can delete it
+Route::post('/profile', [ProfileController::class, 'update']);
+
 //Product details page
 Route::get('/details', function () {
     return view('shop-single');
@@ -90,10 +101,6 @@ Route::get('/details', function () {
 //Product details page
 Route::get('/shop', function () {
     return view('shop');
-});
-//Product details page
-Route::get('/wishlist', function () {
-    return view('wishlist');
 });
 //Product details page
 Route::get('/checkout', function () {
