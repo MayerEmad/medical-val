@@ -26,8 +26,9 @@ class User extends Authenticatable
         'last_login_at',
         'phone',
         'area',
-        'street',
         'block',
+        'street',
+        'floor',
         'departement',
     ];
 

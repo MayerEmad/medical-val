@@ -92,7 +92,7 @@ Route::get('lang/change', [HomeController::class, 'change'])->name('changeLang')
 
 // profile page
 Route::get('/profile', [ProfileController::class, 'show']);// i think we can delete it
-Route::post('/profile', [ProfileController::class, 'update']);
+Route::put('/profile/{user}', [ProfileController::class, 'update'])->name('profile-update');
 
 //Product details page
 Route::get('/details', function () {

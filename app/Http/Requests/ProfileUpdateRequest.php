@@ -29,18 +29,20 @@ class ProfileUpdateRequest extends FormRequest
             'id'=>'required|numeric',
             'email' => 'required|string|email',
             'name' => ['required','min:3','max:190','string','regex:/(^[\pL\p{N} _.-]+$)/u'],
-            'description' => 'required|max:300|string|regex:/(^[\pL\p{N}\r\n _.-]+$)/u',
-            'street' => ['required','min:3','max:190','string','regex:/(^[\pL\p{N} _.-]+$)/u'],
-            'block'=>'required|integer|numeric',
+            'phone' => 'regex:/(01)[0-9]{9}/',
+            'area' => ['min:2','max:100','string','regex:/(^[\pL\p{N} _.-]+$)/u'],
+            'street' => ['min:3','max:100','string','regex:/(^[\pL\p{N} _.-]+$)/u'],
+            'block'=> ['min:1','max:100','string','regex:/(^[\pL\p{N} _.-]+$)/u'],
+            'departement'=> ['min:1','max:30','string','regex:/(^[\pL\p{N} _.-]+$)/u'],
+            'floor'=>'integer|numeric',
         ];
     }
 
     public function messages()
     {
         return [
-            'name.reuired' => 'A nice title is required for the category.',
-            'description.required' => 'Please add description for the category.',
-            //'image.required'=>'Add image',
+            'name.reuired' => 'A name is required for the profile.',
+            'floor.numeric' => 'Floor must be number.',
         ];
     }
     public function failedValidation(Validator $validator)

@@ -21,7 +21,7 @@ class UserTableSeeder extends Seeder
         ]);
         // for($i=0;$i<10;$i++)
         // {
-        //    
+        //
         // }
     }
 }

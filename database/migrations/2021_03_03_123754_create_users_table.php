@@ -27,8 +27,9 @@ class CreateUsersTable extends Migration
 
             $table->string('phone')->nullable()->default(null);
             $table->string('area')->nullable()->default(null);
-            $table->string('street')->nullable()->default(null);
             $table->string('block')->nullable()->default(null);
+            $table->string('street')->nullable()->default(null);
+            $table->string('floor')->nullable()->default(null);
             $table->string('departement')->nullable()->default(null);
         });
     }
