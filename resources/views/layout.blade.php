@@ -128,9 +128,18 @@
                                 <li class="nav-item"><a href="contact">{{ __('message.Contact') }}</a></li>
                                 @if (Auth::check())
                                     <li class="nav-item"><a href="profile">Profile</a></li>
-                                    @if(Auth::user()->hasRole('editoradmin') || Auth::user()->hasRole('superadmin'))
+                                    @if(Auth::user()->hasRole('admin') || Auth::user()->hasRole('editoradmin') || Auth::user()->hasRole('superadmin'))
                                          <li class="nav-item"><a href="admin">Dashboard</a></li>
                                     @endif
+                                    <form method="POST" action="{{ route('logout') }}">
+                                        @csrf
+                                        <li class="nav-item"><a href="route('logout')">{{ __('Logout') }}</a></li>
+                                        <x-dropdown-link :href="route('logout')"
+                                                onclick="event.preventDefault();
+                                                            this.closest('form').submit();">
+                                            {{ __('Logout') }}
+                                        </x-dropdown-link>
+                                    </form>
                                 @else
                                     <li class="nav-item"><a href="login">Log In</a></li>
                                 @endif

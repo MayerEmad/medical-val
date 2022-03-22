@@ -61,15 +61,17 @@ class CategoryController extends Controller
                         <div class="pt-2 mb-4">
                             <a href="'.route('category.edit',['category'=>$cat->id]).'" class="btn btn-success mr-3" type="button">
                                 <i class="fas fa-edit"></i> Edit
-                            </a>
-                            <a onclick="deletefunction('.$cat->id.')" class="btn btn-danger" type="button">
+                            </a>';
+                            if (Auth::user()->hasRole('superadmin')==true){
+                            $output.='<a onclick="deletefunction('.$cat->id.')" class="btn btn-danger" type="button">
                                 <i class="fas fa-trash-alt"></i> Delete
                             </a>
                             <form action="'. route('category.destroy',['category'=>$cat->id]).'" id="'.$cat->id.'" method="POST" style="display:none">
                             @csrf @method("DELETE")
                             <button type="submit"></button>
-                            </form>
-                        </div>
+                            </form>';
+                            }
+                            $output.='</div>
                     </div>
                     <a href="'.route("category.show",["category"=>$cat->id]).'" class="btn btn-light pro-btn mb-3 mr-2 ml-2" type="button">
                         <i class="fab fa-product-hunt"></i> View Contents

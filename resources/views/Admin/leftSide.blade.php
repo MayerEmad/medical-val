@@ -48,9 +48,9 @@
     <!-- Left navbar links -->
     <ul class="navbar-nav">
       <li class="nav-item">
-          <a class="nav-link" href="{{route('admin.profile')}}">Profile</a>
+          <a class="nav-link" href="{{route('index')}}">Site</a>
       </li>
-      <li class="nav-item d-none d-sm-inline-block">
+     {{--- <li class="nav-item d-none d-sm-inline-block">
           <a href="{{route('admin.index')}}" class="nav-link">Dashboard</a>
       </li>
       @if(Auth::user()->hasRole('superadmin'))
@@ -61,6 +61,7 @@
           <a href="{{route('admin.tablepage')}}" class="nav-link">Admins Table</a>
         </li>
       @endif
+      --}}
       <!-- <li class="nav-item d-none d-sm-inline-block">
         <a href="#" class="nav-link">Contact</a>
       </li> -->
@@ -86,7 +87,7 @@
             <option data-content='Arabic'>Arabic</option>
         </select>
       </li> -->
-      
+
       <!-- <li class="nav-item">
         <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button">
           <i class="fas fa-th-large"></i>
@@ -126,7 +127,7 @@
             </x-slot>
         </x-dropdown> --}}
     </ul>
-      
+
   </nav>
   <!-- /.navbar -->
 
@@ -142,16 +143,16 @@
     <div class="sidebar">
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-        <div class="image">
+        {{-- <div class="image">
           <img src="{{ asset('img/user2-160x160.jpg') }}" class="img-circle elevation-2" alt="User Image">
-        </div>
+        </div> --}}
         <div class="info">
-          <a href="/profile" class="d-block">Admin Name</a>
+        <a href="{{route('profile')}}" class="d-block">{{Auth::user()->name}}</a>
         </div>
       </div>
 
       <!-- SidebarSearch Form -->
-      <div class="form-inline">
+      {{-- <div class="form-inline">
         <div class="input-group" data-widget="sidebar-search">
           <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
           <div class="input-group-append">
@@ -160,7 +161,7 @@
             </button>
           </div>
         </div>
-      </div>
+      </div> --}}
 
       <!-- Sidebar Menu -->
       <nav class="mt-2">
@@ -176,14 +177,14 @@
             </a>
           </li>
 
-          <li class="nav-item">
+          {{-- <li class="nav-item">
             <a href="/widgets" class="nav-link">
               <i class="nav-icon fas fa-th"></i>
               <p>
                 Widgets
               </p>
             </a>
-          </li>
+          </li> --}}
           @if(Auth::user()->hasRole('superadmin'))
             <li class="nav-item">
               <a href="#" class="nav-link">
@@ -210,7 +211,7 @@
             </li>
           @endif
           <li class="nav-item">
-            <a href="/users" class="nav-link">
+            <a href="{{route('admin.usertablepage')}}" class="nav-link">
             <i class="fas fa-user"></i>
               <p>
                 Users

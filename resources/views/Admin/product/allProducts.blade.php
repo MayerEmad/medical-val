@@ -12,6 +12,22 @@
 </head>
 
 <body>
+     <!-- delete popUp -->
+     <div id="delete-modal" class="modal" >
+        <form class="modal-content" id="delete-product-f" action="" method="POST">
+            @csrf
+            <div class="container con-delete">
+                <h1>Delete Item</h1>
+                <p id="delete-product-p"></p>
+                <div class="clearfix pl-5">
+                    @method('DELETE')
+                    <button type="submit"  class="deletebtn btn btn-danger ml-1">Delete</button>
+                    <button type="button" onclick="document.getElementById('delete-modal').style.display='none'" class="cancelbtn btn btn-secondary mr-1">Cancel</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
     <div class="content-wrapper">
         <section class="content-header">
             <div class="container-fluid">
@@ -26,6 +42,21 @@
                     </div>
                 </div>
             </div><!-- /.container-fluid -->
+              <!-- Success message -->
+              @if(Session::has('success'))
+              <div class="alert alert-success">
+                  {{Session::get('success')}}
+              </div>
+          @endif
+          @if ($errors->any())
+              <div class="alert alert-danger">
+                  <ul>
+                      @foreach ($errors->all() as $error)
+                          <li>{{ $error }}</li>
+                      @endforeach
+                  </ul>
+              </div>
+          @endif
         </section>
         <section class="content">
             <div class="container-fluid">
@@ -35,11 +66,11 @@
                     <!-- jquery validation -->
                     <div class="card card-primary">
                         <div class="card-body">
-                            @if(count($products))  <!--add this in a new blade-->
-                                <form id="delete-form" action="" method="POST" style="display:none">
+                            @if(count($products))
+                                {{-- <form id="delete-form" action="" method="POST" style="display:none">
                                     @csrf
                                     @method('DELETE')
-                                </form>
+                                </form> --}}
                                 <h2 class="mb-4">products </h2>
                                 <table class="table table-bordered yajra-datatable">
                                     <thead>
@@ -132,10 +163,18 @@
          $('body').on('click', '#delete-product', function ()
           {
               var product_id = $(this).data("id");
+              $("#delete-modal").show();
+              $("#delete-product-p").html("Are you sure to delete this product?");
               let url="{{ route('product.destroy',[':id']) }}".replace(':id',product_id );
-              $("#delete-form").attr('action',url);
-              $("#delete-form").submit();
+              $('#delete-product-f').attr('action',url)
+              window.onclick = function(event) {
+                    if (event.target == modal) {
+                        modal.style.display = "none";
+                    }
+                }
           });
+
+
     </script>
 </html>
 @endsection

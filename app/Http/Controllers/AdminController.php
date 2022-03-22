@@ -12,8 +12,8 @@ class AdminController extends Controller
 {
     public function onlysuperadmin()
     {
-        if (Auth::user()->hasRole('superadmin')==false) 
-            return view('errors.401'); 
+        if (Auth::user()->hasRole('superadmin')==false)
+            return view('errors.401');
         return;
     }
 
@@ -36,16 +36,16 @@ class AdminController extends Controller
             ->addColumn('type', function($row)
             {
                 $type=$row->roles[0]['display_name'];
-                return $type;      
+                return $type;
             })
             ->addColumn('action', function($row)
             {
                 $action = '<a herf id="edit-admin" data-id='.$row->id.' class="btn btn-success">Edit </a>
                 <a id="delete-admin" data-id='.$row->id.' class="btn btn-danger delete-user">Delete</a>';
-                return $action;      
+                return $action;
             })
             ->rawColumns(['action'])
-            ->make(true);  
+            ->make(true);
         }
     }
 
@@ -55,28 +55,27 @@ class AdminController extends Controller
         return view('Admin.dashboard');
     }
 
-   //Invitation Page 
+   //Invitation Page
     public function create()
     {
         $this->onlysuperadmin();
         return view('Admin.admins.create-invitation');
     }
-    
-    
+
+
     //Insert admin into database
     public function store(Request $request)
     {
-        $this->onlysuperadmin();
-        return "store";
+        //$this->onlysuperadmin();return "store";
     }
 
-    
+
     public function show(User $id)
     {
         //
     }
 
-   
+
     public function edit(User $id)
     {
         $this->onlysuperadmin();
@@ -87,7 +86,7 @@ class AdminController extends Controller
     public function update(Request $request,  $id)
     {
         $this->onlysuperadmin();
-       
+
         $admin=User::find($id);
         $oldRole=$admin->roles[0]['name'];
         $newRole=$request->role;
@@ -107,7 +106,6 @@ class AdminController extends Controller
         $admin=User::find($id);
         $name=$admin->name;
         $admin->delete();
-        return redirect()->route('admin.tablepage')->with('success','Admin '.$name.' Deleted Succesfully.');
+        return redirect()->route('admin.tablepage')->with('success','User '.$name.' Deleted Succesfully.');
     }
 }
- 

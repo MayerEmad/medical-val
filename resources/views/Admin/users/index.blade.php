@@ -14,11 +14,11 @@
 <body>
     <!-- delete popUp -->
     <div id="delete-modal" class="modal" >
-        <form class="modal-content" id="delete-admin-f" action="" method="POST">
+        <form class="modal-content" id="delete-user-f" action="" method="POST">
             @csrf
             <div class="container con-delete">
                 <h1>Delete Item</h1>
-                <p id="delete-admin-p"></p>
+                <p id="delete-user-p"></p>
                 <div class="clearfix pl-5">
                     @method('DELETE')
                     <button type="submit"  class="deletebtn btn btn-danger ml-1">Delete</button>
@@ -30,22 +30,21 @@
 
        <!-- epdate popUp -->
        <div id="edit-modal" class="modal" >
-        <form class="modal-content" id="edit-admin-f" action="" method="POST">
+        <form class="modal-content" id="edit-user-f" action="" method="POST">
             @csrf
             <div class="container con-delete">
                 <h1>Edit Item</h1>
-                <p id="edit-admin-p"></p>
+                <p id="edit-user-p"></p>
                 <div class="form-group">
                     <label>Admin Types: </label>
                     <select name="role" id="edit-modal-s" class="block mt-1 w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm">
-                        <option value="customer">Customer</option>
                         <option value="admin">Admin</option>
                         <option value="editoradmin">Editor Admin</option>
                     </select>
                 </div>
                 <div class="clearfix pl-5">
                     @method('PUT')
-                    <button type="submit" id="update-admin-b" value="" class="deletebtn btn btn-success ml-1">Update</button>
+                    <button type="submit" id="update-user-b" value="" class="deletebtn btn btn-success ml-1">Update</button>
                     <button type="button" onclick="document.getElementById('edit-modal').style.display='none'" class="cancelbtn btn btn-secondary mr-1">Cancel</button>
                 </div>
             </div>
@@ -60,7 +59,7 @@
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="/dashboard">Home</a></li>
+                        <li class="breadcrumb-item"><a href="/admin">Home</a></li>
                         <li class="breadcrumb-item active">Table</li>
                         </ol>
                     </div>
@@ -90,7 +89,7 @@
                     <!-- jquery validation -->
                     <div class="card card-primary">
                         <div class="card-body">
-                            <h2 class="mb-4">Admins Data table </h2>
+                            <h2 class="mb-4">Users Data table </h2>
                             <table class="table table-bordered admin-datatable">
                                 <thead>
                                     <tr>
@@ -140,62 +139,21 @@
 
 
 <script type="text/javascript">
-  //delete-admin
-$('body').on('click', '#delete-admin', function ()
-{
-    var admin_id = $(this).data("id");
-    $("#delete-modal").show();
-    $("#delete-admin-p").html("Are you sure to delete this user? if you want to make him customer EDIT it");
-    let url="{{ route('admin.destroy',[':id']) }}".replace(':id', admin_id);
-    $('#delete-admin-f').attr('action',url)
-    // When the user clicks anywhere outside of the modal, close it DOESNT YWORK
-    window.onclick = function(event) {
-        if (event.target == modal) {
-            modal.style.display = "none";
-        }
-    }
-});
 
-
- //edit-admin-permission
- $('body').on('click', '#edit-admin', function ()
+ //edit-user-permission
+ $('body').on('click', '#edit-user', function ()
     {
         var admin_id = $(this).data("id");
         $("#edit-modal").show();
-        $("#edit-admin-p").html("Do you want to change Admin type?")
-        $("#update-admin-b").val(admin_id);
+        $("#edit-user-p").html("Do you want to change Admin type?")
+        $("#update-user-b").val(admin_id);
 
          let url="{{ route('admin.update',[':id']) }}".replace(':id',admin_id );
-         $('#edit-admin-f').attr('action',url)
+         $('#edit-user-f').attr('action',url)
         // When the user clicks anywhere outside of the modal, close it
 
     });
 
-    // $('#update-admin-b').click(function (e) {
-    //     e.preventDefault();
-    //     $(this).html('Updating..');
-    //     //alert($("#update-admin-b").val());
-    //     $.ajaxSetup({ headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') }});
-    //     var url = "{{URL('admin/5')}}";
-    //     $.ajax({
-    //       url: url,
-    //       data: {
-    //              role: $('#edit-admin-s').val()
-    //             },
-    //       type: "PUT",
-    //       dataType: 'json',
-    //       success: function (data) {
-
-    //           $('#edit-modal-f').trigger("reset");
-    //           $('#edit-modal').hide();
-    //           table.draw();
-
-    //       },
-    //       error: function (data) {
-    //           console.log('Error:', data.responseJSON);
-    //       }
-    //   });
-    // });
 
   $(function () {
     var table = $('.admin-datatable').DataTable({
@@ -209,7 +167,7 @@ $('body').on('click', '#delete-admin', function ()
         ],
         processing: true,
         serverSide: true,
-        ajax: "{{ route('admin.tabledata') }}",
+        ajax: "{{ route('admin.userstabledata') }}",
         columns: [
             {data: 'DT_RowIndex', name: 'DT_RowIndex'},
             {data: 'id', name: 'id' },

@@ -19,9 +19,8 @@ class HomeController extends Controller
 
         // return view('index')->with(array('products', 'categories'));
         return view('index', compact('products','categories'));
-
     }
-    
+
     public function search(Request $request)
     {
         $searchQuery=$request->query1;
@@ -44,7 +43,7 @@ class HomeController extends Controller
     {
         App::setLocale($request->lang);
         session()->put('locale', $request->lang);
-  
+
         return redirect()->back();
     }
 }

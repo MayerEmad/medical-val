@@ -3,13 +3,14 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Models\User;
+
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\Auth\RegisterRequest;
+use App\Models\User;
 
 class RegisteredUserController extends Controller
 {
@@ -41,11 +42,11 @@ class RegisteredUserController extends Controller
             'email' => $validated["email"],
             'password' => Hash::make($validated["password"]),
         ]));
-        $user->attachRole($validated["role"]);
         event(new Registered($user));
-       
-       // if($validated["role_id"]=='customer')
-            return redirect(RouteServiceProvider::HOME);
+        $user->attachRole($validated["role"]);
+        return redirect(RouteServiceProvider::HOME);
+
+        //if($validated["role"]=='customer')
         //else     return redirect(Route('admin.index'));
     }
 }

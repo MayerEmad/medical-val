@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\MailController;
@@ -22,9 +23,11 @@ use App\Models\Category;
 */
 
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+Route::get('/', [HomeController::class, 'index']);
+
 // I will need admin middelware
 //Route::view('categories/subcategory/{category}', 'Admin.category.create', ['category' => $category])->name('category.subcategory');
 //Route::resource('categories.products', ProductController::class);
@@ -37,6 +40,10 @@ Route::group(['middleware' => ['auth', 'role:superadmin|editoradmin|admin']], fu
         Route::get('tabledata', [AdminController::class, 'adminstabledata'])->name('tabledata');
         Route::post('invite-admin', [MailController::class, 'inviteadminbymail'])->name('inviteadmin');
         Route::get('profile', [AdminController::class, 'showProfile'])->name('profile');
+
+        Route::get('users', [UserController::class, 'index'])->name('usertablepage');
+        Route::get('userstabledata', [UserController::class, 'userstabledata'])->name('userstabledata');
+
     });
     Route::prefix('category/')->name('category.')->group(function () {
         Route::get('table', [CategoryController::class, 'getproducts'])->name('productlist');
@@ -91,7 +98,7 @@ Route::get('/search',[HomeController::class, 'search'])->name('search');
 Route::get('lang/change', [HomeController::class, 'change'])->name('changeLang');
 
 // profile page
-Route::get('/profile', [ProfileController::class, 'show']);// i think we can delete it
+Route::get('/profile', [ProfileController::class, 'show'])->name('profile');// i think we can delete it
 Route::put('/profile/{user}', [ProfileController::class, 'update'])->name('profile-update');
 
 //Product details page

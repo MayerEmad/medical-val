@@ -128,7 +128,7 @@ class ProductController extends Controller
     {
         $this->onlysuperadmin();
         $product=Product::find($product->id);
-       // $product->delete();
+        $product->delete();
         return back()->with('success','Product Deleted Succesfully.');
     }
 }
