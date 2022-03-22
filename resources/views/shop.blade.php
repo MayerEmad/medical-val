@@ -39,7 +39,12 @@
 
         <div class="row">
           <div class="col-sm-6 col-lg-4 text-center item mb-4">
-            <span class="tag">Sale</span>
+              <div class="product-option">
+                <a href="#" title="Add to cart" onclick="showSwal('auto-close')"><i class="fas fa-shopping-cart"></i></a>
+                <a href="#" title="Add to wishlist"><i class="fas fa-heart"></i></a>
+                <a href="#" title="Compare"><i class="far fa-copy"></i></a>
+              </div>
+              <span class="tag">Sale</span>
             <a href="shop-single"> <img src="images/product_01.png" alt="Image"></a>
             <h3 class="text-dark"><a href="shop-single">Bioderma</a></h3>
             <p class="price"><del>95.00</del> &mdash; $55.00</p>

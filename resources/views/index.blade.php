@@ -49,7 +49,7 @@
               {{-- <button class="nav-link" id="v-pills-settings-tab" data-bs-toggle="pill" data-bs-target="#v-pills-settings" type="button" role="tab" aria-controls="v-pills-settings" aria-selected="false">Settings</button> --}}
             </div>
           </div>
-          
+
           <div class="col-sm-12 col-md-9 col-lg-9">
             <div class="title-section text-center col-lg-9 col-sm-12 col-md-9">
               <h2 class="text-uppercase">{{ __('message.POPULAR_PRODUCTS') }}</h2>
@@ -58,7 +58,6 @@
               <div class="tab-pane fade show active" id="v-pills-Products" role="tabpanel" aria-labelledby="v-pills-Products-tab">
                 <div class="row">
 				   @foreach($products as $product)
-
                   <div class="col-sm-6 col-lg-4 col-md-6 text-center item mb-4">
                     <div class="product-option">
                       <a href="#" title="Add to cart" onclick="showSwal('auto-close')"><i class="fas fa-shopping-cart"></i></a>
@@ -70,12 +69,9 @@
                     <p class="price"><del>{{$product->price}}</del> &mdash; ${{$product->price-$product->discount}}</p>
                   </div>
 				  @endforeach;
-               
-
-                 
                 </div>
               </div>
-              
+
               <div class="tab-pane fade" id="v-pills-Categories" role="tabpanel" aria-labelledby="v-pills-Categories-tab">
                 <div class="row">
                 @foreach($categories as $category)
@@ -87,44 +83,16 @@
                           <img src="images/makeup.jpg" alt="Avatar" style="width:100%;height:300px;">
                         </div>
                         <div class="flip-card-back">
-                          <h1 class="pt-4">{{$category->name}}</h1> 
-                          <p class="pt-2">{{$category->description }}</p> 
+                          <h1 class="pt-4">{{$category->name}}</h1>
+                          <p class="pt-2">{{$category->description }}</p>
                           {{-- <p>We love that guy</p> --}}
                         </div>
                       </div>
                     </div>
                   </div>
                   @endforeach;
-<!-- 
-                  <div class="col-sm-6 col-lg-4 col-md-6 text-center mb-4">
-                    <div class="flip-card">
-                      <div class="flip-card-inner">
-                        <div class="flip-card-front">
-                          <img src="images/skin.jpg" alt="Avatar" style="width:100%;height:300px;">
-                        </div>
-                        <div class="flip-card-back">
-                          <h1 class="pt-4">Category Name</h1> 
-                          <p class="pt-2">Description</p> 
-                          {{-- <p>We love that guy</p> --}}
-                        </div>
-                      </div>
-                    </div>
-                  </div> -->
-                  <!-- <div class="col-sm-6 col-lg-4 col-md-6 text-center mb-4">
-                    <div class="flip-card">
-                      <div class="flip-card-inner">
-                        <div class="flip-card-front">
-                          <img src="images/supplements.jpg" alt="Avatar" style="width:100%;height:300px;">
-                        </div>
-                        <div class="flip-card-back">
-                          <h1 class="pt-4">Category Name</h1> 
-                          <p class="pt-2">Description</p> 
-                          {{-- <p>We love that guy</p> --}}
-                        </div>
-                      </div>
-                    </div>
-                  </div> -->
-                </div> 
+
+                </div>
               </div>
               <div class="tab-pane fade" id="v-pills-filter" role="tabpanel" aria-labelledby="v-pills-filter-tab">...</div>
               {{-- <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">...</div> --}}
@@ -143,7 +111,7 @@
 
     {{-- <div class="wrapper text-center">
       <h4 class="card-title">Alerts Popups</h4>
-      <p class="card-description">A message with auto close timer</p> 
+      <p class="card-description">A message with auto close timer</p>
       <button class="btn btn-outline-success" onclick="showSwal('auto-close')">Click here!</button>
     </div> --}}
 
@@ -157,6 +125,18 @@
         <div class="row">
           <div class="col-md-12 block-3 products-wrap">
             <div class="nonloop-block-3 owl-carousel">
+                @foreach($products as $product)
+                <div class="text-center item mb-4">
+                  <div class="product-option">
+                    <a href="#" title="Add to cart" onclick="showSwal('auto-close')"><i class="fas fa-shopping-cart"></i></a>
+                    <a href="#" title="Add to wishlist"><i class="fas fa-heart"></i></a>
+                    <a href="#" title="Compare"><i class="far fa-copy"></i></a>
+                  </div>
+                  <a href="shop-single"> <img src="images/product_01.png" alt="Image"></a>
+                  <h3 class="text-dark"><a href="shop-single">{{$product->name}}</a></h3>
+                  <p class="price"><del>{{$product->price}}</del> &mdash; ${{$product->price-$product->discount}}</p>
+                </div>
+                @endforeach;
 
               <div class="text-center item mb-4">
                 <a href="shop-single"> <img src="images/product_03.png" alt="Image"></a>
