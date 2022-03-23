@@ -153,7 +153,7 @@
 
                         <a href="/cart" class="icons-btn d-inline-block bag">
                             <span class="icon-shopping-cart"></span>
-                            <span class="number">2</span>
+                            <span class="number">{{Cart::count()}}</span>
                         </a>
                         <a href="/wishlist" class="icons-btn d-inline-block heart">
                             <span class="icon-heart"></span>

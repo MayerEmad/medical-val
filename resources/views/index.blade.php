@@ -60,7 +60,9 @@
 				   @foreach($products as $product)
                   <div class="col-sm-6 col-lg-4 col-md-6 text-center item mb-4">
                     <div class="product-option">
-                      <a href="#" title="Add to cart" onclick="showSwal('auto-close')"><i class="fas fa-shopping-cart"></i></a>
+                    <a href="{{ action('Client\CartController@store', ['product' => $product])  }}" onclick="showSwal('auto-close')"  title="Add to cart" ><i class="fas fa-shopping-cart"></i></a>
+
+                      <!-- <a href="#" title="Add to cart" onclick="showSwal('auto-close')"><i class="fas fa-shopping-cart"></i></a> -->
                       <a href="#" title="Add to wishlist"><i class="fas fa-heart"></i></a>
                       <a href="#" title="Compare"><i class="far fa-copy"></i></a>
                     </div>
@@ -128,7 +130,9 @@
                 @foreach($products as $product)
                 <div class="text-center item mb-4">
                   <div class="product-option">
-                    <a href="#" title="Add to cart" onclick="showSwal('auto-close')"><i class="fas fa-shopping-cart"></i></a>
+                  <a href="{{ action('Client\CartController@store', ['product' => $product])  }}" onclick="showSwal('auto-close')"  title="Add to cart" ><i class="fas fa-shopping-cart"></i></a>
+
+                    <!-- <a href="#" title="Add to cart" onclick="showSwal('auto-close')"><i class="fas fa-shopping-cart"></i></a> -->
                     <a href="#" title="Add to wishlist"><i class="fas fa-heart"></i></a>
                     <a href="#" title="Compare"><i class="far fa-copy"></i></a>
                   </div>
