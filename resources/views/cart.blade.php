@@ -43,14 +43,18 @@
                     <td>
                       <div class="input-group mb-3" style="max-width: 120px;">
                         <div class="input-group-prepend">
-                          <button class="btn btn-outline-primary js-btn-minus" href="{{ action('Client\CartController@minusButton', ['id' =>  $item->rowId]) }}" type="button">&minus;</button>
+                          <button onclick=" submitFormminus('{{$item->rowId}}');" class="btn btn-outline-primary js-btn-minus"  type="button">&minus;</button>
                         </div>
                         <input type="text" class="form-control text-center" value="{{$item->qty}}" placeholder=""
                           aria-label="Example text with button addon" aria-describedby="button-addon1">
+                        <!-- <form id="{{$item->rowId}}" action="{{ action('Client\CartController@plusButton', ['rowId' =>  $item->rowId]) }}" method="GET" style="display:none"> -->
                         <div class="input-group-append">
-                          <a href="{{ action('Client\CartController@plusButton', ['id' =>  $item->id]) }}"  class="btn btn-outline-primary js-btn-plus">&plus;</a>
 
+                        <a onclick=" submitForm('{{$item->rowId}}');" class="btn btn-outline-primary js-btn-plus" >&plus;</a>
                         </div>
+  
+                        <!-- </form> -->
+
                       </div>
     
                     </td>
@@ -180,3 +184,49 @@
       </div>
     </div>
 @endsection
+<script>
+  function submitForm(id){
+    // $('#'+id).submit();
+    console.log(id);
+    var form = document.createElement("form");
+    var element1 = document.createElement("input"); 
+    // var element2 = document.createElement("input");  
+
+    form.method = "GET";
+    form.action = "{{ action('Client\CartController@plusButton', ['rowId' =>  $item->rowId]) }}";   
+
+    element1.value=id;
+    element1.name="rowId";
+    form.appendChild(element1);  
+
+    // element2.value=pw;
+    // element2.name="rowId";
+    // form.appendChild(element2);
+
+    document.body.appendChild(form);
+
+    form.submit();
+}
+function submitFormminus(id){
+    // $('#'+id).submit();
+    console.log(id);
+    var form = document.createElement("form");
+    var element1 = document.createElement("input"); 
+    // var element2 = document.createElement("input");  
+
+    form.method = "GET";
+    form.action = "{{ action('Client\CartController@minusButton', ['rowId' =>  $item->rowId]) }}";   
+
+    element1.value=id;
+    element1.name="rowId";
+    form.appendChild(element1);  
+
+    // element2.value=pw;
+    // element2.name="rowId";
+    // form.appendChild(element2);
+
+    document.body.appendChild(form);
+
+    form.submit();
+}
+</script>

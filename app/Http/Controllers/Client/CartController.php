@@ -16,6 +16,7 @@ class CartController extends Controller
 {
     public function cart()
     {
+        // dd(Cart::content());
         return view('cart');
     }
     public function store(Product $product)
@@ -113,6 +114,7 @@ class CartController extends Controller
     /* plusButton */
     public function plusButton($id)
     {
+        // dd('ssgs');
         // $cart = session()->get('cart');
         // dd($cart);
         // if(!isset($cart)){
@@ -123,10 +125,11 @@ class CartController extends Controller
         //     $cart["productsNumber"]['number']++;
         //     session()->put('cart', $cart);
         // }
-        Cart::update($id, $request->quantity);
+    $cart=Cart::get($id);
+        Cart::update($id, $cart->qty+1);
         session()->flash('success_message', 'Quantity was updated successfully!');
         // return response()->json(['success' => true]);
-        return back()->with('success', 'Successful remove operation.');
+        return back()->with('success', 'Successful addind operation.');
 
         // return response()->json(['message' => 'product increased']);
     }
@@ -134,16 +137,15 @@ class CartController extends Controller
     /* minusButton */
     public function minusButton($id)
     {
-        $cart = session()->get('cart');
-        if(!isset($cart)){
-            return response()->json(['message' => 'cart.unexpected error']);
+        $cart=Cart::get($id);
+        if($cart->qty>1){
+            Cart::update($id, $cart->qty-1);
+
         }
-        if (isset($cart[$id])) {
-            $cart[$id]['quantity']--;
-            $cart["productsNumber"]['number']--;
-            session()->put('cart', $cart);
-        }
-        return response()->json(['message' => 'product decreased']);
+        session()->flash('success_message', 'Quantity was updated successfully!');
+        // return response()->json(['success' => true]);
+        return back()->with('success', 'Successful decrease operation.');
+
     }
 
 
