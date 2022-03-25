@@ -161,7 +161,7 @@
                         </a>
                         <a href="/compare" class="icons-btn d-inline-block heart">
                             <span class="icon-book"></span>
-                            <span class="number">5</span>
+                            <span class="number">{{count(Session::get('compare'))}}</span>
                         </a>
                 <select class="selectpicker changeLang" data-width="fit">
     <option data-content='<span class="flag-icon flag-icon-us"></span> English' value="en" {{ session()->get('locale') == 'en' ? 'selected' : '' }}>English</option>
