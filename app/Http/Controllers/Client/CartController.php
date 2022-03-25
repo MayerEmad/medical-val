@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Product;
+use App\Models\ShopingCart;
+
 use Gloudemans\Shoppingcart\Facades\Cart;
 
 class CartController extends Controller
@@ -28,10 +30,14 @@ class CartController extends Controller
 
         Cart::add($product->id, $product->name, 1, $product->price)
             ->associate('App\Product');
-        // return response()->json(['message' => 'Item was added to your cart!']);
+            if(Auth::user()){
+                $user= Auth::user();
+
+                $cart=ShopingCart::create(['product_id'=>$product->id,'user_id'=>$user->id,'quantity'=>1]);
+
+            }
         return back()->with('success', 'Item was added to your cart!');
 
-        // return redirect()->route('cart.index')->with('success_message', 'Item was added to your cart!');
     }
 
     /* addProductButton */
@@ -91,6 +97,7 @@ class CartController extends Controller
         $item = Cart::get($id);
         Cart::remove($id);
         session([$item->id => null]);
+        
         // dd($cart);
         // if (isset($cart[$id])) {
         //     $cart["productsNumber"]['number']-=$cart[$id]['quantity'];
