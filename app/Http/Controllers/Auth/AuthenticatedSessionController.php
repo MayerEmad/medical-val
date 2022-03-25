@@ -7,7 +7,9 @@ use App\Http\Requests\Auth\LoginRequest;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\ShopingCart;
 
+use Gloudemans\Shoppingcart\Facades\Cart;
 class AuthenticatedSessionController extends Controller
 {
     /**
@@ -31,7 +33,23 @@ class AuthenticatedSessionController extends Controller
         $request->authenticate();
 
         $request->session()->regenerate();
+        /*update cart after login*/
+        if(Cart::count()>0){
+            $user= Auth::user();
+          
+            foreach (Cart::content() as $item){
+                $cart=ShopingCart::create(['product_id'=>$item->id,'user_id'=>$user->id,'quantity'=>1]);
 
+            }
+        }else{
+            $user= Auth::user();
+            $carts=ShopingCart::where('user_id',$user->id)->get();
+            foreach ($carts as $cart){
+                Cart::add($cart->product->id, $cart->product->name,$cart->quantity, $cart->product->price);
+            }
+          
+
+        }
         return redirect(RouteServiceProvider::HOME);
     }
 
