@@ -81,9 +81,11 @@ Route::get('/cart/{product}', [CartController::class, 'store'])->name('cart.stor
 Route::get('/removeproduct/{rowId}', [CartController::class, 'removeproduct'])->name('cart.removeproduct');
 Route::get('/plusButton', [CartController::class, 'plusButton'])->name('cart.plusButton');
 Route::get('/minusButton', [CartController::class, 'minusButton'])->name('cart.minusButton');
+
 // compare page
 Route::get('compare', [CompareController::class, 'compare']);
 Route::get('/compare/{product}', [CompareController::class, 'store'])->name('compare.store');
+
 
 Route::post('/wishlist/{product}', [WishListController::class, 'addWishlist'])->name('cart.addWishlist');
 Route::get('/wishlist/{id}', [WishListController::class, 'removeWishlist'])->name('cart.removeWishlist');

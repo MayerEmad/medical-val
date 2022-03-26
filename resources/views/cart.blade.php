@@ -190,8 +190,6 @@
     console.log(id);
     var form = document.createElement("form");
     var element1 = document.createElement("input"); 
-    // var element2 = document.createElement("input");  
-
     form.method = "GET";
     form.action = "{{ action('Client\CartController@plusButton') }}";   
 

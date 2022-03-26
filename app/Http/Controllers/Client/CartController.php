@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
+
 use App\Models\Product;
 use App\Models\ShopingCart;
 
@@ -136,7 +137,8 @@ class CartController extends Controller
     }
 
     /* minusButton */
-    public function minusButton(Request $request )
+
+    public function minusButton(Request $request)
     {
         $id=$request->rowId;
 
