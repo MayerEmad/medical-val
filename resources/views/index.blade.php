@@ -64,7 +64,8 @@
 
                       <!-- <a href="#" title="Add to cart" onclick="showSwal('auto-close')"><i class="fas fa-shopping-cart"></i></a> -->
                       <a href="#" title="Add to wishlist"><i class="fas fa-heart"></i></a>
-                      <a href="#" title="Compare"><i class="far fa-copy"></i></a>
+                      <a href="{{ action('Client\CompareController@store', ['product' => $product])  }}" title="Compare"><i class="far fa-copy"></i></a>
+
                     </div>
                     <a href="shop-single"> <img src="images/product_01.png" alt="Image"></a>
                     <h3 class="text-dark"><a href="shop-single">{{$product->name}}</a></h3>

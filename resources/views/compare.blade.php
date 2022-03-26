@@ -81,46 +81,55 @@
                     <th class="first-row">
                         <p>Products</p>
                     </th>
+                    @foreach($products as $product)
+
                     <th class="col-lg-4 col-md-4 col-sm-4">
-                        <img src="images/product_01.png" alt="product image">
+                        <img src="{{$product->image}}" alt="product image">
                     </th>
-                    <th class="col-lg-4 col-md-4 col-sm-4">
+                    @endforeach
+                    <!-- <th class="col-lg-4 col-md-4 col-sm-4">
                         <img src="images/product_02.png" alt="product image">
                     </th>
                     <th class="col-lg-4 col-md-4 col-sm-4">
-                        <img src="images/product_03.png" alt="product image">
-                    </th>
+                        <img src="images/product_03.png" alt="product image"> -->
+                    <!-- </th> -->
+
                     
                   </tr>
                   <tr>
                     <td>Name</td>
-                    <td>Product 1</td>
-                    <td>Product 2</td>
-                    <td>Product 3</td>
+                    @foreach($products as $product)
+
+                    <td>{{$product->name}}</td>
+                    @endforeach
                   </tr>
                   <tr>
                     <td>Price</td>
-                    <td>55 $</td>
-                    <td>65 $</td>
-                    <td>45 $</td>
+                    @foreach($products as $product)
+
+                    <td>{{$product->price}}</td>
+                    @endforeach
                   </tr>
                   <tr>
                     <td>Customer Rating</td>
-                    <td>2</td>
-                    <td>1</td>
-                    <td>3</td>
+                    @foreach($products as $product)
+
+                    <td>{{$product->rate}}</td>
+@endforeach
                   </tr>
                   <tr>
                     <td>Im. Date</td>
-                    <td>10/12/2020</td>
-                    <td>10/12/2020</td>
-                    <td>10/12/2020</td>
+                    @foreach($products as $product)
+
+<td>{{$product->created_at}}</td>
+@endforeach
                   </tr>
                   <tr>
                     <td>Exp. Date</td>
-                    <td>10/12/2023</td>
-                    <td>10/12/2023</td>
-                    <td>10/12/2023</td>
+                    @foreach($products as $product)
+
+<td>{{$product->created_at}}</td>
+@endforeach
                   </tr>
                 </table>
               </div>
