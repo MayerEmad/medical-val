@@ -40,4 +40,17 @@ class WishListController extends Controller
         return back()->with('success', 'Item was added to your wishlist!');
 
     }
+    public function removewishlist( $id)
+    {
+       $key=array_search($id, (Session::get('wishlist')));
+
+        
+        // Session::pull('wishlist'.$key);
+        Session::pull('wishlist.'.$key); // retrieving pen and removing
+        wishlist::where([['product_id',$id],['user_id',Auth::user()->id]])->delete();
+        
+        return back()->with('success', 'Item was removed from your wishlist!');
+
+    }
+    
 }

@@ -9,6 +9,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\ShopingCart;
 use App\Models\Compare;
+use App\Models\Wishlist;
+
 use Session;
 
 
@@ -58,7 +60,7 @@ class AuthenticatedSessionController extends Controller
 
             }   
             /*update compare after login*/
-        if(count(Session::get('compare'))>0){
+        if(Session::get('compare')!==null&&count(Session::get('compare'))>0){
             $user= Auth::user();
         
             foreach (Session::get('compare') as $product_id){
@@ -74,6 +76,23 @@ class AuthenticatedSessionController extends Controller
         
 
             }   
+          /*update wishlist after login*/
+        if(Session::get('wishlist')!==null&&count(Session::get('wishlist'))>0){
+            $user= Auth::user();
+        
+            foreach (Session::get('wishlist') as $product_id){
+                $cart=Wishlist::create(['product_id'=>$product_id,'user_id'=>$user->id]);
+
+            }
+        }else{  
+            $user= Auth::user();
+            $Wishlists=Wishlist::where('user_id',$user->id)->get();
+            foreach ($Wishlists as $Wishlist){
+                Session::push('wishlist', $Wishlist->id);
+            }
+        
+
+            } 
     }
 
     /**
