@@ -11,7 +11,7 @@ use App\Http\Controllers\Client\WishListController;
 use App\Http\Controllers\Client\CompareController;
 use App\Http\Controllers\Client\HomeController;
 use App\Http\Controllers\Client\ProfileController;
-
+use App\Http\Controllers\Client\OrderController;
 
 use App\Models\Category;
 
@@ -21,6 +21,10 @@ use App\Models\Category;
     Client and Api controllers are for the web site  ----> Resources
 
 */
+
+Route::get('test', [OrderController::class, 'createInvoice']);
+Route::get('order/success', [OrderController::class, 'paymentSuccess'])->name('paymentSuccess');
+Route::get('order/failure', [OrderController::class, 'paymentFailure'])->name('paymentFailure');
 
 
 // Route::get('/', function () {
