@@ -83,8 +83,13 @@ Route::get('/search',[HomeController::class, 'search'])->name('search');
 Route::get('cart', [CartController::class, 'cart']);
 Route::get('/cart/{product}', [CartController::class, 'store'])->name('cart.store');
 Route::get('/removeproduct/{rowId}', [CartController::class, 'removeproduct'])->name('cart.removeproduct');
-Route::get('/plusButton/{rowId}', [CartController::class, 'plusButton'])->name('cart.plusButton');
-Route::get('/minusButton/{rowId}', [CartController::class, 'minusButton'])->name('cart.minusButton');
+Route::get('/plusButton', [CartController::class, 'plusButton'])->name('cart.plusButton');
+Route::get('/minusButton', [CartController::class, 'minusButton'])->name('cart.minusButton');
+
+// compare page
+Route::get('compare', [CompareController::class, 'compare']);
+Route::get('/compare/{product}', [CompareController::class, 'store'])->name('compare.store');
+
 
 Route::post('/wishlist/{product}', [WishListController::class, 'addWishlist'])->name('cart.addWishlist');
 Route::get('/wishlist/{id}', [WishListController::class, 'removeWishlist'])->name('cart.removeWishlist');
@@ -95,7 +100,7 @@ Route::post('/cart', [CartController::class, 'minusButton'])->name('minusButton'
 //wishlist
 Route::get('wishlist', [WishListController::class, 'wishlist']);
 //wishlist
-Route::get('compare', [CompareController::class, 'compare']);
+// Route::get('compare', [CompareController::class, 'compare']);
 // about page
 Route::get('/about', function () {
     return view('about');

@@ -190,10 +190,8 @@
     console.log(id);
     var form = document.createElement("form");
     var element1 = document.createElement("input"); 
-    // var element2 = document.createElement("input");  
-
     form.method = "GET";
-    form.action = "{{ action('Client\CartController@plusButton', ['rowId' =>  $item->rowId]) }}";   
+    form.action = "{{ action('Client\CartController@plusButton') }}";   
 
     element1.value=id;
     element1.name="rowId";
@@ -215,7 +213,7 @@ function submitFormminus(id){
     // var element2 = document.createElement("input");  
 
     form.method = "GET";
-    form.action = "{{ action('Client\CartController@minusButton', ['rowId' =>  $item->rowId]) }}";   
+    form.action = "{{ action('Client\CartController@minusButton') }}";   
 
     element1.value=id;
     element1.name="rowId";
