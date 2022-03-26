@@ -20,7 +20,7 @@ class OrderController extends Controller
             //Fill required data
             'NotificationOption' => 'Lnk', //'SMS', 'EML', or 'ALL'
             'InvoiceValue'       => '50',
-            'CustomerName'       => 'fname lname',
+            'CustomerName'       => 'mayer',
                 //Fill optional data
                 //'DisplayCurrencyIso' => 'KWD',
                 //'MobileCountryCode'  => '+965',
@@ -50,6 +50,9 @@ class OrderController extends Controller
 
     public function paymentFailure(){
         return "failure dont delete cart";
+    }
+    public function paymentSuccess(){
+         return view('checkout');
     }
 
     public function checkout()
