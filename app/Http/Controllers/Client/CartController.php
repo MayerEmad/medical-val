@@ -112,7 +112,7 @@ class CartController extends Controller
     }
 
     /* plusButton */
-    public function plusButton($id)
+    public function plusButton(Request $request)
     {
         // dd('ssgs');
         // $cart = session()->get('cart');
@@ -125,6 +125,7 @@ class CartController extends Controller
         //     $cart["productsNumber"]['number']++;
         //     session()->put('cart', $cart);
         // }
+        $id=$request->rowId;
     $cart=Cart::get($id);
         Cart::update($id, $cart->qty+1);
         session()->flash('success_message', 'Quantity was updated successfully!');
@@ -135,8 +136,10 @@ class CartController extends Controller
     }
 
     /* minusButton */
-    public function minusButton($id)
+    public function minusButton(Request $request )
     {
+        $id=$request->rowId;
+
         $cart=Cart::get($id);
         if($cart->qty>1){
             Cart::update($id, $cart->qty-1);

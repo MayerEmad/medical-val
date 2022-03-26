@@ -12,15 +12,20 @@ class CompareController extends Controller
 {
     public function compare()
     {
+        $products=[];
+        $product_ids=[];
+        if (Session::has('compare')){
         $product_ids=Session::get('compare');
         $products=Product::whereIn('id',$product_ids)->paginate(3);
+        }
         return view('compare', compact('products'));
 
         // return view('compare');
     }
     public function store(Product $product)
     {
-        $product_ids=Session::get('compare');
+        $product_ids=[];
+        array_push($product_ids,(Session::get('compare')));
         if(!in_array($product->id,$product_ids)){
             Session::push('compare', $product->id);
 
