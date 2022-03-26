@@ -79,8 +79,8 @@ Route::get('/search',[HomeController::class, 'search'])->name('search');
 Route::get('cart', [CartController::class, 'cart']);
 Route::get('/cart/{product}', [CartController::class, 'store'])->name('cart.store');
 Route::get('/removeproduct/{rowId}', [CartController::class, 'removeproduct'])->name('cart.removeproduct');
-Route::get('/plusButton/{rowId}', [CartController::class, 'plusButton'])->name('cart.plusButton');
-Route::get('/minusButton/{rowId}', [CartController::class, 'minusButton'])->name('cart.minusButton');
+Route::get('/plusButton', [CartController::class, 'plusButton'])->name('cart.plusButton');
+Route::get('/minusButton', [CartController::class, 'minusButton'])->name('cart.minusButton');
 
 Route::post('/wishlist/{product}', [WishListController::class, 'addWishlist'])->name('cart.addWishlist');
 Route::get('/wishlist/{id}', [WishListController::class, 'removeWishlist'])->name('cart.removeWishlist');
