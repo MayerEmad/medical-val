@@ -84,12 +84,12 @@ Route::get('/minusButton', [CartController::class, 'minusButton'])->name('cart.m
 // compare page
 Route::get('compare', [CompareController::class, 'compare']);
 Route::get('/compare/{product}', [CompareController::class, 'store'])->name('compare.store');
+// wishlist page
 
-Route::post('/wishlist/{product}', [WishListController::class, 'addWishlist'])->name('cart.addWishlist');
-Route::get('/wishlist/{id}', [WishListController::class, 'removeWishlist'])->name('cart.removeWishlist');
-Route::get('/cart', [CartController::class, 'cart'])->name('cart.index');
-Route::get('/wishlist', [WishListController::class, 'wishlist'])->name('wishlist.index');
-
+Route::post('/wishlist/{product}', [WishListController::class, 'store'])->name('wishlist.store');
+Route::get('/wishlist/{id}', [WishListController::class, 'removeWishlist'])->name('wishlist.removeWishlist');
+Route::get('/wishlist', [WishListController::class, 'wishlist']);
+///
 Route::post('/cart', [CartController::class, 'minusButton'])->name('minusButton');
 //wishlist
 Route::get('wishlist', [WishListController::class, 'wishlist']);

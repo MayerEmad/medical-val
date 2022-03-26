@@ -63,7 +63,7 @@
                     <a href="{{ action('Client\CartController@store', ['product' => $product])  }}" onclick="showSwal('auto-close')"  title="Add to cart" ><i class="fas fa-shopping-cart"></i></a>
 
                       <!-- <a href="#" title="Add to cart" onclick="showSwal('auto-close')"><i class="fas fa-shopping-cart"></i></a> -->
-                      <a href="#" title="Add to wishlist"><i class="fas fa-heart"></i></a>
+                      <a href="{{ action('Client\WishlistController@store', ['product' => $product])  }}" title="Add to wishlist"><i class="fas fa-heart"></i></a>
                       <a href="{{ action('Client\CompareController@store', ['product' => $product])  }}" title="Compare"><i class="far fa-copy"></i></a>
 
                     </div>

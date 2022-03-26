@@ -157,7 +157,11 @@
                         </a>
                         <a href="/wishlist" class="icons-btn d-inline-block heart">
                             <span class="icon-heart"></span>
-                            <span class="number">2</span>
+                            @if (Session::has('wishlist'))
+
+                            <span class="number">{{count(Session::get('wishlist'))}}</span>
+                            @endif
+
                         </a>
                         <a href="/compare" class="icons-btn d-inline-block heart">
                             <span class="icon-book"></span>
