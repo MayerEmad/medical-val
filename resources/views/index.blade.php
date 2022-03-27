@@ -44,8 +44,12 @@
               <button class="nav-link" id="v-pills-Categories-tab" data-bs-toggle="pill" data-bs-target="#v-pills-Categories" type="button" role="tab" aria-controls="v-pills-Categories" aria-selected="false">{{ __('message.Categories') }}</button>
               <p class="lead mb-0 pl-4">{{ __('message.By_price') }}:</p>
               <div id="slider-range" class="border-primary mt-3"></div>
-              <input type="text" style="background: #dbeaf700" name="text" id="amount" class="form-control border-0 pl-0" disabled="" />
-              <button class="btn btn-primary mb-4 p-0" id="v-pills-filter-tab" style="width: 50%;margin: auto;" data-bs-toggle="pill" data-bs-target="#v-pills-filter" type="button" role="tab" aria-controls="v-pills-filter" aria-selected="false">{{ __('message.FILTER') }}</button>
+              <form action="{{ route('filter') }}"  method="GET" >
+            
+              <input type="text" id="amount"  style="background: #dbeaf700" name="text" class="form-control border-0 pl-0"  />
+              <button class="btn btn-primary mb-4 p-0" id="v-pills-filter-tab" style="width: 50%;margin: auto;" data-bs-toggle="pill" data-bs-target="#v-pills-filter" type="submit" role="tab" aria-controls="v-pills-filter" aria-selected="false">{{ __('message.FILTER') }}</button>
+                            </form>
+             
               {{-- <button class="nav-link" id="v-pills-settings-tab" data-bs-toggle="pill" data-bs-target="#v-pills-settings" type="button" role="tab" aria-controls="v-pills-settings" aria-selected="false">Settings</button> --}}
             </div>
           </div>

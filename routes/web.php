@@ -74,6 +74,7 @@ Route::get('/home', function () {
 });
 Route::get('/index', [HomeController::class, 'index'])->name('index');
 Route::get('/search',[HomeController::class, 'search'])->name('search');
+Route::get('/filter',[HomeController::class, 'filter'])->name('filter');
 
 //cart page
 Route::get('cart', [CartController::class, 'cart']);

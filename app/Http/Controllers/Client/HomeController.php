@@ -26,20 +26,8 @@ class HomeController extends Controller
         $searchQuery=$request->query1;
         $products = Product::where('name', 'LIKE', '%' . $searchQuery . '%')->orWhere('ar_name', 'LIKE', '%' . $searchQuery . '%')->get();
         $categories = Category::where('name', 'LIKE', '%' . $searchQuery . '%')->orWhere('ar_name', 'LIKE', '%' . $searchQuery . '%')->get();
-
-        // if ($products->isEmpty()) {
-        //     $response = [
-        //         'error' => __('client::messages.no-clients-matched-with-the-entered-query')
-        //     ];
-        // } else {
-        //     $response = [
-        //         'products' => $products
-        //     ];
-        // }
         return view('index', compact('products','categories'));
-
-        // return response()->json($response);
-    }
+        }
     public function change(Request $request)
     {
         App::setLocale($request->lang);
@@ -47,4 +35,13 @@ class HomeController extends Controller
 
         return redirect()->back();
     }
+    public function filter(Request $request)
+    {
+        preg_match_all('!\d+!', $request->text, $prices);
+      
+        $products = Product::wherebetween('price', $prices)->get();
+        $categories = Category::paginate(5);
+
+        return view('index', compact('products','categories'));
+        }
 }
