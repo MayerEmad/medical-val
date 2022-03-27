@@ -25,6 +25,7 @@ class HomeController extends Controller
     {
         $searchQuery=$request->query1;
         $products = Product::where('name', 'LIKE', '%' . $searchQuery . '%')->orWhere('ar_name', 'LIKE', '%' . $searchQuery . '%')->get();
+        $categories = Category::where('name', 'LIKE', '%' . $searchQuery . '%')->orWhere('ar_name', 'LIKE', '%' . $searchQuery . '%')->get();
 
         // if ($products->isEmpty()) {
         //     $response = [
@@ -35,7 +36,7 @@ class HomeController extends Controller
         //         'products' => $products
         //     ];
         // }
-        return view('index')->with('products', $products);
+        return view('index', compact('products','categories'));
 
         // return response()->json($response);
     }
