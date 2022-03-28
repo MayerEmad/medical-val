@@ -15,9 +15,10 @@ class CreateComparesTable extends Migration
     {
         Schema::create('compares', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('product_id')->constrained('products')->onDelete('cascade');
-            $table->foreignId('user_id')->constrained('users');
-         
+            $table->integer('product_id')->unsigned();
+            $table->foreign('product_id')->references('id')->on('products');
+            $table->integer('user_id')->unsigned();
+            $table->foreign('user_id')->references('id')->on('users');         
             $table->timestamps();
         });
     }

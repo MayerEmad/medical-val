@@ -29,14 +29,16 @@
                   </tr>
                 </thead>
                 <tbody>
+                @foreach($products as $product)
+
                   <tr>
                     <td class="product-thumbnail">
                       <img src="images/product_02.png" alt="Image" class="img-fluid">
                     </td>
                     <td class="product-name">
-                      <h2 class="h5 text-black">Ibuprofen</h2>
+                      <h2 class="h5 text-black">{{$product->name}}</h2>
                     </td>
-                    <td>$55.00</td>
+                    <td>{{$product->price}}</td>
                     {{-- <td>
                       <div class="input-group mb-3" style="max-width: 120px;">
                         <div class="input-group-prepend">
@@ -50,11 +52,12 @@
                       </div>
     
                     </td> --}}
-                    <td>$49.00</td>
-                    <td><a href="#" class="btn btn-primary height-auto btn-sm">X</a></td>
+                    <td>{{$product->price}}</td>
+                    <td><a href="{{ action('Client\WishListController@removewishlist', ['id' =>  $product->id]) }}" class="btn btn-primary height-auto btn-sm">X</a></td>
                   </tr>
-    
-                  <tr>
+                  @endforeach
+
+                  <!-- <tr>
                     <td class="product-thumbnail">
                       <img src="images/product_01.png" alt="Image" class="img-fluid">
                     </td>
@@ -77,7 +80,7 @@
                     </td> --}}
                     <td>$49.00</td>
                     <td><a href="#" class="btn btn-primary height-auto btn-sm">X</a></td>
-                  </tr>
+                  </tr> -->
                 </tbody>
               </table>
             </div>
