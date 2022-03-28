@@ -30,8 +30,7 @@
                 </thead>
                 <tbody>
                 @if (Cart::count() > 0)
-@foreach (Cart::content() as $item)
-
+            @foreach (Cart::content() as $item)
                   <tr>
                     <td class="product-thumbnail">
                       <img src="images/product_02.png" alt="Image" class="img-fluid">
@@ -64,7 +63,7 @@
                       <a href="{{ action('Client\CartController@removeproduct', ['rowId' =>  $item->rowId]) }}" class="btn btn-primary height-auto btn-sm">X</a>
                     </td>
 
-             <td style="display:none;">{{$item->rowId}} </td>
+                    <td style="display:none;">{{$item->rowId}} </td>
                   </tr>
                   @endforeach;
     @endif;
@@ -142,7 +141,7 @@
                     <span class="text-black">Total</span>
                   </div>
                   <div class="col-md-6 text-right">
-                  <strong class="text-black">{{$total}}</strong>
+                  <strong class="text-black">99</strong>
                   </div>
                 </div>
 
