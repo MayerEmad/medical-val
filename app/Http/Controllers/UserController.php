@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use App\Models\User;
+use App\Models\Order;
+use App\Models\OrderProductItem;
 use DataTables;
 
 class UserController extends Controller
@@ -65,5 +67,44 @@ class UserController extends Controller
         return redirect()->route('user.index')->with('success','user '.$user->name.' already is '.$newRole);
     }
 
+     //Display Orders in Page
+     public function ordersTablePage()
+     {
+         $this->onlysuperadmin();
+         return view('Admin.orders.index');
+     }
+
+     public function ordersTableData(Request $request)
+     {
+         $this->onlysuperadmin();
+         if ($request->ajax()) {
+             $orders = Order::all();
+             return Datatables::of($orders)
+             ->addIndexColumn()
+             ->addColumn('name', function($row)
+             {
+                 $name=$row->user->name;
+                 return $name;
+             })
+             ->addColumn('action', function($row)
+             {
+                 $url=route('admin.orderShow',$row->id);
+                 $action = '<a herf id="show-order" data-id='.$row->id.' class="btn btn-success">Show Order</a>';
+                 return $action;
+             })
+             ->rawColumns(['action'])
+             ->make(true);
+         }
+     }
+
+     public function orderShow($id)
+     {
+        $order=Order::find($id);
+        $data = [
+            'total'  => $order->total_price,
+            'products'   => $order->products,
+        ];
+        return view('Admin.orders.show')->with('data',$data);
+     }
 
 }

@@ -12,44 +12,6 @@
 </head>
 
 <body>
-    <!-- delete popUp -->
-    <div id="delete-modal" class="modal" >
-        <form class="modal-content" id="delete-user-f" action="" method="POST">
-            @csrf
-            <div class="container con-delete">
-                <h1>Delete Item</h1>
-                <p id="delete-user-p"></p>
-                <div class="clearfix pl-5">
-                    @method('DELETE')
-                    <button type="submit"  class="deletebtn btn btn-danger ml-1">Delete</button>
-                    <button type="button" onclick="document.getElementById('delete-modal').style.display='none'" class="cancelbtn btn btn-secondary mr-1">Cancel</button>
-                </div>
-            </div>
-        </form>
-    </div>
-
-       <!-- epdate popUp -->
-       <div id="edit-modal" class="modal" >
-        <form class="modal-content" id="edit-user-f" action="" method="POST">
-            @csrf
-            <div class="container con-delete">
-                <h1>Edit Item</h1>
-                <p id="edit-user-p"></p>
-                <div class="form-group">
-                    <label>Admin Types: </label>
-                    <select name="role" id="edit-modal-s" class="block mt-1 w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm">
-                        <option value="admin">Admin</option>
-                        <option value="editoradmin">Editor Admin</option>
-                    </select>
-                </div>
-                <div class="clearfix pl-5">
-                    @method('PUT')
-                    <button type="submit" id="update-user-b" value="" class="deletebtn btn btn-success ml-1">Update</button>
-                    <button type="button" onclick="document.getElementById('edit-modal').style.display='none'" class="cancelbtn btn btn-secondary mr-1">Cancel</button>
-                </div>
-            </div>
-        </form>
-    </div>
     <div class="content-wrapper">
         <section class="content-header">
             <div class="container-fluid">
@@ -60,7 +22,7 @@
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="/admin">Home</a></li>
-                        <li class="breadcrumb-item active"><a herf="">Users</a></li>
+                        <li class="breadcrumb-item active">Table</li>
                         </ol>
                     </div>
                     <!-- Success message -->
@@ -89,15 +51,14 @@
                     <!-- jquery validation -->
                     <div class="card card-primary">
                         <div class="card-body">
-                            <h2 class="mb-4">Users Data table </h2>
-                            <table class="table table-bordered admin-datatable">
+                            <h2 class="mb-4">Orders Data table </h2>
+                            <table class="table table-bordered order-datatable">
                                 <thead>
                                     <tr>
                                         <th>NO</th>
                                         <th>Id</th>
-                                        <th>Name</th>
-                                        <th>Email</th>
-                                        <th>Permession</th>
+                                        <th>User Name</th>
+                                        <th>Price</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -140,23 +101,16 @@
 
 <script type="text/javascript">
 
- //edit-user-permission
- $('body').on('click', '#edit-user', function ()
-    {
-        var admin_id = $(this).data("id");
-        $("#edit-modal").show();
-        $("#edit-user-p").html("Do you want to change Admin type?")
-        $("#update-user-b").val(admin_id);
 
-         let url="{{ route('admin.update',[':id']) }}".replace(':id',admin_id );
-         $('#edit-user-f').attr('action',url)
-        // When the user clicks anywhere outside of the modal, close it
-
-    });
-
+$('body').on('click', '#show-order', function ()
+        {
+            var order_id = $(this).data("id");
+            let url="{{ route('admin.orderShow',[':id']) }}".replace(':id',order_id );
+            $(this).attr('href',url);
+        });
 
   $(function () {
-    var table = $('.admin-datatable').DataTable({
+    var table = $('.order-datatable').DataTable({
         columnDefs: [
             {
                 "targets": [ 0 ], "visible": true,"searchable": false,"orderable" : true,
@@ -166,20 +120,16 @@
             },
             {
                 "targets": [ 4 ], "visible": true,"searchable": false,"orderable" : false,
-            },
-            {
-                "targets": [ 5 ], "visible": true,"searchable": false,"orderable" : false,
             }
         ],
         processing: true,
         serverSide: true,
-        ajax: "{{ route('admin.userstabledata') }}",
+        ajax: "{{ route('admin.ordersTableData') }}",
         columns: [
             {data: 'DT_RowIndex', name: 'DT_RowIndex'},
             {data: 'id', name: 'id' },
             {data: 'name', name: 'name'},
-            {data: 'email', name: 'email'},
-            {data: 'type',name: 'type'},
+            {data: 'total_price', name: 'total_price'},
             {data: 'action',name: 'action'},
         ]
     });

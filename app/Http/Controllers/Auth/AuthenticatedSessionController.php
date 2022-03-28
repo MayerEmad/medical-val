@@ -43,37 +43,37 @@ class AuthenticatedSessionController extends Controller
         /*update cart after login*/
         if(Cart::count()>0){
             $user= Auth::user();
-        
+
             foreach (Cart::content() as $item){
                 $cart=ShopingCart::create(['product_id'=>$item->id,'user_id'=>$user->id,'quantity'=>1]);
 
             }
-        }else{  
+        }else{
             $user= Auth::user();
             $carts=ShopingCart::where('user_id',$user->id)->get();
             foreach ($carts as $cart){
                 Cart::add($cart->product->id, $cart->product->name,$cart->quantity, $cart->product->price);
             }
-        
 
-            }   
+
+            }
             /*update compare after login*/
-        if(count(Session::get('compare'))>0){
-            $user= Auth::user();
-        
-            foreach (Session::get('compare') as $product_id){
-                $cart=Compare::create(['product_id'=>$product_id,'user_id'=>$user->id]);
+        // if(count(Session::get('compare'))>0){
+        //     $user= Auth::user();
 
-            }
-        }else{  
-            $user= Auth::user();
-            $Compares=Compare::where('user_id',$user->id)->get();
-            foreach ($Compares as $Compare){
-                Session::push('compare', $Compare->id);
-            }
-        
+        //     foreach (Session::get('compare') as $product_id){
+        //         $cart=Compare::create(['product_id'=>$product_id,'user_id'=>$user->id]);
 
-            }   
+        //     }
+        // }else{
+        //     $user= Auth::user();
+        //     $Compares=Compare::where('user_id',$user->id)->get();
+        //     foreach ($Compares as $Compare){
+        //         Session::push('compare', $Compare->id);
+        //     }
+
+
+        //     }
     }
 
     /**

@@ -155,6 +155,14 @@
   $(function () {
     var category_id = '{{ $category->id }}';
     var table = $('.yajra-datatable').DataTable({
+        columnDefs: [
+            {
+                "targets": [ 0 ], "visible": true,"searchable": false,"orderable" : true,
+            },
+            {
+                "targets": [ 6 ], "visible": true,"searchable": false,"orderable" : false,
+            }
+        ],
         processing: true,
         serverSide: true,
         ajax:{
@@ -178,13 +186,13 @@
     {
         var product_id = $(this).data("id");
         let url="{{ route('product.edit',[':id']) }}".replace(':id',product_id );
-        $("#edit-product").attr('href',url);
+        $(this).attr('href',url);
     });
    $('body').on('click', '#show-product', function ()
     {
         var product_id = $(this).data("id");
         let url="{{ route('product.show',[':id']) }}".replace(':id',product_id );
-        $("#show-product").attr('href',url);
+        $(this).attr('href',url);
     });
    $('body').on('click', '#delete-product', function ()
     {

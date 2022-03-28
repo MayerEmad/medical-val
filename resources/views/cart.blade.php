@@ -5,7 +5,7 @@
       <div class="container">
         <div class="row">
           <div class="col-md-12 mb-0">
-            <a href="index">Home</a> <span class="mx-2 mb-0">/</span> 
+            <a href="index">Home</a> <span class="mx-2 mb-0">/</span>
             <strong class="text-black">Cart</strong>
           </div>
         </div>
@@ -52,14 +52,14 @@
 
                         <a onclick=" submitForm('{{$item->rowId}}');" class="btn btn-outline-primary js-btn-plus" >&plus;</a>
                         </div>
-  
+
                         <!-- </form> -->
 
                       </div>
-    
+
                     </td>
                     <td>${{ $item->price *$item->qty}}</td>
-              
+
                     <td>
                       <a href="{{ action('Client\CartController@removeproduct', ['rowId' =>  $item->rowId]) }}" class="btn btn-primary height-auto btn-sm">X</a>
                     </td>
@@ -87,7 +87,7 @@
                           <button class="btn btn-outline-primary js-btn-plus" type="button">&plus;</button>
                         </div>
                       </div>
-    
+
                     </td>
                     <td>$49.00</td>
                     <td><a href="#" class="btn btn-primary height-auto btn-sm">X</a></td>
@@ -97,7 +97,7 @@
             </div>
           </form>
         </div>
-    
+
         <div class="row">
           <div class="col-md-6">
             <div class="row mb-5">
@@ -142,13 +142,13 @@
                     <span class="text-black">Total</span>
                   </div>
                   <div class="col-md-6 text-right">
-                    <strong class="text-black">$230.00</strong>
+                  <strong class="text-black">{{$total}}</strong>
                   </div>
                 </div>
-    
+
                 <div class="row">
                   <div class="col-md-12">
-                    <button class="btn btn-primary btn-lg btn-block" onclick="window.location='checkout'">Proceed To
+                    <button class="btn btn-primary btn-lg btn-block" onclick="goToCheckOut()">Proceed To
                       Checkout</button>
                   </div>
                 </div>
@@ -189,13 +189,13 @@
     // $('#'+id).submit();
     console.log(id);
     var form = document.createElement("form");
-    var element1 = document.createElement("input"); 
+    var element1 = document.createElement("input");
     form.method = "GET";
-    form.action = "{{ action('Client\CartController@plusButton') }}";   
+    form.action = "{{ action('Client\CartController@plusButton') }}";
 
     element1.value=id;
     element1.name="rowId";
-    form.appendChild(element1);  
+    form.appendChild(element1);
 
     // element2.value=pw;
     // element2.name="rowId";
@@ -205,19 +205,20 @@
 
     form.submit();
 }
+
 function submitFormminus(id){
     // $('#'+id).submit();
     console.log(id);
     var form = document.createElement("form");
-    var element1 = document.createElement("input"); 
-    // var element2 = document.createElement("input");  
+    var element1 = document.createElement("input");
+    // var element2 = document.createElement("input");
 
     form.method = "GET";
-    form.action = "{{ action('Client\CartController@minusButton') }}";   
+    form.action = "{{ action('Client\CartController@minusButton') }}";
 
     element1.value=id;
     element1.name="rowId";
-    form.appendChild(element1);  
+    form.appendChild(element1);
 
     // element2.value=pw;
     // element2.name="rowId";
@@ -226,5 +227,17 @@ function submitFormminus(id){
     document.body.appendChild(form);
 
     form.submit();
+}
+
+function goToCheckOut(){
+    $.ajax({
+    url:     "{{route('cart.checkout')}}",
+    type:    'GET',
+    data:    { src: 'show' },
+    success: function(response) {
+       window.location.href = "{{route('cart.checkout')}}";
+    }
+});
+
 }
 </script>

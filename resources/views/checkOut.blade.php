@@ -287,7 +287,7 @@
                   </div>
 
                   <div class="form-group">
-                    <button class="btn btn-primary btn-lg btn-block" onclick="window.location='thankyou'">Place
+                    <button class="btn btn-primary btn-lg btn-block" onclick="goToCreateInvoice()">Place
                       Order</button>
                   </div>
 
@@ -326,6 +326,17 @@
         </div>
       </div>
     </div>
+    <form  id="createOrderForm" action="" method="GET">
+        @csrf
+    </form>
 
    @endsection
+
+<script>
+function goToCreateInvoice(){
+    let url="{{ route('createInvoice')}}";
+    $('#createOrderForm').attr('action',url);
+    $( "#createOrderForm" ).submit();
+}
+</script>
 

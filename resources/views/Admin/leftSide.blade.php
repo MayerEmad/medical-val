@@ -270,7 +270,7 @@
           </li>
 
           <li class="nav-item">
-            <a href="/orders" class="nav-link">
+            <a href="{{route('admin.ordersTablePage')}}" class="nav-link">
             <i class="fas fa-receipt"></i>
               <p>
               Orders
