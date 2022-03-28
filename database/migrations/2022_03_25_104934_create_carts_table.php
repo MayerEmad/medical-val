@@ -22,7 +22,7 @@ class CreateCartsTable extends Migration
             $table->integer('quantity')->default(0);
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->nullable();
-      
+
         });
     }
 

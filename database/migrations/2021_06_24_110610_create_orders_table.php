@@ -19,10 +19,10 @@ class CreateOrdersTable extends Migration
 
             $table->string('user_name');
             $table->unsignedInteger('user_id')->index();
+            $table->decimal('total_price', 8,3)->default(0.00);
+            $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users');
-
-            $table->timestamps();
         });
     }
 

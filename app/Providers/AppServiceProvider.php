@@ -13,7 +13,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        // $this-app->bind(MyFatoorahService::class,function(){
+        //     return new MyFatoorahService();
+        // });
     }
 
     /**
