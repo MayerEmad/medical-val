@@ -131,7 +131,7 @@ class CartController extends Controller
         Cart::update($id, $cart->qty+1);
         session()->flash('success_message', 'Quantity was updated successfully!');
         // return response()->json(['success' => true]);
-        return back()->with('success', 'Successful addind operation.');
+        return view('cart')->with('success', 'Successful addind operation.');
 
         // return response()->json(['message' => 'product increased']);
     }
@@ -143,13 +143,14 @@ class CartController extends Controller
         $id=$request->rowId;
 
         $cart=Cart::get($id);
+        // dd($cart);
         if($cart->qty>1){
             Cart::update($id, $cart->qty-1);
 
         }
         session()->flash('success_message', 'Quantity was updated successfully!');
         // return response()->json(['success' => true]);
-        return back()->with('success', 'Successful decrease operation.');
+        return view('cart')->with('success', 'Successful decrease operation.');
 
     }
 

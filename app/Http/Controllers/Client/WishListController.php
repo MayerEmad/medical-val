@@ -47,8 +47,10 @@ class WishListController extends Controller
         
         // Session::pull('wishlist'.$key);
         Session::pull('wishlist.'.$key); // retrieving pen and removing
+        if(Auth::user()){
+
         wishlist::where([['product_id',$id],['user_id',Auth::user()->id]])->delete();
-        
+        }
         return back()->with('success', 'Item was removed from your wishlist!');
 
     }

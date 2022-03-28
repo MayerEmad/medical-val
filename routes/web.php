@@ -91,7 +91,6 @@ Route::get('wishlist', [WishListController::class, 'wishlist']);
 Route::get('/wishlist/{product}', [WishListController::class, 'store'])->name('wishlist.store');
 Route::get('/removewishlist/{id}', [WishListController::class, 'removewishlist'])->name('wishlist.removewishlist');
 ///
-Route::post('/cart', [CartController::class, 'minusButton'])->name('minusButton');
 //wishlist
 Route::get('wishlist', [WishListController::class, 'wishlist']);
 //wishlist
