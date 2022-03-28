@@ -74,6 +74,7 @@ Route::get('/home', function () {
 });
 Route::get('/index', [HomeController::class, 'index'])->name('index');
 Route::get('/search',[HomeController::class, 'search'])->name('search');
+Route::get('/filter',[HomeController::class, 'filter'])->name('filter');
 
 //cart page
 Route::get('cart', [CartController::class, 'cart']);
@@ -81,6 +82,7 @@ Route::get('/cart/{product}', [CartController::class, 'store'])->name('cart.stor
 Route::get('/removeproduct/{rowId}', [CartController::class, 'removeproduct'])->name('cart.removeproduct');
 Route::get('/plusButton', [CartController::class, 'plusButton'])->name('cart.plusButton');
 Route::get('/minusButton', [CartController::class, 'minusButton'])->name('cart.minusButton');
+
 // compare page
 Route::get('compare', [CompareController::class, 'compare']);
 Route::get('/compare/{product}', [CompareController::class, 'store'])->name('compare.store');
