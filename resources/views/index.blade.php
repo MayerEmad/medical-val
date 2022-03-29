@@ -64,7 +64,7 @@
 				   @foreach($products as $product)
                   <div class="col-sm-6 col-lg-4 col-md-6 text-center item mb-4">
                     <div class="product-option">
-                    <a href="{{ action('Client\CartController@store', ['product' => $product])  }}" onclick="showSwal('auto-close')"  title="Add to cart" ><i class="fas fa-shopping-cart"></i></a>
+                    <a href="{{ action('Client\CartController@store', ['product' => $product])  }}" onclick="showSwal('auto-close','Item added succesfully.')"  title="Add to cart" ><i class="fas fa-shopping-cart"></i></a>
 
                       <!-- <a href="#" title="Add to cart" onclick="showSwal('auto-close')"><i class="fas fa-shopping-cart"></i></a> -->
                       <a href="{{ action('Client\WishListController@store', ['product' => $product])  }}" title="Add to wishlist"><i class="fas fa-heart"></i></a>

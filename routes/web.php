@@ -11,7 +11,7 @@ use App\Http\Controllers\Client\WishListController;
 use App\Http\Controllers\Client\CompareController;
 use App\Http\Controllers\Client\HomeController;
 use App\Http\Controllers\Client\ProfileController;
-use App\Http\Controllers\Client\OrderController;
+
 
 use App\Models\Category;
 
@@ -44,10 +44,6 @@ Route::group(['middleware' => ['auth', 'role:superadmin|editoradmin|admin']], fu
         Route::get('users', [UserController::class, 'index'])->name('usertablepage');
         Route::get('userstabledata', [UserController::class, 'userstabledata'])->name('userstabledata');
 
-        Route::get('orders', [UserController::class, 'ordersTablePage'])->name('ordersTablePage');
-        Route::get('ordersTableData', [UserController::class, 'ordersTableData'])->name('ordersTableData');
-        Route::get('order/{id}', [UserController::class, 'orderShow'])->name('orderShow');
-
     });
     Route::prefix('category/')->name('category.')->group(function () {
         Route::get('table', [CategoryController::class, 'getproducts'])->name('productlist');
@@ -69,6 +65,9 @@ require __DIR__ . '/auth.php';
 
 
 //__________________________ FOR THE WEB PAGE __________________________
+Route::get('/order', function () {
+    return view('orders');
+});
 //home page
 Route::get('/home', function () {
     return view('home');
@@ -81,17 +80,8 @@ Route::get('/filter',[HomeController::class, 'filter'])->name('filter');
 Route::get('cart', [CartController::class, 'cart']);
 Route::get('/cart/{product}', [CartController::class, 'store'])->name('cart.store');
 Route::get('/removeproduct/{rowId}', [CartController::class, 'removeproduct'])->name('cart.removeproduct');
-Route::get('/plusButton', [CartController::class, 'plusButton'])->name('cart.plusButton');
-Route::get('/minusButton', [CartController::class, 'minusButton'])->name('cart.minusButton');
-Route::get('/checkout', [CartController::class, 'checkout'])->name('cart.checkout');
-
-
-//orders
-Route::get('order/create', [OrderController::class, 'createInvoice'])->name('createInvoice');
-Route::get('order/success', [OrderController::class, 'paymentSuccess'])->name('paymentSuccess');
-Route::get('order/failure', [OrderController::class, 'paymentFailure'])->name('paymentFailure');
-//Route::get('/order', function () {return view('orders');});
-
+Route::POST('/plusButton', [CartController::class, 'plusButton'])->name('cart.plusButton');
+Route::POST('/minusButton', [CartController::class, 'minusButton'])->name('cart.minusButton');
 
 // compare page
 Route::get('compare', [CompareController::class, 'compare']);
@@ -114,7 +104,9 @@ Route::get('/contact', function () {
     return view('contact');
 });
 //home page
-
+// Route::get('/index', function () {
+//     return view('index');
+// });
 Route::get('/index', [HomeController::class, 'index'])->name('index');
 Route::get('/search',[HomeController::class, 'search'])->name('search');
 Route::get('lang/change', [HomeController::class, 'change'])->name('changeLang');
@@ -131,6 +123,9 @@ Route::get('/details', function () {
 Route::get('/shop', function () {
     return view('shop');
 });
-
+//Product details page
+Route::get('/checkout', function () {
+    return view('checkout');
+});
 
 

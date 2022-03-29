@@ -313,12 +313,12 @@
 
   <script>
     (function($) {
-        showSwal = function(type) {
+        showSwal = function(type,msg) {
             'use strict';
             if (type === 'auto-close') {
                 swal({
                     title: '',
-                    text: 'Item added succesfully.',
+                    text: msg,
                     timer: 2000
 
                     })

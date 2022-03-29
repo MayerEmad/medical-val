@@ -17,21 +17,18 @@ class CartController extends Controller
 {
     public function cart()
     {
-        $total=0;
-        foreach (Cart::content() as $item){
-            $total+=$item->price*$item->qty;
-        }
-        return view('cart')->with('total',$total);;
+        // dd(Cart::content());
+        return view('cart');
     }
     public function store(Product $product)
     {
-        // $duplicates = Cart::search(function ($cartItem, $rowId) use ($product) {
-        //     return $cartItem->id === $product->id;
-        // });
+        $duplicates = Cart::search(function ($cartItem, $rowId) use ($product) {
+            return $cartItem->id === $product->id;
+        });
+        if ($duplicates->isNotEmpty()) {
 
-        // if ($duplicates->isNotEmpty()) {
-        //     return redirect()->route('cart.index')->with('success_message', 'Item is already in your cart!');
-        // }
+            return redirect()->route('index')->with('warning', 'Item is already in your cart!');
+        }
 
         Cart::add($product->id, $product->name, 1, $product->price)
             ->associate('App\Product');
@@ -52,9 +49,9 @@ class CartController extends Controller
 //         if (!isset($product)) {
 //             return response()->json(['message' => 'cart.unexpected error']);
 //         }
-//
+// 
 //         $cart = session()->get('cart');
-//
+// 
 //         /**  if cart is empty then this the first product **/
 //         if (!isset($cart)) {
 //             $cart = [
@@ -71,7 +68,7 @@ class CartController extends Controller
 //             session()->put('cart', $cart);
 //             return response()->json(['message' => 'add to cart']);
 //         }
-//
+// 
 //         /* if cart not empty
 //           then check if this product exist then increment quantity*/
 //         if (isset($cart[$id])) {
@@ -79,7 +76,7 @@ class CartController extends Controller
 //         } else {
 //             $cart[$id] = [
 //                 "id" => $product->id,
-//
+// 
 //                 "name" => $product->name,
 //                 "quantity" => 1,
 //                 "price" => $product->price,
@@ -87,7 +84,7 @@ class CartController extends Controller
 //             ];
 //         }
 //         $cart["productsNumber"]['number']++;
-//
+// 
 //         session()->put('cart', $cart);
 //         return response()->json(['message' => 'add to cart']);
 //     }
@@ -102,7 +99,7 @@ class CartController extends Controller
         $item = Cart::get($id);
         Cart::remove($id);
         session([$item->id => null]);
-
+        
         // dd($cart);
         // if (isset($cart[$id])) {
         //     $cart["productsNumber"]['number']-=$cart[$id]['quantity'];
@@ -130,10 +127,9 @@ class CartController extends Controller
         //     session()->put('cart', $cart);
         // }
         $id=$request->rowId;
-    $cart=Cart::get($id);
+        $cart=Cart::get($id);
         Cart::update($id, $cart->qty+1);
-        session()->flash('success_message', 'Quantity was updated successfully!');
-        return view('cart')->with('success', 'Successful addind operation.');
+        return json_encode(['qty'=>$cart->qty]);
 
     }
 
@@ -149,15 +145,9 @@ class CartController extends Controller
 
         }
         session()->flash('success_message', 'Quantity was updated successfully!');
-        return view('cart')->with('success', 'Successful decrease operation.');
+        return json_encode(['qty'=>$cart->qty,'cart'=>$cart]);
 
     }
-    public function checkout()
-    {
-        if(Auth::check()){
-            return view('checkout');
-        }
-        return redirect('/login');
-    }
+
 
 }
