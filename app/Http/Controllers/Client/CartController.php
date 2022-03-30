@@ -49,9 +49,9 @@ class CartController extends Controller
 //         if (!isset($product)) {
 //             return response()->json(['message' => 'cart.unexpected error']);
 //         }
-// 
+//
 //         $cart = session()->get('cart');
-// 
+//
 //         /**  if cart is empty then this the first product **/
 //         if (!isset($cart)) {
 //             $cart = [
@@ -68,7 +68,7 @@ class CartController extends Controller
 //             session()->put('cart', $cart);
 //             return response()->json(['message' => 'add to cart']);
 //         }
-// 
+//
 //         /* if cart not empty
 //           then check if this product exist then increment quantity*/
 //         if (isset($cart[$id])) {
@@ -76,7 +76,7 @@ class CartController extends Controller
 //         } else {
 //             $cart[$id] = [
 //                 "id" => $product->id,
-// 
+//
 //                 "name" => $product->name,
 //                 "quantity" => 1,
 //                 "price" => $product->price,
@@ -84,7 +84,7 @@ class CartController extends Controller
 //             ];
 //         }
 //         $cart["productsNumber"]['number']++;
-// 
+//
 //         session()->put('cart', $cart);
 //         return response()->json(['message' => 'add to cart']);
 //     }
@@ -99,7 +99,7 @@ class CartController extends Controller
         $item = Cart::get($id);
         Cart::remove($id);
         session([$item->id => null]);
-        
+
         // dd($cart);
         // if (isset($cart[$id])) {
         //     $cart["productsNumber"]['number']-=$cart[$id]['quantity'];
@@ -148,6 +148,12 @@ class CartController extends Controller
         return json_encode(['qty'=>$cart->qty,'cart'=>$cart]);
 
     }
-
+    public function checkout()
+    {
+        if(Cart::count() > 0){
+            return view('checkout');
+        }
+        return back()->with('error', 'you dont have items in your cart');
+    }
 
 }

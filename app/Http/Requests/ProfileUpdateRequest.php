@@ -30,11 +30,11 @@ class ProfileUpdateRequest extends FormRequest
             'email' => 'required|string|email',
             'name' => ['required','min:3','max:190','string','regex:/(^[\pL\p{N} _.-]+$)/u'],
             'phone' => 'regex:/(01)[0-9]{9}/',
-            'area' => ['min:2','max:100','string','regex:/(^[\pL\p{N} _.-]+$)/u'],
-            'street' => ['min:3','max:100','string','regex:/(^[\pL\p{N} _.-]+$)/u'],
-            'block'=> ['min:1','max:100','string','regex:/(^[\pL\p{N} _.-]+$)/u'],
-            'departement'=> ['min:1','max:30','string','regex:/(^[\pL\p{N} _.-]+$)/u'],
-            'floor'=>'integer|numeric',
+            'address' => ['max:100','string','regex:/(^[\pL\p{N} _.-]+$)/u'],
+            'street' => ['max:100','string','regex:/(^[\pL\p{N} _.-]+$)/u'],
+            'block'=> ['max:100','string','regex:/(^[\pL\p{N} _.-]+$)/u'],
+            'house_building_number'=>'integer|numeric',
+            'address_instructions'=> ['max:100','string','regex:/(^[\pL\p{N} _.-]+$)/u'],
         ];
     }
 
@@ -42,7 +42,6 @@ class ProfileUpdateRequest extends FormRequest
     {
         return [
             'name.reuired' => 'A name is required for the profile.',
-            'floor.numeric' => 'Floor must be number.',
         ];
     }
     public function failedValidation(Validator $validator)

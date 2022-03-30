@@ -13,7 +13,6 @@ class ProfileController extends Controller
 {
     public function show()
     {
-        if(Auth::check()==null)return redirect('/login');
         $user = Auth::user();
         return view('profile')->with('user', $user);
     }
@@ -26,13 +25,13 @@ class ProfileController extends Controller
         $user->name=$validated["name"];
         $user->email=$validated["email"];
         $user->phone=$validated["phone"];
-        $user->area=$validated["area"];
+        $user->address=$validated["address"];
         $user->block=$validated["block"];
         $user->street=$validated["street"];
-        $user->floor=$validated["floor"];
-        $user->departement=$validated["departement"];
+        $user->house_building_number=$validated["house_building_number"];
+        $user->address_instructions=$validated["address_instructions"];
 
-        //$user->save();
-        return back()->with('success', 'Successful update operation.');
+        $user->save();
+        return back()->with('success', 'Successful update profile.');
     }
 }

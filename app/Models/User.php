@@ -27,11 +27,11 @@ class User extends Authenticatable
         'last_device_ip',
         'last_login_at',
         'phone',
-        'area',
+        'address',
         'block',
         'street',
-        'floor',
-        'departement',
+        'house_building_number',
+        'address_instructions',
     ];
 
     /**

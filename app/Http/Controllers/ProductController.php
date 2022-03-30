@@ -13,18 +13,7 @@ use App\Http\Requests\ProductStoreUpdateRequest;
 
 class ProductController extends Controller
 {
-    public function onlysuperadmin()
-    {
-        if (Auth::user()->hasRole('superadmin')==false)
-            return view('errors.401');
-        return;
-    }
-    public function editoradmin()
-    {
-        if (Auth::user()->hasRole('superadmin')==false && Auth::user()->hasRole('editoradmin')==false)
-            return view('errors.401');
-        return;
-    }
+
     public function uploadImage(Request $request)
     {
         $request->validate([
@@ -63,14 +52,16 @@ class ProductController extends Controller
 
     public function create(Request $category)
     {
-        $this->onlysuperadmin();
+        if(auth::user()->hasrole('superadmin')==false && auth::user()->hasrole('editoradmin')==false)
+            return view('errors.401');
         $category=Category::find($category->id);
         return view('Admin.product.create')->with('category',$category);
     }
 
     public function store(ProductStoreUpdateRequest $request)
     {
-        $this->onlysuperadmin();
+        if(auth::user()->hasrole('superadmin')==false && auth::user()->hasrole('editoradmin')==false)
+            return view('errors.401');
         $validated = $request->validated();
         $image_name=$this->uploadImage($request);
 
@@ -96,14 +87,16 @@ class ProductController extends Controller
 
     public function edit(Product $product)
     {
-        $this->editoradmin();
+        if (auth::user()->hasrole('superadmin')==false && auth::user()->hasrole('editoradmin')==false)
+            return view('errors.401');
         $product=Product::find($product->id);
         return view('Admin.product.edit')->with('product',$product);
     }
 
     public function update(ProductStoreUpdateRequest $request, Product $product)
     {
-        $this->editoradmin();
+        if (auth::user()->hasrole('superadmin')==false && auth::user()->hasrole('editoradmin')==false)
+            return view('errors.401');
         $validated = $request->validated();
         if($request->image!=null)
         {
@@ -126,7 +119,8 @@ class ProductController extends Controller
 
     public function destroy(Product $product)
     {
-        $this->onlysuperadmin();
+        if (auth::user()->hasrole('superadmin')==false)
+            return view('errors.401');
         $product=Product::find($product->id);
         $product->delete();
         return back()->with('success','Product Deleted Succesfully.');

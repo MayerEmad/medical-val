@@ -75,26 +75,40 @@ Route::get('/home', function () {
 Route::get('/index', [HomeController::class, 'index'])->name('index');
 Route::get('/search',[HomeController::class, 'search'])->name('search');
 Route::get('/filter',[HomeController::class, 'filter'])->name('filter');
+Route::get('lang/change', [HomeController::class, 'change'])->name('changeLang');
+
 
 //cart page
 Route::get('cart', [CartController::class, 'cart']);
 Route::get('/cart/{product}', [CartController::class, 'store'])->name('cart.store');
 Route::get('/removeproduct/{rowId}', [CartController::class, 'removeproduct'])->name('cart.removeproduct');
-Route::POST('/plusButton', [CartController::class, 'plusButton'])->name('cart.plusButton');
-Route::POST('/minusButton', [CartController::class, 'minusButton'])->name('cart.minusButton');
+Route::get('/plusButton', [CartController::class, 'plusButton'])->name('cart.plusButton');
+Route::get('/minusButton', [CartController::class, 'minusButton'])->name('cart.minusButton');
+
+Route::group(['middleware' => 'auth'], function () {
+    Route::get('/checkout', [CartController::class, 'checkout'])->name('cart.checkout');
+
+    //Route::get('/order', function () {return view('orders');});
+    Route::get('order/checkdata', [OrderController::class, 'checkOrderData'])->name('checkOrderData');
+    Route::get('order/create', [OrderController::class, 'createInvoice'])->name('createInvoice');
+    Route::get('order/success', [OrderController::class, 'paymentSuccess'])->name('paymentSuccess');
+    Route::get('order/failure', [OrderController::class, 'paymentFailure'])->name('paymentFailure');
+
+    // profile page
+    Route::get('/profile', [ProfileController::class, 'show'])->name('profile');
+    Route::put('/profile/{user}', [ProfileController::class, 'update'])->name('profile-update');
+});
 
 // compare page
 Route::get('compare', [CompareController::class, 'compare']);
 Route::get('/compare/{product}', [CompareController::class, 'store'])->name('compare.store');
+
 // wishlist page
 Route::get('wishlist', [WishListController::class, 'wishlist']);
 Route::get('/wishlist/{product}', [WishListController::class, 'store'])->name('wishlist.store');
 Route::get('/removewishlist/{id}', [WishListController::class, 'removewishlist'])->name('wishlist.removewishlist');
-///
-//wishlist
-Route::get('wishlist', [WishListController::class, 'wishlist']);
-//wishlist
-// Route::get('compare', [CompareController::class, 'compare']);
+
+
 // about page
 Route::get('/about', function () {
     return view('about');
@@ -103,29 +117,17 @@ Route::get('/about', function () {
 Route::get('/contact', function () {
     return view('contact');
 });
-//home page
-// Route::get('/index', function () {
-//     return view('index');
-// });
-Route::get('/index', [HomeController::class, 'index'])->name('index');
-Route::get('/search',[HomeController::class, 'search'])->name('search');
-Route::get('lang/change', [HomeController::class, 'change'])->name('changeLang');
-
-// profile page
-Route::get('/profile', [ProfileController::class, 'show'])->name('profile');// i think we can delete it
-Route::put('/profile/{user}', [ProfileController::class, 'update'])->name('profile-update');
-
 //Product details page
 Route::get('/details', function () {
     return view('shop-single');
 });
-//Product details page
+//shop page
 Route::get('/shop', function () {
     return view('shop');
 });
-//Product details page
-Route::get('/checkout', function () {
-    return view('checkout');
+//thanks after successful order
+Route::get('/thanks', function () {
+    return view('thankyou');
 });
 
 
