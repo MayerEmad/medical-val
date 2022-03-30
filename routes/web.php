@@ -11,6 +11,7 @@ use App\Http\Controllers\Client\WishListController;
 use App\Http\Controllers\Client\CompareController;
 use App\Http\Controllers\Client\HomeController;
 use App\Http\Controllers\Client\ProfileController;
+use App\Http\Controllers\Client\OrderController;
 
 
 use App\Models\Category;
@@ -44,6 +45,9 @@ Route::group(['middleware' => ['auth', 'role:superadmin|editoradmin|admin']], fu
         Route::get('users', [UserController::class, 'index'])->name('usertablepage');
         Route::get('userstabledata', [UserController::class, 'userstabledata'])->name('userstabledata');
 
+        Route::get('orders', [UserController::class, 'ordersTablePage'])->name('ordersTablePage');
+        Route::get('orderstabledata', [UserController::class, 'ordersTableData'])->name('ordersTableData');
+        Route::get('orderShow/{id}', [UserController::class, 'orderShow'])->name('orderShow');
     });
     Route::prefix('category/')->name('category.')->group(function () {
         Route::get('table', [CategoryController::class, 'getproducts'])->name('productlist');
