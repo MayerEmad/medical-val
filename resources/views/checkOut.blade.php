@@ -8,6 +8,31 @@
             <a href="index">Home</a> <span class="mx-2 mb-0">/</span>
             <strong class="text-black">Checkout</strong>
           </div>
+            @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+            @endif
+            @if(Session::has('data-error'))
+                <div class="alert alert-info">
+                     <p> {{Session::get('data-error')}} <a href="profile" style="#bf2727">Click here</a> to profile</p>
+                </div>
+            @endif
+            @if(Session::has('error'))
+                <div class="alert alert-danger">
+                     <p> {{Session::get('error')}} </p>
+                </div>
+            @endif
+            <!-- Success message -->
+            @if(Session::has('success'))
+                <div class="alert alert-success">
+                    {{Session::get('success')}}
+                </div>
+            @endif
         </div>
       </div>
     </div>
@@ -16,9 +41,11 @@
       <div class="container">
         <div class="row mb-5">
           <div class="col-md-12">
+            @if (!Auth::check())
             <div class="bg-light rounded p-3">
-              <p class="mb-0">Returning customer? <a href="#" class="d-inline-block">Click here</a> to login</p>
+              <p class="mb-0">Returning customer? <a href="/login" class="d-inline-block">Click here</a> to login</p>
             </div>
+            @endif
           </div>
         </div>
         <div class="row">
@@ -287,7 +314,7 @@
                   </div>
 
                   <div class="form-group">
-                    <button class="btn btn-primary btn-lg btn-block" onclick="goToCreateInvoice()">Place
+                    <button class="btn btn-primary btn-lg btn-block" onclick="goToCheckOrderData()">Place
                       Order</button>
                   </div>
 
@@ -333,8 +360,8 @@
    @endsection
 
 <script>
-function goToCreateInvoice(){
-    let url="{{ route('createInvoice')}}";
+function goToCheckOrderData(){
+    let url="{{ route('checkOrderData')}}";
     $('#createOrderForm').attr('action',url);
     $( "#createOrderForm" ).submit();
 }

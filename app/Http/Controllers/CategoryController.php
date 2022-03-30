@@ -12,18 +12,6 @@ use DataTables;
 
 class CategoryController extends Controller
 {
-    public function onlysuperadmin()
-    {
-        if (Auth::user()->hasRole('superadmin')==false)
-            return view('errors.401');
-        return ;
-    }
-    public function editoradmin()
-    {
-        if (Auth::user()->hasRole('superadmin')==false && Auth::user()->hasRole('editoradmin')==false)
-            return view('errors.401');
-        return;
-    }
     public function uploadImage(Request $request)
     {
         $request->validate([
@@ -90,13 +78,13 @@ class CategoryController extends Controller
 
     public function create()
     {
-        $this->onlysuperadmin();
+        if (Auth::user()->hasRole('superadmin')==false)return view('errors.401');
         return view('Admin.category.create');
     }
 
     public function store(CategoryStoreUpdateRequest $request)
     {
-        $this->onlysuperadmin();
+        if (Auth::user()->hasRole('superadmin')==false)return view('errors.401');
 
         $validated = $request->validated();
         $image_name=$this->uploadImage($request);
@@ -145,14 +133,16 @@ class CategoryController extends Controller
 
     public function edit(Category $category)
     {
-        $this->editoradmin();
+        if (auth::user()->hasrole('superadmin')==false && auth::user()->hasrole('editoradmin')==false)
+            return view('errors.401');
         $category=Category::find($category->id);
         return view('Admin.category.edit')->with('category',$category);
     }
 
     public function update(CategoryStoreUpdateRequest $request, Category $category)
     {
-        $this->editoradmin();
+        if (auth::user()->hasrole('superadmin')==false && auth::user()->hasrole('editoradmin')==false)
+            return view('errors.401');
 
         $validated = $request->validated();
         if($request->image!=null)
@@ -171,7 +161,7 @@ class CategoryController extends Controller
 
     public function destroy(Category $category)
     {
-        $this->onlysuperadmin();
+        if (Auth::user()->hasRole('superadmin')==false)return view('errors.401');
         $category=Category::find($category->id);
         $category->delete();
         return redirect('/category')->with('success','Category Deleted Succesfully.');

@@ -154,10 +154,10 @@ class CartController extends Controller
     }
     public function checkout()
     {
-        if(Auth::check()){
+        if(Cart::count() > 0){
             return view('checkout');
         }
-        return redirect('/login');
+        return back()->with('error', 'you dont have items in your cart');
     }
 
 }

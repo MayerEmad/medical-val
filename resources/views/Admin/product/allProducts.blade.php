@@ -150,7 +150,7 @@
                   {data: 'discount', name: 'discount'},
                   {data: 'quantity', name: 'quantity'},
                   {data: 'rate', name: 'rate'},
-                  {data: 'action',  name: 'action',  orderable: true,  searchable: false},
+                  {data: 'action',  name: 'action'},
               ]
           });
 

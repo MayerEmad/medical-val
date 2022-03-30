@@ -44,7 +44,6 @@
                 </div>
 
                 <div class="card-body pb-0">
-                    >
                     <div class="row d-flex align-items-stretch" id="searchable_div">
                     @foreach($categories as $cat)
 

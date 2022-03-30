@@ -24,13 +24,15 @@ class UserController extends Controller
     //Display Users in Page
     public function index()
     {
-        $this->onlysuperadmin();
+        if (auth::user()->hasrole('superadmin')==false)
+            return view('errors.401');
         return view('Admin.users.index');
     }
 
     public function userstabledata(Request $request)
     {
-        $this->onlysuperadmin();
+        if (auth::user()->hasrole('superadmin')==false)
+            return view('errors.401');
         if ($request->ajax()) {
             $users = User::whereRoleIs('customer')->get();
             return Datatables::of($users)
@@ -53,7 +55,8 @@ class UserController extends Controller
     //Change Users roles
     public function update(Request $request,  $id)
     {
-        $this->onlysuperadmin();
+        if (auth::user()->hasrole('superadmin')==false)
+            return view('errors.401');
 
         $user=User::find($id);
         $oldRole=$user->roles[0]['name'];
@@ -70,13 +73,15 @@ class UserController extends Controller
      //Display Orders in Page
      public function ordersTablePage()
      {
-         $this->onlysuperadmin();
+         if (auth::user()->hasrole('superadmin')==false)
+            return view('errors.401');
          return view('Admin.orders.index');
      }
 
      public function ordersTableData(Request $request)
      {
-         $this->onlysuperadmin();
+         if (auth::user()->hasrole('superadmin')==false)
+            return view('errors.401');
          if ($request->ajax()) {
              $orders = Order::all();
              return Datatables::of($orders)

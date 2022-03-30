@@ -6,29 +6,26 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+use App\Services\IsAdminService;
 use App\Models\User;
 use DataTables;
 class AdminController extends Controller
 {
-    public function onlysuperadmin()
-    {
-        if (Auth::user()->hasRole('superadmin')==false)
-            return view('errors.401');
-        return;
-    }
 
     public function showProfile()
     {
-        return view('Admin.profile');
+        return view('Admin.dashboard');
+        //return view('Admin.profile');
     }
     public function adminstablepage()
     {
-        $this->onlysuperadmin();
+        if (Auth::user()->hasRole('superadmin')==false)return view('errors.401');
         return view('Admin.admins.table');
     }
     public function adminstabledata(Request $request)
     {
-        $this->onlysuperadmin();
+        if (Auth::user()->hasRole('superadmin')==false)return view('errors.401');
+
         if ($request->ajax()) {
             $admins = User::whereRoleIs('admin')->orWhereRoleIs('editoradmin')->get();
             return Datatables::of($admins)
@@ -58,7 +55,7 @@ class AdminController extends Controller
    //Invitation Page
     public function create()
     {
-        $this->onlysuperadmin();
+        if (Auth::user()->hasRole('superadmin')==false)return view('errors.401');
         return view('Admin.admins.create-invitation');
     }
 
@@ -78,14 +75,15 @@ class AdminController extends Controller
 
     public function edit(User $id)
     {
-        $this->onlysuperadmin();
+        if (Auth::user()->hasRole('superadmin')==false)
+            return view('errors.401');
         return "edit permissions";
     }
 
     //Change admins roles
     public function update(Request $request,  $id)
     {
-        $this->onlysuperadmin();
+        if (Auth::user()->hasRole('superadmin')==false)return view('errors.401');
 
         $admin=User::find($id);
         $oldRole=$admin->roles[0]['name'];
@@ -102,7 +100,7 @@ class AdminController extends Controller
     //Delete an Admin from the system
     public function destroy($id)
     {
-        $this->onlysuperadmin();
+        if (Auth::user()->hasRole('superadmin')==false)return view('errors.401');
         $admin=User::find($id);
         $name=$admin->name;
         $admin->delete();

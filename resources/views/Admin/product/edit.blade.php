@@ -12,7 +12,7 @@
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="/dashboard">Home</a></li>
+                        <li class="breadcrumb-item"><a href="/admin">Home</a></li>
                         <li class="breadcrumb-item"><a href="{{ route('category.show',['category'=>$product->category_id]) }}">{{$product->name}} category</a></li>
                         <li class="breadcrumb-item active">Edit {{$product->name}} </li>
                         </ol>
@@ -29,9 +29,9 @@
                         <!-- jquery validation -->
                         <div class="card card-primary">
 
-                        <!-- /.card-header -->                      
+                        <!-- /.card-header -->
                             <div class="card-body">
-                            
+
                             <!-- error message -->
                             @if ($errors->any())
                                 <div class="alert alert-danger">
@@ -49,11 +49,11 @@
                                     {{Session::get('success')}}
                                 </div>
                             @endif
-                        
+
                             <form action="{{route('product.update',['product'=>$product])}}" method="POST" enctype="multipart/form-data" files="true">
                                 @csrf
                                  @method('PUT')
-                            
+
                                 <div class="form-group">
                                     <label>Product Name</label>
                                     <input type="text" name="name" class="form-control" id="product_name_id" value="{{ $product->name }}" placeholder="Name">
@@ -106,7 +106,7 @@
 
                             </div>
                             <!-- /.card-body -->
-                            
+
                         </div>
                         <!-- /.card -->
                         </div>
@@ -145,17 +145,17 @@
 
     </body>
     <script type="text/javascript">
- 
+
         $('#theFileInput').change(function()
-        {       
-            if (this.files && this.files[0]) 
+        {
+            if (this.files && this.files[0])
             {
                 let reader = new FileReader();
-                reader.onload = (e) => { 
-                    $('#image-previewer').attr('src', e.target.result); 
+                reader.onload = (e) => {
+                    $('#image-previewer').attr('src', e.target.result);
                 }
                 reader.readAsDataURL(this.files[0]);
-                $('#deletebtn').show(); 
+                $('#deletebtn').show();
             }
         });
         function useinputfile()
@@ -167,7 +167,7 @@
             $("#imgdiv img:last-child").remove()
             $("#imgdiv").append('<img id="image-previewer" src="https://www.riobeauty.co.uk/images/product_image_not_found.gif"alt="preview image" style="max-height: 250px;">');
             $('#theFileInput').val(null);
-            $('#deletebtn').hide(); 
+            $('#deletebtn').hide();
         }
     </script>
 </html>

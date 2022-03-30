@@ -25,10 +25,16 @@
                 <ul>
                     @foreach ($errors->all() as $error)
                         <li>{{ $error }}</li>
+                        @break
                     @endforeach
                 </ul>
             </div>
             @endif
+            @if(Session::has('error'))
+             <div class="alert alert-danger">
+                 {{Session::get('error')}}
+             </div>
+             @endif
             <!-- Success message -->
             @if(Session::has('success'))
             <div class="alert alert-success">
@@ -44,47 +50,63 @@
                 <div class="form-group row">
                   <div class="col-md-12">
                     <label for="name" class="text-black">Name <span class="text-danger">*</span></label>
-                    <input type="text" class="form-control" id="name" name="name" value={{$user->name}}>
+                    <input type="text" class="form-control" id="name" name="name"
+                        value=@if($user->name!=''){{$user->name}}@else{{ old('name') }}@endif
+                    >
                   </div>
                 </div>
                 <div class="form-group row">
                   <div class="col-md-12">
                     <label for="email" class="text-black">Email <span class="text-danger">*</span></label>
-                    <input type="email" class="form-control" id="email" name="email" placeholder="" value={{$user->email}} readonly>
+                    <input type="email" class="form-control" id="email" name="email" placeholder=""
+                        value=@if($user->email!=''){{$user->email}}@else{{ old('email') }}@endif
+                    readonly>
                   </div>
                 </div>
                 <div class="form-group row">
                     <div class="col-md-12">
                       <label for="phone" class="text-black">Phone <span class="text-danger">*</span></label>
-                      <input type="phone" class="form-control" id="phone" name="phone" placeholder="" value={{$user->phone}} >
+                      <input type="phone" class="form-control" id="phone" name="phone" placeholder=""
+                        value=@if($user->phone!=''){{$user->phone}}@else{{ old('phone') }}@endif
+                      >
                     </div>
                 </div>
                 <div class="form-group row">
                     <div class="col-md-12">
-                      <label for="area" class="text-black">Area <span class="text-danger">*</span></label>
-                      <input type="area" class="form-control" id="area" name="area" placeholder="" value={{$user->area}} >
+                      <label for="address" class="text-black">Address <span class="text-danger">*</span></label>
+                      <input type="address" class="form-control" id="address" name="address" placeholder=""
+                        value=@if($user->address!=''){{$user->address}}@else{{ old('address') }}@endif
+                      >
                     </div>
                 </div>
                 <div class="form-group row">
                     <div class="col-md-12">
                       <label for="block" class="text-black">Block <span class="text-danger">*</span></label>
-                      <input type="block" class="form-control" id="block" name="block" placeholder="" value={{$user->block}} >
+                      <input type="block" class="form-control" id="block" name="block" placeholder=""
+                            value=@if($user->block!=''){{$user->block}}@else {{ old('block') }}@endif
+                       >
                     </div>
                 </div>
                 <div class="form-group row">
                     <div class="col-md-12">
                       <label for="street" class="text-black">Street <span class="text-danger">*</span></label>
-                      <input type="street" class="form-control" id="street" name="street" placeholder="" value={{$user->street}} >
+                      <input type="street" class="form-control" id="street" name="street" placeholder=""
+                            value=@if($user->street!=''){{$user->street}}@else{{ old('street') }}@endif
+                       >
                     </div>
                 </div>
                 <div class="form-group row">
                     <div class="col-md-6">
-                        <label for="floor" class="text-black">Floor <span class="text-danger">*</span></label>
-                        <input type="floor" class="form-control" id="floor" name="floor" placeholder="" value={{$user->floor}} >
+                        <label for="house_building_number" class="text-black">House Building Number <span class="text-danger">*</span></label>
+                        <input type="house_building_number" class="form-control" id="house_building_number" name="house_building_number" placeholder=""
+                            value=@if($user->house_building_number!=''){{$user->house_building_number}}@else{{ old('house_building_number') }}@endif
+                        >
                     </div>
                     <div class="col-md-6">
-                      <label for="departement" class="text-black">Departement <span class="text-danger">*</span></label>
-                      <input type="departement" class="form-control" id="departement" name="departement" placeholder="" value={{$user->departement}} >
+                      <label for="address_instructions" class="text-black">Address Instructions <span class="text-danger"></span></label>
+                      <input type="address_instructions" class="form-control" id="address_instructions" name="address_instructions" placeholder=""
+                            value=@if($user->address_instructions!=''){{$user->address_instructions}}@else{{ old('address_instructions') }}@endif
+                      >
                     </div>
                 </div>
                 <input type="hidden" class="form-control" id="id" name="id" value={{$user->id}}>

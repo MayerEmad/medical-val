@@ -26,11 +26,11 @@ class CreateUsersTable extends Migration
             $table->timestamps();
 
             $table->string('phone')->nullable()->default(null);
-            $table->string('area')->nullable()->default(null);
+            $table->string('address')->nullable()->default(null);
             $table->string('block')->nullable()->default(null);
             $table->string('street')->nullable()->default(null);
-            $table->string('floor')->nullable()->default(null);
-            $table->string('departement')->nullable()->default(null);
+            $table->string('house_building_number')->nullable()->default(null);
+            $table->string('address_instructions')->nullable()->default(null);
         });
     }
 

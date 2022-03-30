@@ -9,6 +9,28 @@
             <strong class="text-black">Cart</strong>
           </div>
         </div>
+        <div class="row">
+             <!-- Success message -->
+             @if(Session::has('success'))
+             <div class="alert alert-success">
+                 {{Session::get('success')}}
+             </div>
+             @endif
+             @if(Session::has('error'))
+             <div class="alert alert-danger">
+                 {{Session::get('error')}}
+             </div>
+             @endif
+             @if ($errors->any())
+             <div class="alert alert-danger">
+                 <ul>
+                     @foreach ($errors->all() as $error)
+                         <li>{{ $error }}</li>
+                     @endforeach
+                 </ul>
+             </div>
+             @endif
+        </div>
       </div>
     </div>
 
@@ -29,7 +51,7 @@
                   </tr>
                 </thead>
                 <tbody>
-                @if (Cart::count() > 0)
+          @if (Cart::count() > 0)
             @foreach (Cart::content() as $item)
                   <tr>
                     <td class="product-thumbnail">
@@ -38,7 +60,7 @@
                     <td class="product-name">
                       <h2 class="h5 text-black">{{ $item->name }}</h2>
                     </td>
-                    <td>${{ $item->price }}</td>
+                    <td>{{ $item->price }}</td>
                     <td>
                       <div class="input-group mb-3" style="max-width: 120px;">
                         <div class="input-group-prepend">
@@ -65,8 +87,8 @@
 
                     <td style="display:none;">{{$item->rowId}} </td>
                   </tr>
-                  @endforeach;
-    @endif;
+                  @endforeach
+    @endif
                   <!-- <tr>
                     <td class="product-thumbnail">
                       <img src="images/product_01.png" alt="Image" class="img-fluid">
@@ -182,6 +204,9 @@
         </div>
       </div>
     </div>
+    <form  id="checkoutForm" action="" method="GET">
+        @csrf
+    </form>
 @endsection
 <script>
   function submitForm(id){
@@ -229,14 +254,9 @@ function submitFormminus(id){
 }
 
 function goToCheckOut(){
-    $.ajax({
-    url:     "{{route('cart.checkout')}}",
-    type:    'GET',
-    data:    { src: 'show' },
-    success: function(response) {
-       window.location.href = "{{route('cart.checkout')}}";
-    }
-});
+    let url="{{ route('cart.checkout')}}";
+    $('#checkoutForm').attr('action',url);
+    $( "#checkoutForm" ).submit();
+};
 
-}
 </script>

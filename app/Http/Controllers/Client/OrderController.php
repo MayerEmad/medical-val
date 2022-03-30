@@ -9,14 +9,26 @@ use Illuminate\Http\Request;
 use App\Models\Order;
 use App\Models\OrderProductItem;
 use App\Services\MyFatoorahService;
-use App\Services\IsAdminService;
 use Redirect;
 use Gloudemans\Shoppingcart\Facades\Cart;
 
 class OrderController extends Controller
 {
 
-    // MUST be LOGGED IN
+    public function checkOrderData()
+    {
+        $user = Auth::user();
+        if( $user->phone=='' ||
+            $user->address=='' ||
+            $user->block=='' ||
+            $user->street=='' ||
+            $user->house_building_number=='' )
+            {
+               return back()->with('data-error','Fill mandatory profile data to make your order.' );
+            }
+        return redirect(route('createInvoice'));
+    }
+
     public function createInvoice()
     {
         $total=0;
@@ -40,7 +52,6 @@ class OrderController extends Controller
                 //'ExpiryDate'         => '', //The Invoice expires after 3 days by default. Use 'Y-m-d\TH:i:s' format in the 'Asia/Kuwait' time zone.
         ];
 
-        //IsAdminService::test();
         $data=(new MyFatoorahService())->sendPayment($postFields);
         $invoiceId   = $data->InvoiceId;
         $paymentLink = $data->InvoiceURL;
@@ -77,9 +88,9 @@ class OrderController extends Controller
             });
         } catch (\Exception $e) {
             //return $e->getMessage();
-            return view('checkout');
+            return back()->with('error',$e->getMessage());
         }
         Cart::destroy();
-        return redirect('/checkout')->with('success','Order Created Succesfully');
+        return redirect('thanks');
     }
 }

@@ -11,7 +11,7 @@
     <body>
         @if($category->parent_id==0)
             {{$category_word="Category"}}
-        @else 
+        @else
             {{$category_word="Sub Category"}}
         @endif
         <div class="content-wrapper">
@@ -23,7 +23,7 @@
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="/dashboard">Home</a></li>
+                        <li class="breadcrumb-item"><a href="/admin">Home</a></li>
                         <li class="breadcrumb-item active">Edit Category</li>
                         </ol>
                     </div>
@@ -101,7 +101,7 @@
                 <!-- /.card -->
                    </div>
                 </div>
-                
+
             </section>
             <!-- /.content -->
 
@@ -129,22 +129,22 @@
         <!-- dropzonejs -->
         <script src="{{ asset('/js/dropzone.min.js') }}"></script>
     </body>
-        
+
 
         <script>
             $('#theFileInput').change(function()
-            {       
-                if (this.files && this.files[0]) 
+            {
+                if (this.files && this.files[0])
                 {
                     let reader = new FileReader();
-                    reader.onload = (e) => { 
-                        $('#image-previewer').attr('src', e.target.result); 
+                    reader.onload = (e) => {
+                        $('#image-previewer').attr('src', e.target.result);
                     }
                     reader.readAsDataURL(this.files[0]);
-                    $('#deletebtn').show(); 
+                    $('#deletebtn').show();
                 }
             });
-    
+
         function useinputfile()
         {
             $('#theFileInput').click();
@@ -155,9 +155,9 @@
             $("#imgdiv img:last-child").remove()
             $("#imgdiv").append('<img id="image-previewer" src="https://www.riobeauty.co.uk/images/product_image_not_found.gif"alt="preview image" style="max-height: 250px;">');
             $('#theFileInput').val(null);
-            $('#deletebtn').hide(); 
+            $('#deletebtn').hide();
         }
         </script>
-    
+
 </html>
 @endsection
