@@ -111,6 +111,11 @@ class ProductController extends Controller
         $product->ar_description=$validated["ar_description"];
         $product->price=$validated["price"];
         $product->quantity=$validated["quantity"];
+        if($product->quantity>0){
+            $product->instock=1;
+        }else{
+            $product->instock=0;
+        }
         $product->discount=$validated["discount"];
         $product->save();
         return back()->with('success', 'Successful update product operation.');

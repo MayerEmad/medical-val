@@ -17,8 +17,13 @@ class CartController extends Controller
 {
     public function cart()
     {
-        // dd(Cart::content());
-        return view('cart');
+        $total=0;
+        if(Cart::count()){
+            foreach (Cart::content() as $item){
+                $total+=$item->price*$item->qty;
+            }
+        }
+        return view('cart')->with('total',$total);
     }
     public function store(Product $product)
     {
@@ -151,7 +156,15 @@ class CartController extends Controller
     public function checkout()
     {
         if(Cart::count() > 0){
-            return view('checkout');
+            $total=0;
+            foreach (Cart::content() as $item){
+                $total+=$item->price*$item->qty;
+            }
+            $data = [
+                'total'  => $total,
+                'products'   => Cart::content(),
+            ];
+            return view('checkout')->with('data',$data);
         }
         return back()->with('error', 'you dont have items in your cart');
     }

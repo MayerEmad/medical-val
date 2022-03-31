@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\Order;
+use App\Models\Product;
 use App\Models\OrderProductItem;
 use App\Services\MyFatoorahService;
 use Redirect;
@@ -18,14 +19,27 @@ class OrderController extends Controller
     public function checkOrderData()
     {
         $user = Auth::user();
-        if( $user->phone=='' ||
-            $user->address=='' ||
-            $user->block=='' ||
-            $user->street=='' ||
-            $user->house_building_number=='' )
-            {
-               return back()->with('data-error','Fill mandatory profile data to make your order.' );
+        if( $user->phone=='' || $user->address=='' || $user->block=='' || $user->street=='' ||
+            $user->house_building_number=='' ){
+                return back()->with('data-error','Fill mandatory profile data to make your order.' );
+        }
+
+        $productsNotEnough=0;
+        foreach (Cart::content() as $item){
+            $product=Product::find($item->id);
+            if($item->qty > $product->quantity-1000){
+                if($product->quantity==0){
+                   // Cart::remove($item->rowId);
+                }
+                else {
+                   // Cart::update($item->rowId, $product->quantity);
+                }
+                $productsNotEnough=1;
             }
+        }
+        if($productsNotEnough==1){
+            return back()->with('product-error','some of products are not availble by the quantities you select, this your order with the availbale products' );
+        }
         return redirect(route('createInvoice'));
     }
 
@@ -84,6 +98,14 @@ class OrderController extends Controller
                     $orderProductItem->product_id=$item->id;
                     $orderProductItem->quantity=$item->qty;
                     $orderProductItem->save();
+
+                    $product=Product::find($item->id);
+                    $product->quantity=$product->quantity-$item->qty;
+                    if($product->quantity<=0){
+                        $product->quantity=0;
+                        $product->instock=0;
+                    }
+                    $product->save();
                 }
             });
         } catch (\Exception $e) {
