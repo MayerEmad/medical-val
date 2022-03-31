@@ -27,7 +27,7 @@ class CartController extends Controller
         });
         if ($duplicates->isNotEmpty()) {
 
-            return redirect()->route('index')->with('warning', 'Item is already in your cart!');
+            return back()->with('warning', 'Item is already in your cart!');
         }
 
         Cart::add($product->id, $product->name, 1, $product->price)

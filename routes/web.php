@@ -12,7 +12,7 @@ use App\Http\Controllers\Client\CompareController;
 use App\Http\Controllers\Client\HomeController;
 use App\Http\Controllers\Client\ProfileController;
 use App\Http\Controllers\Client\OrderController;
-
+use App\Http\Controllers\Client\ShopController;
 
 use App\Models\Category;
 
@@ -81,6 +81,13 @@ Route::get('/search',[HomeController::class, 'search'])->name('search');
 Route::get('/filter',[HomeController::class, 'filter'])->name('filter');
 Route::get('lang/change', [HomeController::class, 'change'])->name('changeLang');
 
+//shop page
+Route::get('/shop', [ShopController::class, 'shop'])->name('shop');
+//Route::get('/search',[ShopController::class, 'search'])->name('search');
+Route::get('/shop/filter',[ShopController::class, 'filter'])->name('shop.productfilter');
+//Route::get('/shop/pagination', [ShopController::class, 'filter']);
+Route::get('/details/{id}',[ShopController::class, 'productDetails'])->name('shop.productDetails');
+
 
 //cart page
 Route::get('cart', [CartController::class, 'cart']);
@@ -120,14 +127,6 @@ Route::get('/about', function () {
 // contact page
 Route::get('/contact', function () {
     return view('contact');
-});
-//Product details page
-Route::get('/details', function () {
-    return view('shop-single');
-});
-//shop page
-Route::get('/shop', function () {
-    return view('shop');
 });
 //thanks after successful order
 Route::get('/thanks', function () {
