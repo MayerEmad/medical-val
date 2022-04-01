@@ -45,11 +45,11 @@
               <p class="lead mb-0 pl-4">{{ __('message.By_price') }}:</p>
               <div id="slider-range" class="border-primary mt-3"></div>
               <form action="{{ route('filter') }}"  method="GET" >
-            
+
               <input type="text" id="amount"  style="background: #dbeaf700" name="text" class="form-control border-0 pl-0"  />
               <button class="btn btn-primary mb-4 p-0" id="v-pills-filter-tab" style="width: 50%;margin: auto;" data-bs-toggle="pill" data-bs-target="#v-pills-filter" type="submit" role="tab" aria-controls="v-pills-filter" aria-selected="false">{{ __('message.FILTER') }}</button>
                             </form>
-             
+
               {{-- <button class="nav-link" id="v-pills-settings-tab" data-bs-toggle="pill" data-bs-target="#v-pills-settings" type="button" role="tab" aria-controls="v-pills-settings" aria-selected="false">Settings</button> --}}
             </div>
           </div>
@@ -61,21 +61,25 @@
             <div class="tab-content" id="v-pills-tabContent">
               <div class="tab-pane fade show active" id="v-pills-Products" role="tabpanel" aria-labelledby="v-pills-Products-tab">
                 <div class="row">
-				   @foreach($products as $product)
-                  <div class="col-sm-6 col-lg-4 col-md-6 text-center item mb-4">
-                    <div class="product-option">
-                    <a href="{{ action('Client\CartController@store', ['product' => $product])  }}" onclick="showSwal('auto-close','Item added succesfully.')"  title="Add to cart" ><i class="fas fa-shopping-cart"></i></a>
-
-                      <!-- <a href="#" title="Add to cart" onclick="showSwal('auto-close')"><i class="fas fa-shopping-cart"></i></a> -->
-                      <a href="{{ action('Client\WishListController@store', ['product' => $product])  }}" title="Add to wishlist"><i class="fas fa-heart"></i></a>
-                      <a href="{{ action('Client\CompareController@store', ['product' => $product])  }}" title="Compare"><i class="far fa-copy"></i></a>
-
+                    @foreach($products as $product)
+                    <div class="col-sm-6 col-lg-4 col-md-6 text-center item mb-4" onclick="submitForm('{{$product->id}}')">
+                        <div class="product-option">
+                            <a href="{{ action('Client\CartController@store', ['product' => $product])  }}" onclick="showSwal('auto-close','{{ __('message.Item_added') }}')"  title="Add to cart" ><i class="fas fa-shopping-cart"></i></a>
+                            <a href="{{ action('Client\WishListController@store', ['product' => $product])  }}" title="Add to wishlist"><i class="fas fa-heart"></i></a>
+                            <a href="{{ action('Client\CompareController@store', ['product' => $product])  }}" title="Compare"><i class="far fa-copy"></i></a>
+                        </div>
+                        @if($product->discount>0)
+                            <span class="tag">{{ __('message.Sale') }}</span>
+                        @endif
+                         <img src="images/product_01.png" alt="Image">
+                        <h3 class="text-dark">
+                            @if (session()->get('locale') == 'ar'){{$product->ar_name}}
+                            @else{{$product->name}}
+                            @endif
+                        </h3>
+                        <p class="price"><del>{{$product->price}}</del> &mdash; ${{$product->price-$product->discount}}</p>
                     </div>
-                    <a href="shop-single"> <img src="images/product_01.png" alt="Image"></a>
-                    <h3 class="text-dark"><a href="shop-single">{{$product->name}}</a></h3>
-                    <p class="price"><del>{{$product->price}}</del> &mdash; ${{$product->price-$product->discount}}</p>
-                  </div>
-				  @endforeach;
+                @endforeach
                 </div>
               </div>
 
@@ -131,7 +135,7 @@
         </div>
         <div class="row">
           <div class="col-md-12 block-3 products-wrap">
-            <div class="nonloop-block-3 owl-carousel">
+            <div dir="ltr"class="nonloop-block-3 owl-carousel">
                 @foreach($products as $product)
                 <div class="text-center item mb-4">
                   <div class="product-option">

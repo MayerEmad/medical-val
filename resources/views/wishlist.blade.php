@@ -5,8 +5,8 @@
       <div class="container">
         <div class="row">
           <div class="col-md-12 mb-0">
-            <a href="index">Home</a> <span class="mx-2 mb-0">/</span> 
-            <strong class="text-black">Wishlist</strong>
+            <a href="index">{{__('message.Home') }}</a> <span class="mx-2 mb-0">/</span>
+            <strong class="text-black">{{__('message.Wishlist') }}</strong>
           </div>
         </div>
       </div>
@@ -20,12 +20,12 @@
               <table class="table table-bordered">
                 <thead>
                   <tr>
-                    <th class="product-thumbnail">Image</th>
-                    <th class="product-name">Product</th>
-                    <th class="product-price">Price</th>
+                    <th class="product-thumbnail">{{__('message.Image') }}</th>
+                    <th class="product-name">{{__('message.Product') }}</th>
+                    <th class="product-price">{{__('message.Price') }}</th>
                     {{-- <th class="product-quantity">Quantity</th> --}}
-                    <th class="product-total">Total</th>
-                    <th class="product-remove">Remove</th>
+                    <th class="product-total">{{__('message.Total') }}</th>
+                    <th class="product-remove">{{__('message.Remove') }}</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -50,7 +50,7 @@
                           <button class="btn btn-outline-primary js-btn-plus" type="button">&plus;</button>
                         </div>
                       </div>
-    
+
                     </td> --}}
                     <td>{{$product->price}}</td>
                     <td><a href="{{ action('Client\WishListController@removewishlist', ['id' =>  $product->id]) }}" class="btn btn-primary height-auto btn-sm">X</a></td>
@@ -76,7 +76,7 @@
                           <button class="btn btn-outline-primary js-btn-plus" type="button">&plus;</button>
                         </div>
                       </div>
-    
+
                     </td> --}}
                     <td>$49.00</td>
                     <td><a href="#" class="btn btn-primary height-auto btn-sm">X</a></td>
@@ -86,7 +86,7 @@
             </div>
           </form>
         </div>
-    
+
         <div class="row">
           <div class="col-md-6">
             <div class="row mb-5">
@@ -94,7 +94,7 @@
                 <button class="btn btn-primary btn-md btn-block">Update Cart</button>
               </div> --}}
               <div class="col-md-6">
-                <a href="shop" class="btn btn-outline-primary btn-md btn-block">Continue Shopping</a>
+                <a href="shop" class="btn btn-outline-primary btn-md btn-block">{{ __('message.Continue Shopping') }}</a>
               </div>
             </div>
             {{-- <div class="row">
@@ -135,7 +135,7 @@
                     <strong class="text-black">$230.00</strong>
                   </div>
                 </div>
-    
+
                 <div class="row">
                   <div class="col-md-12">
                     <button class="btn btn-primary btn-lg btn-block" onclick="window.location='checkout'">Proceed To

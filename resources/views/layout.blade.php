@@ -63,7 +63,7 @@
                     <div class="main-nav d-none d-lg-block">
                         <nav class="site-navigation text-right text-md-center" role="navigation">
                             <ul class="site-menu js-clone-nav d-none d-lg-block">
-                                <li class="nav-item"><a href="index">{{ __('message.HOME') }}</a></li>
+                                <li class="nav-item"><a href="index">{{ __('message.Home') }}</a></li>
                                 <li class="nav-item"><a href="shop">{{ __('message.Store') }}</a></li>
                                 <li class="dropdown dropdown-large">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ __('message.Products') }} <b class="caret"></b></a>
@@ -127,16 +127,16 @@
                                 <li class="nav-item"><a href="about">{{ __('message.About') }}</a></li>
                                 <li class="nav-item"><a href="contact">{{ __('message.Contact') }}</a></li>
                                 @if (Auth::check())
-                                    <li class="nav-item"><a href="profile">Profile</a></li>
-                                    <li class="nav-item"><a onclick="logUserOut()">{{ __('Logout') }}</a></li>
+                                    <li class="nav-item"><a href="profile">{{ __('message.Profile') }}</a></li>
+                                    <li class="nav-item"><a onclick="logUserOut()">{{ __('auth.Logout') }}</a></li>
                                     <form id="logoutForm" method="POST" action="{{ route('logout') }}" style="display:none">
                                         @csrf
                                     </form>
                                     @if(Auth::user()->hasRole('admin') || Auth::user()->hasRole('editoradmin') || Auth::user()->hasRole('superadmin'))
-                                    <li class="nav-item"><a href="admin">Dashboard</a></li>
+                                    <li class="nav-item"><a href="admin">{{ __('message.Dashboard') }}</a></li>
                                     @endif
                                 @else
-                                    <li class="nav-item"><a href="login">Log In</a></li>
+                                    <li class="nav-item"><a href="login">{{ __('auth.Login') }}</a></li>
                                 @endif
 
                             </ul>
@@ -167,8 +167,8 @@
 
                         </a>
                 <select class="selectpicker changeLang" data-width="fit">
-    <option data-content='<span class="flag-icon flag-icon-us"></span> English' value="en" {{ session()->get('locale') == 'en' ? 'selected' : '' }}>English</option>
-  <option  data-content='<span class="flag-icon flag-icon-mx"></span> Español'value="ar" {{ session()->get('locale') == 'ar' ? 'selected' : '' }}>Arabic</option>
+    <option data-content='<span class="flag-icon flag-icon-us"></span> English' value="en" {{ session()->get('locale') == 'en' ? 'selected' : '' }}>{{__('message.English')}}</option>
+  <option  data-content='<span class="flag-icon flag-icon-mx"></span> Español'value="ar" {{ session()->get('locale') == 'ar' ? 'selected' : '' }}>{{__('message.Arabic')}}</option>
 </select>
 
                         <a href="#" class="site-menu-toggle js-menu-toggle ml-3 d-inline-block d-lg-none"><span

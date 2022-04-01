@@ -5,8 +5,8 @@
       <div class="container">
         <div class="row">
           <div class="col-md-12 mb-0">
-            <a href="index">Home</a> <span class="mx-2 mb-0">/</span>
-            <strong class="text-black">Cart</strong>
+            <a href="index">{{ __('message.Home') }}</a> <span class="mx-2 mb-0">/</span>
+            <strong class="text-black">{{ __('message.Cart') }}</strong>
           </div>
         </div>
         <div class="row">
@@ -42,12 +42,12 @@
               <table class="table table-bordered">
                 <thead>
                   <tr>
-                    <th class="product-thumbnail">Image</th>
-                    <th class="product-name">Product</th>
-                    <th class="product-price">Price</th>
-                    <th class="product-quantity">Quantity</th>
-                    <th class="product-total">Total</th>
-                    <th class="product-remove">Remove</th>
+                    <th class="product-thumbnail">{{ __('message.Image') }}</th>
+                    <th class="product-name">{{ __('message.Product') }}</th>
+                    <th class="product-price">{{ __('message.Price') }}</th>
+                    <th class="product-quantity">{{ __('message.Quantity') }}</th>
+                    <th class="product-total">{{ __('message.Total') }}</th>
+                    <th class="product-remove">{{ __('message.Remove') }}</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -124,7 +124,7 @@
           <div class="col-md-6">
             <div class="row mb-5">
               <div class="col-md-6 mb-3 mb-md-0">
-                <button class="btn btn-primary btn-md btn-block">Continue Shopping</button>
+                <button class="btn btn-primary btn-md btn-block">{{ __('message.Continue Shopping') }}</button>
               </div>
               {{-- <div class="col-md-6">
                 <button class="btn btn-outline-primary btn-md btn-block">Continue Shopping</button>
@@ -132,14 +132,14 @@
             </div>
             <div class="row">
               <div class="col-md-12">
-                <label class="text-black h4" for="coupon">Coupon</label>
-                <p>Enter your coupon code if you have one.</p>
+                <label class="text-black h4" for="coupon">{{ __('message.Coupon') }}</label>
+                <p>{{ __('message.Enter your coupon code if you have one') }}</p>
               </div>
               <div class="col-md-8 mb-3 mb-md-0">
                 <input type="text" class="form-control py-3" id="coupon" placeholder="Coupon Code">
               </div>
               <div class="col-md-4">
-                <button class="btn btn-primary btn-md px-4">Apply Coupon</button>
+                <button class="btn btn-primary btn-md px-4">{{ __('message.Apply Coupon') }}</button>
               </div>
             </div>
           </div>
@@ -149,7 +149,7 @@
                     <div class="col-md-7">
                         <div class="row">
                         <div class="col-md-12 text-right border-bottom mb-5">
-                            <h3 class="text-black h4 text-uppercase">Cart Totals</h3>
+                            <h3 class="text-black h4 text-uppercase">{{ __('message.Cart Total') }}</h3>
                         </div>
                         </div>
                         {{-- <div class="row mb-3">
@@ -162,7 +162,7 @@
                         </div> --}}
                         <div class="row mb-5">
                             <div class="col-md-6">
-                                <span class="text-black">Total</span>
+                                <span class="text-black">{{ __('message.Total') }}</span>
                             </div>
                             <div class="col-md-6 text-right">
                                 <strong class="text-black">{{$total}}</strong>
@@ -171,8 +171,9 @@
 
                         <div class="row">
                         <div class="col-md-12">
-                            <button class="btn btn-primary btn-lg btn-block" onclick="window.location='checkout'">Proceed To
-                            Checkout</button>
+                            <button class="btn btn-primary btn-lg btn-block" onclick="window.location='checkout'">
+                                {{ __('message.ProceedToCheckout') }}
+                            </button>
                         </div>
                         </div>
                     </div>

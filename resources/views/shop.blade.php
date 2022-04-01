@@ -67,7 +67,7 @@
     <div class="bg-light py-3">
       <div class="container">
         <div class="row">
-          <div class="col-md-12 mb-0"><a href="index">Home</a> <span class="mx-2 mb-0">/</span> <strong class="text-black">Store</strong></div>
+          <div class="col-md-12 mb-0"><a href="index">{{ __('message.Home') }}</a> <span class="mx-2 mb-0">/</span> <strong class="text-black">{{ __('message.Store') }}</strong></div>
         </div>
       </div>
     </div>
@@ -77,18 +77,18 @@
 
         <div class="row">
             <div class="col-lg-3">
-                <h3 class="mb-3 h6 text-uppercase text-black d-block">Filter by Name</h3>
+                <h3 class="mb-3 h6 text-uppercase text-black d-block">{{ __('message.Filter by Name') }}</h3>
                 <input type="text" name="text" id="product_name" class="form-control border-1 pl-1 bg-white"
                         style="width:80%; height:36px;" value="" />
             </div>
 
           <div class="col-lg-3">
-                <h3 class="mb-3 h6 text-uppercase text-black d-block">Filter by Price</h3>
+                <h3 class="mb-3 h6 text-uppercase text-black d-block">{{ __('message.Filter by Price') }}</h3>
                 <div id="slider-range" class="border-primary"></div>
                 <input type="text" name="text" id="amount" class="form-control border-0 pl-0 bg-white" disabled="" />
           </div>
           <div class="col-lg-3">
-            <h3 class="mb-3 h6 text-uppercase text-black d-block">Filter by Has Sale</h3>
+            <h3 class="mb-3 h6 text-uppercase text-black d-block">{{ __('message.Filter by Sale') }}</h3>
                 <label class="switch">
                     <input type="checkbox" id="discount">
                     <span class="slider round"></span>
@@ -117,15 +117,19 @@
             @foreach($products as $product)
                 <div class="col-sm-6 col-lg-4 col-md-6 text-center item mb-4" onclick="submitForm('{{$product->id}}')">
                     <div class="product-option">
-                        <a href="{{ action('Client\CartController@store', ['product' => $product])  }}" onclick="showSwal('auto-close','Item added succesfully.')"  title="Add to cart" ><i class="fas fa-shopping-cart"></i></a>
+                        <a href="{{ action('Client\CartController@store', ['product' => $product])  }}" onclick="showSwal('auto-close','{{ __('message.Item_added') }}')"  title="Add to cart" ><i class="fas fa-shopping-cart"></i></a>
                         <a href="{{ action('Client\WishListController@store', ['product' => $product])  }}" title="Add to wishlist"><i class="fas fa-heart"></i></a>
                         <a href="{{ action('Client\CompareController@store', ['product' => $product])  }}" title="Compare"><i class="far fa-copy"></i></a>
                     </div>
                     @if($product->discount>0)
-                        <span class="tag">Sale</span>
+                        <span class="tag">{{ __('message.Sale') }}</span>
                     @endif
                      <img src="images/product_01.png" alt="Image">
-                    <h3 class="text-dark">{{$product->name}}</h3>
+                    <h3 class="text-dark">
+                        @if (session()->get('locale') == 'ar'){{$product->ar_name}}
+                        @else{{$product->name}}
+                        @endif
+                    </h3>
                     <p class="price"><del>{{$product->price}}</del> &mdash; ${{$product->price-$product->discount}}</p>
                 </div>
             @endforeach
@@ -210,13 +214,13 @@
     // $('#'+id).submit();
     console.log(id);
     var form = document.createElement("form");
-    var element1 = document.createElement("input"); 
-    // var element2 = document.createElement("input");  
+    var element1 = document.createElement("input");
+    // var element2 = document.createElement("input");
     form.method = "GET";
-    form.action = "{{ action('Client\ShopController@productDetails') }}";   
+    form.action = "{{ action('Client\ShopController@productDetails') }}";
     element1.value=id;
     element1.name="id";
-    form.appendChild(element1);  
+    form.appendChild(element1);
     // element2.value=pw;
     // element2.name="rowId";
     // form.appendChild(element2);
