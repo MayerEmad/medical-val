@@ -21,11 +21,12 @@ class ProductTableSeeder extends Seeder
                 'ar_name' => 'منتج '.Str::random(4),
 
                 'description' => 'Description '.Str::random(14),
-                'price' => rand(10,30),
-                'discount' => rand(1,5),
-                'image'=>'https://placeimg.com/100/100/any?' . rand(1, 100),
+                'ar_description' => 'وصف '.Str::random(14),
+                'price' => rand(5,80),
+                'discount' => rand(0,5),
+                'image'=>'product_0'. rand(1, 6).'.png',
                 'rate'=>rand(0,5),
-                'quantity'=>rand(1,100),
+                'quantity'=>rand(0,100),
                 'category_id'=>rand(1,9),
             ]);
         }

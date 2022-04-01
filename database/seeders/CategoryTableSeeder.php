@@ -19,10 +19,11 @@ class CategoryTableSeeder extends Seeder
             DB::table('categories')->insert([
                 'name' => Str::random(4),
                 'ar_name' => Str::random(4),
-
+                'ar_description' => 'وصف '.Str::random(14),
                 'description' => Str::random(14),
                 'discount' => rand(1,20),
                 'image'=>'https://placeimg.com/100/100/any?' . rand(1, 100),
+                'parent_id' => 0,
             ]);
         }
     }
