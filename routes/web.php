@@ -76,6 +76,9 @@ Route::get('/order', function () {
 Route::get('/home', function () {
     return view('home');
 });
+Route::get('/shop-single', function () {
+    return view('shop-single');
+});
 Route::get('/index', [HomeController::class, 'index'])->name('index');
 Route::get('/search',[HomeController::class, 'search'])->name('search');
 Route::get('/filter',[HomeController::class, 'filter'])->name('filter');
@@ -86,7 +89,7 @@ Route::get('/shop', [ShopController::class, 'shop'])->name('shop');
 //Route::get('/search',[ShopController::class, 'search'])->name('search');
 Route::get('/shop/filter',[ShopController::class, 'filter'])->name('shop.productfilter');
 //Route::get('/shop/pagination', [ShopController::class, 'filter']);
-Route::get('/details/{id}',[ShopController::class, 'productDetails'])->name('shop.productDetails');
+Route::get('/shop-single',[ShopController::class, 'productDetails'])->name('shop.productDetails');
 
 
 //cart page

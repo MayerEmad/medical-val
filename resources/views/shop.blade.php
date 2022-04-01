@@ -115,7 +115,7 @@
         </form>
         <div class="row" id="products-search-div">
             @foreach($products as $product)
-                <div class="col-sm-6 col-lg-4 col-md-6 text-center item mb-4" onclick="goToDetails('{{$product->id}}')">
+                <div class="col-sm-6 col-lg-4 col-md-6 text-center item mb-4" onclick="submitForm('{{$product->id}}')">
                     <div class="product-option">
                         <a href="{{ action('Client\CartController@store', ['product' => $product])  }}" onclick="showSwal('auto-close','Item added succesfully.')"  title="Add to cart" ><i class="fas fa-shopping-cart"></i></a>
                         <a href="{{ action('Client\WishListController@store', ['product' => $product])  }}" title="Add to wishlist"><i class="fas fa-heart"></i></a>
@@ -201,11 +201,28 @@
         });
     }
 
-    function goToDetails(id){
-        let url=""//"/details/"+id;
-        $('#productDetailsForm').attr('action',url);
-        $( "#productDetailsForm" ).submit();
-    }
+    // function goToDetails(id){
+    //     let url=""//"/details/"+id;
+    //     $('#productDetailsForm').attr('action',url);
+    //     $( "#productDetailsForm" ).submit();
+    // }
+    function submitForm(id){
+    // $('#'+id).submit();
+    console.log(id);
+    var form = document.createElement("form");
+    var element1 = document.createElement("input"); 
+    // var element2 = document.createElement("input");  
+    form.method = "GET";
+    form.action = "{{ action('Client\ShopController@productDetails') }}";   
+    element1.value=id;
+    element1.name="id";
+    form.appendChild(element1);  
+    // element2.value=pw;
+    // element2.name="rowId";
+    // form.appendChild(element2);
+    document.body.appendChild(form);
+    form.submit();
+}
     // $(document).ready(function() {
 
     //         $(document).on('click', '.pagination a', function(event) {

@@ -68,9 +68,9 @@ class ShopController extends Controller
                 echo json_encode($output);
         }
     }
-    public function productDetails($id)
+    public function productDetails(Request $request)
     {
-        $product=Product::find($id);
+        $product=Product::find($request->id);
         return view('shop-single')->with('product',$product);
     }
 }
