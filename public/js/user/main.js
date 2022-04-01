@@ -48,13 +48,13 @@ jQuery(document).ready(function($) {
 
 		$('<div class="site-mobile-menu-body"></div>').appendTo('.site-mobile-menu');
 
-		
+
 
 		$('.js-logo-clone').clone().appendTo('.site-mobile-menu-logo');
 		$('.site-mobile-menu-logo .js-logo-clone .mobile-image').attr('src','images/logo-title.png');
 
 		$('<span class="ion-ios-close js-menu-toggle"></div>').prependTo('.site-mobile-menu-close');
-		
+
 
 		$('.js-clone-nav').each(function() {
 			var $this = $(this);
@@ -63,11 +63,11 @@ jQuery(document).ready(function($) {
 
 
 		setTimeout(function() {
-			
+
 			var counter = 0;
       $('.site-mobile-menu .has-children').each(function(){
         var $this = $(this);
-        
+
         $this.prepend('<span class="arrow-collapse collapsed">');
 
         $this.find('.arrow-collapse').attr({
@@ -93,8 +93,8 @@ jQuery(document).ready(function($) {
       } else {
         $this.addClass('active');
       }
-      e.preventDefault();  
-      
+      e.preventDefault();
+
     });
 
 		$(window).resize(function() {
@@ -119,7 +119,7 @@ jQuery(document).ready(function($) {
 				$('body').addClass('offcanvas-menu');
 				$this.addClass('active');
 			}
-		}) 
+		})
 
 		// click outisde offcanvas
 		$(document).mouseup(function(e) {
@@ -130,7 +130,7 @@ jQuery(document).ready(function($) {
 				}
 	    }
 		});
-	}; 
+	};
 	siteMenuClone();
 
 
@@ -155,8 +155,8 @@ jQuery(document).ready(function($) {
     $( "#slider-range" ).slider({
       range: true,
       min: 0,
-      max: 500,
-      values: [ 75, 300 ],
+      max: 250,
+      values: [ 10, 150 ],
       slide: function( event, ui ) {
         $( "#amount" ).val( "$" + ui.values[ 0 ] + " - $" + ui.values[ 1 ] );
       }
