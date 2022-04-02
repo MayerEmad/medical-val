@@ -69,7 +69,9 @@
                             <a href="{{ action('Client\CompareController@store', ['product' => $product])  }}" title="Compare"><i class="far fa-copy"></i></a>
                         </div>
                         @if($product->discount>0)
-                            <span class="tag">{{ __('message.Sale') }}</span>
+                            <span class="tag" @if (session()->get('locale') == 'ar') style="left:7px !important;" @endif>
+                                {{ __('message.Sale') }}
+                            </span>
                         @endif
                          <img src="images/product_01.png" alt="Image">
                         <h3 class="text-dark">

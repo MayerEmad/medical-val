@@ -62,6 +62,19 @@
     .slider.round:before {
     border-radius: 50%;
     }
+
+    #slider-range{
+      width:80%;
+    }
+    /*this class I created it my self because its not downloaded*/
+    @media (max-width: 576px){
+        .col-xs-6{
+            /* padding-right: 2% !important;
+            padding-left: 2% !important;
+            width: 82% !important;
+            margin: 4px 6% 0px 6%; */
+        }
+    }
 </style>
 @section("content")
     <div class="bg-light py-3">
@@ -76,18 +89,18 @@
       <div class="container">
 
         <div class="row">
-            <div class="col-lg-3">
+            <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 ">
                 <h3 class="mb-3 h6 text-uppercase text-black d-block">{{ __('message.Filter by Name') }}</h3>
                 <input type="text" name="text" id="product_name" class="form-control border-1 pl-1 bg-white"
                         style="width:80%; height:36px;" value="" />
             </div>
 
-          <div class="col-lg-3">
+          <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 ">
                 <h3 class="mb-3 h6 text-uppercase text-black d-block">{{ __('message.Filter by Price') }}</h3>
                 <div id="slider-range" class="border-primary"></div>
                 <input type="text" name="text" id="amount" class="form-control border-0 pl-0 bg-white" disabled="" />
           </div>
-          <div class="col-lg-3">
+          <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 ">
             <h3 class="mb-3 h6 text-uppercase text-black d-block">{{ __('message.Filter by Sale') }}</h3>
                 <label class="switch">
                     <input type="checkbox" id="discount">
@@ -104,7 +117,7 @@
                 <a class="dropdown-item" href="#">Price, high to low</a>
             </div>
           </div> --}}
-          <div class="col-lg-3">
+          <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 ">
                 <button class="btn btn-primary mb-4 p-0" onclick="return productFilter()" id="filter-btn" style="width: 50%;margin: auto; height: 36px;" data-bs-toggle="pill" data-bs-target="#v-pills-filter" type="submit" role="tab" aria-controls="v-pills-filter" aria-selected="false">
                     {{ __('message.FILTER') }}
                 </button>
@@ -115,14 +128,16 @@
         </form>
         <div class="row" id="products-search-div">
             @foreach($products as $product)
-                <div class="col-sm-6 col-lg-4 col-md-6 text-center item mb-4" onclick="submitForm('{{$product->id}}')">
+                <div class="col-xs-6 col-sm-6 col-lg-4 col-md-6 text-center item mb-4" onclick="submitForm('{{$product->id}}')">
                     <div class="product-option">
                         <a href="{{ action('Client\CartController@store', ['product' => $product])  }}" onclick="showSwal('auto-close','{{ __('message.Item_added') }}')"  title="Add to cart" ><i class="fas fa-shopping-cart"></i></a>
                         <a href="{{ action('Client\WishListController@store', ['product' => $product])  }}" title="Add to wishlist"><i class="fas fa-heart"></i></a>
                         <a href="{{ action('Client\CompareController@store', ['product' => $product])  }}" title="Compare"><i class="far fa-copy"></i></a>
                     </div>
                     @if($product->discount>0)
-                        <span class="tag">{{ __('message.Sale') }}</span>
+                        <span class="tag" @if (session()->get('locale') == 'ar') style="left:7px !important;" @endif>
+                            {{ __('message.Sale') }}
+                        </span>
                     @endif
                      <img src="images/product_01.png" alt="Image">
                     <h3 class="text-dark">

@@ -49,8 +49,7 @@
                 </form> -->
                 <form action="{{ route('search') }}" method="GET" class="search-form">
                         <input type="text" name="query1" id="query1" value="{{ request()->input('query1') }}" class="form-control" placeholder="Search keyword and hit enter...">
-
-                    </form>
+                </form>
                 </div>
             </div>
             <div class="container">
@@ -60,7 +59,7 @@
                             <a href="index" class="js-logo-clone"><img class="mobile-image" src="images/logo.png" alt="logo" width="75px"></a>
                         </div>
                     </div>
-                    <div class="main-nav d-none d-lg-block">
+                    <div class="main-nav d-none d-xl-block">
                         <nav class="site-navigation text-right text-md-center" role="navigation">
                             <ul class="site-menu js-clone-nav d-none d-lg-block">
                                 <li class="nav-item"><a href="index">{{ __('message.Home') }}</a></li>
@@ -132,7 +131,7 @@
                                     <form id="logoutForm" method="POST" action="{{ route('logout') }}" style="display:none">
                                         @csrf
                                     </form>
-                                    @if(Auth::user()->hasRole('admin') || Auth::user()->hasRole('editoradmin') || Auth::user()->hasRole('superadmin'))
+                                    @if(!Auth::user()->hasRole('customer'))
                                     <li class="nav-item"><a href="admin">{{ __('message.Dashboard') }}</a></li>
                                     @endif
                                 @else
@@ -153,25 +152,22 @@
                         <a href="/wishlist" class="icons-btn d-inline-block heart">
                             <span class="icon-heart"></span>
                             @if (Session::has('wishlist'))
-
-                            <span class="number">{{count(Session::get('wishlist'))}}</span>
+                                <span class="number">{{count(Session::get('wishlist'))}}</span>
                             @endif
-
                         </a>
                         <a href="/compare" class="icons-btn d-inline-block heart">
                             <span class="icon-book"></span>
                             @if (Session::has('compare'))
-
-                            <span class="number">{{count(Session::get('compare'))}}</span>
+                                <span class="number">{{count(Session::get('compare'))}}</span>
                             @endif
 
                         </a>
-                <select class="selectpicker changeLang" data-width="fit">
-    <option data-content='<span class="flag-icon flag-icon-us"></span> English' value="en" {{ session()->get('locale') == 'en' ? 'selected' : '' }}>{{__('message.English')}}</option>
-  <option  data-content='<span class="flag-icon flag-icon-mx"></span> Español'value="ar" {{ session()->get('locale') == 'ar' ? 'selected' : '' }}>{{__('message.Arabic')}}</option>
-</select>
+                        <select class="selectpicker changeLang" data-width="fit">
+                            <option data-content='<span class="flag-icon flag-icon-us"></span> English' value="en" {{ session()->get('locale') == 'en' ? 'selected' : '' }}>{{__('message.English')}}</option>
+                            <option  data-content='<span class="flag-icon flag-icon-mx"></span> Español'value="ar" {{ session()->get('locale') == 'ar' ? 'selected' : '' }}>{{__('message.Arabic')}}</option>
+                        </select>
 
-                        <a href="#" class="site-menu-toggle js-menu-toggle ml-3 d-inline-block d-lg-none"><span
+                        <a href="#" class="site-menu-toggle js-menu-toggle ml-3 d-inline-block d-xl-none"><span
                             class="icon-menu"></span>
                         </a>
                     </div>
