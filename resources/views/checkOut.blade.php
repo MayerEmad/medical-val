@@ -5,8 +5,8 @@
       <div class="container">
         <div class="row">
           <div class="col-md-12 mb-0">
-            <a href="index">Home</a> <span class="mx-2 mb-0">/</span>
-            <strong class="text-black">Checkout</strong>
+            <a href="index">{{ __('message.Home') }}</a> <span class="mx-2 mb-0">/</span>
+            <strong class="text-black">{{ __('message.Checkout') }}</strong>
           </div>
             @if ($errors->any())
             <div class="alert alert-danger">
@@ -19,7 +19,7 @@
             @endif
             @if(Session::has('data-error'))
                 <div class="alert alert-info">
-                     <p> {{Session::get('data-error')}} <a href="profile" style="#bf2727">Click here</a> to profile</p>
+                     <p> {{Session::get('data-error')}} <a href="profile" style="#bf2727">{{ __('message.Click here') }}</a>{{ __('message.to profile') }}</p>
                 </div>
             @endif
             @if(Session::has('product-error'))
@@ -49,7 +49,7 @@
           <div class="col-md-12">
             @if (!Auth::check())
             <div class="bg-light rounded p-3">
-              <p class="mb-0">Returning customer? <a href="/login" class="d-inline-block">Click here</a> to login</p>
+              <p class="mb-0"><a href="/login" class="d-inline-block">{{ __('message.Click here') }}</a> {{ __('message.to login') }}</p>
             </div>
             @endif
           </div>
@@ -235,13 +235,13 @@
                 </div> --}}
                 <div class="row mb-5">
                     <div class="col-md-12">
-                      <h2 class="h3 mb-3 text-black">Your Order</h2>
+                      <h2 class="h3 mb-3 text-black">{{ __('message.Your Order') }}</h2>
                       <div class="p-3 p-lg-5" style="border: 1px solid #c7bebe !important;">
                         <table class="table site-block-order-table mb-5">
                           <thead>
-                            <th>Product</th>
-                            <th>price</th>
-                            <th>Total</th>
+                            <th>{{ __('message.Product') }}</th>
+                            <th>{{ __('message.Price') }}</th>
+                            <th>{{ __('message.Total') }}</th>
                           </thead>
                           <tbody>
                             @if(count($data["products"])>0)
@@ -255,7 +255,7 @@
                             @endif
 
                           <tr>
-                            <td class="text-black font-weight-bold"><strong>Order Total</strong></td>
+                            <td class="text-black font-weight-bold"><strong>{{ __('message.Order Total') }}</strong></td>
                             <td class="text-black font-weight-bold"><strong></strong></td>
                             <td class="text-black font-weight-bold"><strong>${{$data["total"]}}</strong></td>
                           </tr>
@@ -299,8 +299,9 @@
                         </div> --}}
 
                         <div class="form-group">
-                          <button class="btn btn-primary btn-lg btn-block" onclick="goToCheckOrderData()">Place
-                            Order</button>
+                          <button class="btn btn-primary btn-lg btn-block" onclick="goToCheckOrderData()">
+                            {{ __('message.Place Order') }}
+                        </button>
                         </div>
 
                       </div>
@@ -312,15 +313,15 @@
 
             <div class="row mb-5">
                 <div class="col-md-12">
-                    <h2 class="h3 mb-3 text-black">Coupon Code</h2>
+                    <h2 class="h3 mb-3 text-black">{{ __('message.Coupon') }}</h2>
                     <div class="p-3 p-lg-5" style="border: 1px solid #c7bebe !important">
 
-                        <label for="c_code" class="text-black mb-3">Enter your coupon code if you have one</label>
+                        <label for="c_code" class="text-black mb-3">{{ __('message.Enter your coupon code if you have one') }}</label>
                         <div class="input-group w-75">
-                        <input type="text" class="form-control" id="c_code" placeholder="Coupon Code" aria-label="Coupon Code"
+                        <input type="text" class="form-control" id="c_code" placeholder={{ __('message.Code') }} aria-label="Coupon Code"
                             aria-describedby="button-addon2">
                         <div class="input-group-append">
-                            <button class="btn btn-primary btn-sm px-4" type="button" id="button-addon2">Apply</button>
+                            <button class="btn btn-primary btn-sm px-4" type="button" id="button-addon2">{{ __('message.Apply Coupon') }}</button>
                         </div>
                         </div>
 

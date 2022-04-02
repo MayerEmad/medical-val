@@ -21,7 +21,7 @@ class OrderController extends Controller
         $user = Auth::user();
         if( $user->phone=='' || $user->address=='' || $user->block=='' || $user->street=='' ||
             $user->house_building_number=='' ){
-                return back()->with('data-error','Fill mandatory profile data to make your order.' );
+                return back()->with('data-error', __('message.Fill mandatory profile data to make your order.') );
         }
 
         $productsNotEnough=0;
@@ -38,7 +38,7 @@ class OrderController extends Controller
             }
         }
         if($productsNotEnough==1){
-            return back()->with('product-error','some of products are not availble by the quantities you select, this your order with the availbale products' );
+            return back()->with('product-error',__('some of products are not availble by the quantities you select, this your order with the availbale products.') );
         }
         return redirect(route('createInvoice'));
     }
@@ -76,7 +76,7 @@ class OrderController extends Controller
     }
 
     public function paymentFailure(){
-        return redirect('/checkout')->with('error','Payment failed try again please');
+        return redirect('/checkout')->with('error',__('message.Payment failed try again please'));
     }
 
     public function paymentSuccess(){

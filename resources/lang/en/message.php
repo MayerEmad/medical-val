@@ -43,11 +43,25 @@ return [
     'Apply Coupon'=>'Apply Coupon',
     'Enter your coupon code if you have one'=>'Enter your coupon code if you have one',
     'ProceedToCheckout'=>'Proceed To Checkout',
+    'Code'=>'Code',
     //wishlist.blade
     'Wishlist'=>'Wishlist',
     //thank.blade
     'Thank you'=>'Thank you',
     'You order was successfuly completed'=>'You order was successfuly completed.',
+    //checkout.blade
+    'Checkout'=>'Check out',
+    'Click here'=>'Click here ',
+    'to profile'=>'to Profile',
+    'to login'=>'to Login',
+    'Your Order'=>'Your Order',
+    'Order Total'=>'Order Total',
+    'Place Order'=>'Place Order',
+    'Fill mandatory profile data to make your order.'=>'Fill mandatory profile data to make your order.',
+    'some of products are not availble by the quantities you select, this your order with the availbale products.'=>
+    'some of products are not availble by the quantities you select, this your order with the availbale products.',
+    'Payment failed try again please'=>'Payment failed try again please',
+
 
     'Effective_Medicine'=>'Effective Medicine',
     'New_Medicine_Everyday'=>'New Medicine Everyday',

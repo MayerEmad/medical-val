@@ -42,11 +42,26 @@ return [
     'Apply Coupon'=>'استخدام الكوبون',
     'Enter your coupon code if you have one'=>'ادخل كود الكوبون لتستخدمه',
     'ProceedToCheckout'=>'اضغط للدفع',
+    'Code'=>'الكود',
     //wishlist.blade
     'Wishlist'=>'المفضله',
     //thank.blade
     'Thank you'=>'شكرا لك',
     'You order was successfuly completed'=>'طلبك تم بنجاح',
+    //checkout.blade
+    'Checkout'=>'الدفع',
+    'Click here'=>'اضغط هنا ',
+    'to profile'=>'للذهاب للحساب',
+    'to login'=>'لتسجيل الدخول',
+    'Your Order'=>'الطلب',
+    'Order Total'=>'حساب الطلب',
+    'Place Order'=>'اتمام دفع الطلب',
+    'Fill mandatory profile data to make your order.'=>'املا بيانات الحساب الالزاميه لتصنع طلبا',
+    'some of products are not availble by the quantities you select, this your order with the availbale products.'=>
+    'بعض النتجات غير متوافره بالكميات اللتى اخترتها هذا هو طلبك بالكميات المتاحه',
+    'Payment failed try again please'=>'فشل الدفع الرجاء المحاوله مره اخرى',
+
+
 
     'Effective_Medicine'=>'الطب الفعال',
     'New_Medicine_Everyday'=>'الطب الجديد كل يوم ',

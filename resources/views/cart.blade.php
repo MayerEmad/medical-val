@@ -136,7 +136,7 @@
                 <p>{{ __('message.Enter your coupon code if you have one') }}</p>
               </div>
               <div class="col-md-8 mb-3 mb-md-0">
-                <input type="text" class="form-control py-3" id="coupon" placeholder="Coupon Code">
+                <input type="text" class="form-control py-3" id="coupon" placeholder={{ __('message.Code') }}>
               </div>
               <div class="col-md-4">
                 <button class="btn btn-primary btn-md px-4">{{ __('message.Apply Coupon') }}</button>
@@ -213,68 +213,57 @@
     </form>
 @endsection
 <script>
-  function submitForm(id){
-    // $('#'+id).submit();
-    console.log(id);
-
-            $.ajax({
-                url:"{{route('cart.plusButton')}}",
-                method:"POST",
-                data:{"rowId":id,
-                     "_token": "{{ csrf_token() }}",
-},
-                dataType:'json',
-                success:function(data)
-                {
-                  console.log(data);
-                    $("#item_val").val(data.qty);
-                }
-            });
-
-}
-function submitFormminus(id){
-
-
-$.ajax({
-    url:"{{route('cart.minusButton')}}",
-    method:"POST",
-    data:{"rowId":id,
-         "_token": "{{ csrf_token() }}",
-},
-    dataType:'json',
-    success:function(data)
-    {
-      console.log(data);
-        $("#item_val").val(data.qty);
-    }
-});
-}
-    // $('#'+id).submit();
-    console.log(id);
-    var form = document.createElement("form");
-    var element1 = document.createElement("input");
-    // var element2 = document.createElement("input");
-
-    form.method = "GET";
-    form.action = "{{ action('Client\CartController@minusButton') }}";
-
-    element1.value=id;
-    element1.name="rowId";
-    form.appendChild(element1);
-
-    // element2.value=pw;
-    // element2.name="rowId";
-    // form.appendChild(element2);
-
-    document.body.appendChild(form);
-
-    form.submit();
-}
-
-function goToCheckOut(){
-    let url="{{ route('cart.checkout')}}";
-    $('#checkoutForm').attr('action',url);
-    $( "#checkoutForm" ).submit();
-};
-
-</script>
+    function submitForm(id){
+      // $('#'+id).submit();
+      console.log(id);
+              $.ajax({
+                  url:"{{route('cart.plusButton')}}",
+                  method:"POST",
+                  data:{"rowId":id,
+                       "_token": "{{ csrf_token() }}",
+  },
+                  dataType:'json',
+                  success:function(data)
+                  {
+                    console.log(data);
+                      $("#item_val").val(data.qty);
+                  }
+              });
+  }
+  function submitFormminus(id){
+  $.ajax({
+      url:"{{route('cart.minusButton')}}",
+      method:"POST",
+      data:{"rowId":id,
+           "_token": "{{ csrf_token() }}",
+  },
+      dataType:'json',
+      success:function(data)
+      {
+        console.log(data);
+          $("#item_val").val(data.qty);
+      }
+  });
+  }
+      // $('#'+id).submit();
+      console.log(id);
+      var form = document.createElement("form");
+      var element1 = document.createElement("input");
+      // var element2 = document.createElement("input");
+      form.method = "GET";
+      form.action = "{{ action('Client\CartController@minusButton') }}";
+      element1.value=id;
+      element1.name="rowId";
+      form.appendChild(element1);
+      // element2.value=pw;
+      // element2.name="rowId";
+      // form.appendChild(element2);
+      document.body.appendChild(form);
+      form.submit();
+  }
+  function goToCheckOut(){
+      let url="{{ route('cart.checkout')}}";
+      $('#checkoutForm').attr('action',url);
+      $( "#checkoutForm" ).submit();
+  };
+  </script>
