@@ -21,6 +21,7 @@ return [
     'Dashboard'=>'الادمن',
     'Arabic'=>'عربى',
     'English'=>'انجليزى',
+    'Search keyword and hit enter'=>'للبحث ادخل و اضغط انتر',
 
     'Sale'=>'خصم',
     'Item_added'=>'تم اضافه المنتج بنجاح',

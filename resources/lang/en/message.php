@@ -22,6 +22,7 @@ return [
     'Dashboard'=>'DASHBOARD',
     'Arabic'=>'Arabic',
     'English'=>'English',
+    'Search keyword and hit enter'=>'Search keyword and hit enter...',
 
     'Item_added'=>'Item Added Successfully',
     'Sale'=>'SALE',

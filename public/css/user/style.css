@@ -906,7 +906,7 @@ a {
     visibility: visible; }
   .search-wrap .form-control {
     position: absolute;
-    top: 50%;
+    top: 35%;
     width: 100%;
     -webkit-transform: translateY(-50%);
     -ms-transform: translateY(-50%);
@@ -921,7 +921,7 @@ a {
     z-index: 4;
     position: absolute;
     right: 20px;
-    top: 50%;
+    top: 35%;
     -webkit-transform: translateY(-50%);
     -ms-transform: translateY(-50%);
     transform: translateY(-50%); }

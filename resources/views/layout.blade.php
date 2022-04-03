@@ -36,6 +36,21 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
 
 </head>
+    @if (session()->get('locale') == 'ar')
+        <style>
+            .site-mobile-menu{
+                /* right:unset;
+                left:0; */
+            }
+        </style>
+    @endif
+<style>
+    @media (min-width: 1200px){
+            .container {
+                max-width: 1180px !important;
+            }
+        }
+</style>
 <body>
     <div class="site-wrap">
         <!-- navbar -->
@@ -43,12 +58,16 @@
 
             <div class="search-wrap">
                 <div class="container">
-                <a href="#" class="search-close js-search-close"><span class="icon-close2"></span></a>
+                <a href="#" class="search-close js-search-close"
+                    @if (session()->get('locale') == 'ar') style="position:relative;float:left;" @endif
+                >
+                    <span class="icon-close2"></span>
+                </a>
                 <!-- <form action="#" method="post">
                     <input type="text" class="form-control" placeholder="Search keyword and hit enter...">
                 </form> -->
                 <form action="{{ route('search') }}" method="GET" class="search-form">
-                        <input type="text" name="query1" id="query1" value="{{ request()->input('query1') }}" class="form-control" placeholder="Search keyword and hit enter...">
+                        <input type="text" name="query1" id="query1" value="{{ request()->input('query1') }}" class="form-control" placeholder="{{ __('message.Search keyword and hit enter') }}">
                 </form>
                 </div>
             </div>
