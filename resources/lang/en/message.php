@@ -28,5 +28,7 @@ return [
     'By_price'=>'By price',
     'New_Products'=>'New Products',
     'View_all_products'=>'View all products',
+    'LOG_IN'=>'LOG IN ',
+    'Arabic'=>'Arabic',
 
 ];

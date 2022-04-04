@@ -27,6 +27,9 @@ return [
     'By_price'=>'بالسعر',
     'New_Products'=>'منتجات جديدة',
     'View_all_products'=>'مشاهدة جميع المنتجات',
+    'LOG_IN'=>'تسجيل الدخول',
+    'Arabic'=>'عربى',
+
 
     
     

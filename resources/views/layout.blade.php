@@ -25,10 +25,12 @@
   <link rel="stylesheet" href="css/user/owl.theme.default.min.css">
 
 
+
   <link rel="stylesheet" href="css/user/aos.css">
 
   <link rel="stylesheet" href="css/user/style.css">
   @if (session()->get('locale') == 'ar')
+
         <link rel="stylesheet" href="{{ asset('css/bootstrap-rtl.css') }}">
     @endif
   {{-- pop up --}}
@@ -136,7 +138,7 @@
                                     <li class="nav-item"><a href="admin">Dashboard</a></li>
                                     @endif
                                 @else
-                                    <li class="nav-item"><a href="login">Log In</a></li>
+                                    <li class="nav-item"><a href="login">{{ __('message.LOG_IN') }}</a></li>
                                 @endif
 
                             </ul>
@@ -168,7 +170,7 @@
                         </a>
                 <select class="selectpicker changeLang" data-width="fit">
     <option data-content='<span class="flag-icon flag-icon-us"></span> English' value="en" {{ session()->get('locale') == 'en' ? 'selected' : '' }}>English</option>
-  <option  data-content='<span class="flag-icon flag-icon-mx"></span> Español'value="ar" {{ session()->get('locale') == 'ar' ? 'selected' : '' }}>Arabic</option>
+  <option  data-content='<span class="flag-icon flag-icon-mx"></span> Español'value="ar" {{ session()->get('locale') == 'ar' ? 'selected' : '' }}>{{ __('message.Arabic') }}</option>
 </select>
 
                         <a href="#" class="site-menu-toggle js-menu-toggle ml-3 d-inline-block d-lg-none"><span

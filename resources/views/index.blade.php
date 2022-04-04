@@ -131,7 +131,8 @@
         </div>
         <div class="row">
           <div class="col-md-12 block-3 products-wrap">
-            <div class="nonloop-block-3 owl-carousel">
+            
+            <div dir="ltr"class="nonloop-block-3 owl-carousel">
                 @foreach($products as $product)
                 <div class="text-center item mb-4">
                   <div class="product-option">
@@ -202,3 +203,15 @@
       </div>
     </div>
 @endsection
+<script type="text/javascript">
+  $(document).ready(function() {
+
+// $('#slid').owlCarousel({
+//     items: 1,
+//     nav: false,
+//     dots: true,
+//     autoplay: true,
+//     rtl: true
+//   });
+
+});</script>
