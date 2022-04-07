@@ -40,4 +40,18 @@ class CompareController extends Controller
         return back()->with('success', 'Item was added to your compare!');
 
     }
+    public function removeCompare( $id)
+    {
+       $key=array_search($id, (Session::get('compare')));
+
+        
+        // Session::pull('Compare'.$key);
+        Session::pull('compare.'.$key); // retrieving pen and removing
+        if(Auth::user()){
+
+        Compare::where([['product_id',$id],['user_id',Auth::user()->id]])->delete();
+        }
+        return back()->with('success', 'Item was removed from your Compare!');
+
+    }
 }

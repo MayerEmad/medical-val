@@ -3,8 +3,15 @@
     <head>
          <!-- CSS reset -->
          <!-- Resource style -->
-        <script src="js/user/modernizr.js"></script> <!-- Modernizr -->
+      <!--  <script src="js/user/modernizr.js"></script>  Modernizr -->
         <style>
+          .btn.btn-primary {
+                    color: #fff;
+                    background-color: #2a316e;
+                    border-color: #2a316e;
+                    margin-bottom: 49px;
+                    margin-left: 199px;
+                }
             .site-section .container .cd-products-table div .table tr .first-row{
                 padding: 10px 35px 0px 35px;
             }
@@ -85,6 +92,8 @@
 
                     <th class="col-lg-4 col-md-4 col-sm-4">
                         <img src="{{$product->image}}" alt="product image">
+                        <a href="{{ action('Client\CompareController@removeCompare', ['id' =>  $product->id]) }}" class="btn btn-primary height-auto btn-sm">X</a>
+
                     </th>
                     @endforeach
                     <!-- <th class="col-lg-4 col-md-4 col-sm-4">
@@ -166,5 +175,5 @@
         </div>
       </div>
     </div>
-    <script src="js/user/jquery-2.1.4.js"></script>
+    <!-- <script src="js/user/jquery-2.1.4.js"></script> -->
 @endsection

@@ -116,6 +116,9 @@ Route::group(['middleware' => 'auth'], function () {
 // compare page
 Route::get('compare', [CompareController::class, 'compare']);
 Route::get('/compare/{product}', [CompareController::class, 'store'])->name('compare.store');
+Route::get('/removeCompare/{id}', [CompareController::class, 'removeCompare'])->name('compare.removeCompare');
+
+
 
 // wishlist page
 Route::get('wishlist', [WishListController::class, 'wishlist']);
