@@ -80,7 +80,7 @@
                       </div>
 
                     </td>
-                    <td>${{ $item->price *$item->qty}}</td>
+                    <td>${{ ($item->price *$item->qty)-$item->discount}}</td>
 
                     <td>
                       <a href="{{ action('Client\CartController@removeproduct', ['rowId' =>  $item->rowId]) }}" class="btn btn-primary height-auto btn-sm">X</a>
@@ -245,22 +245,7 @@
       }
   });
   }
-      // $('#'+id).submit();
-      console.log(id);
-      var form = document.createElement("form");
-      var element1 = document.createElement("input");
-      // var element2 = document.createElement("input");
-      form.method = "GET";
-      form.action = "{{ action('Client\CartController@minusButton') }}";
-      element1.value=id;
-      element1.name="rowId";
-      form.appendChild(element1);
-      // element2.value=pw;
-      // element2.name="rowId";
-      // form.appendChild(element2);
-      document.body.appendChild(form);
-      form.submit();
-  }
+   
   function goToCheckOut(){
       let url="{{ route('cart.checkout')}}";
       $('#checkoutForm').attr('action',url);

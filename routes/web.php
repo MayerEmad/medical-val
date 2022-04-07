@@ -96,8 +96,8 @@ Route::get('/shop-single',[ShopController::class, 'productDetails'])->name('shop
 Route::get('cart', [CartController::class, 'cart']);
 Route::get('/cart/{product}', [CartController::class, 'store'])->name('cart.store');
 Route::get('/removeproduct/{rowId}', [CartController::class, 'removeproduct'])->name('cart.removeproduct');
-Route::get('/plusButton', [CartController::class, 'plusButton'])->name('cart.plusButton');
-Route::get('/minusButton', [CartController::class, 'minusButton'])->name('cart.minusButton');
+Route::post('/plusButton', [CartController::class, 'plusButton'])->name('cart.plusButton');
+Route::post('/minusButton', [CartController::class, 'minusButton'])->name('cart.minusButton');
 
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/checkout', [CartController::class, 'checkout'])->name('cart.checkout');
