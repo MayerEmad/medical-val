@@ -29,18 +29,29 @@ class OrderController extends Controller
             $product=Product::find($item->id);
             if($item->qty > $product->quantity-1000){
                 if($product->quantity==0){
-                   // Cart::remove($item->rowId);
+                   Cart::remove($item->rowId);
                 }
                 else {
-                   // Cart::update($item->rowId, $product->quantity);
+
+                   Cart::update($item->rowId, $product->quantity);
                 }
                 $productsNotEnough=1;
             }
         }
         if($productsNotEnough==1){
-            return back()->with('product-error',__('some of products are not availble by the quantities you select, this your order with the availbale products.') );
+            if(Cart::count() > 0){
+                $total=0;
+                foreach (Cart::content() as $item){
+                    $total+=$item->price*$item->qty;
+                }
+                $data = [
+                    'total'  => $total,
+                    'products'   => Cart::content(),
+                ];
+                return view('checkout')->with('data',$data);}
+            // return back()->with('product-error',__('some of products are not availble by the quantities you select, this your order with the availbale products.') );
         }
-        return redirect(route('createInvoice'));
+        return view('createInvoice');
     }
 
     public function createInvoice()
