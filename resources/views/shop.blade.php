@@ -202,7 +202,7 @@
     {
         var price_range=$("#amount").val();
         var product_name=$("#product_name").val();
-        var hasSale=$('#discount').is(":checked")
+        var hasSale=$('#discount').is(":checked");
         $.ajax({
             url:"{{route('shop.productfilter')}}",
             method:"GET",
@@ -226,21 +226,21 @@
     //     $( "#productDetailsForm" ).submit();
     // }
     function submitForm(id){
-    // $('#'+id).submit();
-    console.log(id);
-    var form = document.createElement("form");
-    var element1 = document.createElement("input");
-    // var element2 = document.createElement("input");
-    form.method = "GET";
-    form.action = "{{ action('Client\ShopController@productDetails') }}";
-    element1.value=id;
-    element1.name="id";
-    form.appendChild(element1);
-    // element2.value=pw;
-    // element2.name="rowId";
-    // form.appendChild(element2);
-    document.body.appendChild(form);
-    form.submit();
+        // $('#'+id).submit();
+        console.log(id);
+        var form = document.createElement("form");
+        var element1 = document.createElement("input");
+        // var element2 = document.createElement("input");
+        form.method = "GET";
+        form.action = "{{ action('Client\ShopController@productDetails') }}";
+        element1.value=id;
+        element1.name="id";
+        form.appendChild(element1);
+        // element2.value=pw;
+        // element2.name="rowId";
+        // form.appendChild(element2);
+        document.body.appendChild(form);
+        form.submit();
 }
     // $(document).ready(function() {
 

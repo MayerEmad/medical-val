@@ -13,12 +13,13 @@ return [
     |
     */
 
-    'Home'=>'HOME',
+    'Home'=>'Home',
     'Store'=>'Store',
     'Products'=>'Products',
+    'Products'=>'Categories',
     'About'=>'About',
     'Contact'=>'Contact',
-    'Profile'=>'PROFILE',
+    'Profile'=>'Profile',
     'Dashboard'=>'DASHBOARD',
     'Arabic'=>'Arabic',
     'English'=>'English',

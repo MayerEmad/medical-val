@@ -84,13 +84,24 @@
                                 <li class="nav-item"><a href="index">{{ __('message.Home') }}</a></li>
                                 <li class="nav-item"><a href="shop">{{ __('message.Store') }}</a></li>
                                 <li class="dropdown dropdown-large">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ __('message.Products') }} <b class="caret"></b></a>
-                                    <ul class="dropdown-menu dropdown-menu-large row" style="left: -100px;">
-                                        <li class="col-lg-3 col-md-12 col-sm-12">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ __('message.Categories') }} <b class="caret"></b></a>
+                                    <ul id="#category-list"class="dropdown-menu dropdown-menu-large row" style="left: -100px;">
+                                        <li class="category-list col-lg-3 col-md-12 col-sm-12">
+
+                                            {{-- <li class="dropdown-header"> parent YZnO</li>
+                                            <li><a href="#">IyDA</a></li>
+                                            <li><a href="#">CYfJ</a></li>
+                                            <li><a href="#">HP6U</a></li><li>
+                                            <a href="#">4wF1</a></li>
+                                            <li class="dropdown-header"> parent CPa3</li>
+                                            <li><a href="#">q0py</a></li>
+                                            <li class="dropdown-header"> parent vG2Y</li>
+                                            <li><a href="#">HP1q</a></li>
+                                            <li><a href="#">EPXt</a></li> --}}
+
                                             <ul>
                                                 <li class="dropdown-header">Glyphicons</li>
                                                 <li><a href="#">Available glyphs</a></li>
-                                                <li class=""><a href="#">How to use</a></li>
                                                 <li><a href="#">Examples</a></li>
                                                 <li class="divider"></li>
                                                 <li class="dropdown-header">Dropdowns</li>
@@ -100,7 +111,7 @@
                                                 <li><a href="#">Disabled menu items</a></li>
                                             </ul>
                                         </li>
-                                        <li class="col-lg-3 col-md-12 col-sm-12">
+                                        <li class="category-list col-lg-3 col-md-12 col-sm-12">
                                             <ul>
                                                 <li class="dropdown-header">Button groups</li>
                                                 <li><a href="#">Basic example</a></li>
@@ -113,31 +124,30 @@
                                                 <li><a href="#">Single button dropdowns</a></li>
                                             </ul>
                                         </li>
-                                        <li class="col-lg-3 col-md-12 col-sm-12">
+                                        <li class="category-list col-lg-3 col-md-12 col-sm-12">
                                             <ul>
-                                                <li class="dropdown-header">Input groups</li>
+                                                <li class="dropdown-header">Button groups</li>
                                                 <li><a href="#">Basic example</a></li>
+                                                <li><a href="#">Button toolbar</a></li>
                                                 <li><a href="#">Sizing</a></li>
-                                                <li><a href="#">Checkboxes and radio addons</a></li>
+                                                <li><a href="#">Nesting</a></li>
+                                                <li><a href="#">Vertical variation</a></li>
                                                 <li class="divider"></li>
-                                                <li class="dropdown-header">Navs</li>
-                                                <li><a href="#">Tabs</a></li>
-                                                <li><a href="#">Pills</a></li>
-                                                <li><a href="#">Justified</a></li>
+                                                <li class="dropdown-header">Button dropdowns</li>
+                                                <li><a href="#">Single button dropdowns</a></li>
                                             </ul>
                                         </li>
-                                        <li class="col-lg-3 col-md-12 col-sm-12">
+                                        <li class="category-list col-lg-3 col-md-12 col-sm-12">
                                             <ul>
-                                                <li class="dropdown-header">Navbar</li>
-                                                <li><a href="#">Default navbar</a></li>
-                                                <li><a href="#">Buttons</a></li>
-                                                <li><a href="#">Text</a></li>
-                                                <li><a href="#">Non-nav links</a></li>
-                                                <li><a href="#">Component alignment</a></li>
-                                                <li><a href="#">Fixed to top</a></li>
-                                                <li><a href="#">Fixed to bottom</a></li>
-                                                <li><a href="#">Static top</a></li>
-                                                <li><a href="#">Inverted navbar</a></li>
+                                                <li class="dropdown-header">Button groups</li>
+                                                <li><a href="#">Basic example</a></li>
+                                                <li><a href="#">Button toolbar</a></li>
+                                                <li><a href="#">Sizing</a></li>
+                                                <li><a href="#">Nesting</a></li>
+                                                <li><a href="#">Vertical variation</a></li>
+                                                <li class="divider"></li>
+                                                <li class="dropdown-header">Button dropdowns</li>
+                                                <li><a href="#">Single button dropdowns</a></li>
                                             </ul>
                                         </li>
                                     </ul>
@@ -355,17 +365,55 @@
 // }, function () {
 //   // Your code
 // });
-  </script>
-      <script type="text/javascript">
+</script>
+    <script type="text/javascript">
 
-  var url = "{{ route('changeLang') }}";
-  $(".changeLang").change(function(){
-      window.location.href = url + "?lang="+ $(this).val();
-  });
-  function logUserOut(){
-    $("#logoutForm").submit();
-  }
+    var url = "{{ route('changeLang') }}";
+    $(".changeLang").change(function(){
+        window.location.href = url + "?lang="+ $(this).val();
+    });
+    function logUserOut(){
+        $("#logoutForm").submit();
+    }
 
+    function fetchCategories()
+    {
+    $.ajax({
+        url:"{{route('home.fetchCategories')}}",
+        method:"GET",
+        data:{
+            },
+        dataType:'json',
+        success:function(data)
+        {
+            $(".category-list").remove();
+            let html='';
+            // for (let i = 0; i < data.length; i++)
+            // {
+            //     let parentCategoryData=data[i];
+            //     html+='<li class="dropdown-header"> parent '+data[i][0].name+'</li>';
+            //     for (let j = 1; j < parentCategoryData.length; j++) {
+            //         let category=parentCategoryData[j];
+            //         html+='<li><a href="#">'+category.name+'</a></li>';
+            //     }
+            //     if((i+1)%2==0){
+            //         console.log(html);
+            //         $(".dropdown-menu dropdown-menu-large row")
+            //         .add('<li class="category-list col-lg-3 col-md-12 col-sm-12"><ul>'+html+'</ul></li>');
+            //         html='';
+            //     }
+            // }
+            // if(html!=''){
+            //     $(".dropdown-menu dropdown-menu-large row")
+            //         .add('<li class="category-list col-lg-3 col-md-12 col-sm-12"><ul>'+html+'</ul></li>');
+            // }
+            $("#category-list")
+                    .append('<li class="category-list col-lg-3 col-md-12 col-sm-12"><ul>ok</ul></li>');
+                    alert('jjj');
+        }
+    });
+    }
+    fetchCategories();
 
 </script>
 </body>
