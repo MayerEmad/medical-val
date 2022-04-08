@@ -16,9 +16,10 @@ class HomeController extends Controller
     {
         $products = Product::paginate(5);
         $categories = Category::paginate(5);
+        $categories_all = Category::all();
 
         // return view('index')->with(array('products', 'categories'));
-        return view('index', compact('products','categories'));
+        return view('index', compact('categories_all','products','categories'));
     }
 
     public function search(Request $request)

@@ -47,7 +47,7 @@ class AuthenticatedSessionController extends Controller
             $user= Auth::user();
 
             foreach (Cart::content() as $item){
-                $cart=ShopingCart::create(['product_id'=>$item->id,'user_id'=>$user->id,'quantity'=>1]);
+            ShopingCart::create(['product_id'=>$item->id,'user_id'=>$user->id,'quantity'=>1]);
 
             }
         }else{
@@ -63,7 +63,7 @@ class AuthenticatedSessionController extends Controller
             $user= Auth::user();
 
             foreach (Session::get('compare') as $product_id){
-                $cart=Compare::create(['product_id'=>$product_id,'user_id'=>$user->id]);
+                Compare::create(['product_id'=>$product_id,'user_id'=>$user->id]);
 
             }
             /*update compare after login*/
@@ -84,11 +84,12 @@ class AuthenticatedSessionController extends Controller
 
             }
           /*update wishlist after login*/
+        //   dd(Session::get('wishlist')!==null&&count(Session::get('wishlist'))>0);
         if(Session::get('wishlist')!==null&&count(Session::get('wishlist'))>0){
             $user= Auth::user();
 
             foreach (Session::get('wishlist') as $product_id){
-                $cart=Wishlist::create(['product_id'=>$product_id,'user_id'=>$user->id]);
+                Wishlist::create(['product_id'=>$product_id,'user_id'=>$user->id]);
 
             }
         }else{

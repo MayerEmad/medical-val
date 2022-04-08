@@ -85,9 +85,22 @@
                                 <li class="nav-item"><a href="shop">{{ __('message.Store') }}</a></li>
                                 <li class="dropdown dropdown-large">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ __('message.Categories') }} <b class="caret"></b></a>
-                                    <ul id="#category-list"class="dropdown-menu dropdown-menu-large row" style="left: -100px;">
-                                        <li class="category-list col-lg-3 col-md-12 col-sm-12">
+                                    <ul id="category-list1"class="dropdown-menu dropdown-menu-large row" style="left: -100px;">
+                                        <!-- <li class="category-list col-lg-3 col-md-12 col-sm-12"> -->
+                                        <ul>
+                                                <!-- <li><a href="#">Examples</a></li> -->
+                                      @foreach($categories as $category)
+                                    
+                                     <li class="dropdown-header"> {{$category->name}}</li>
 
+                                    @foreach($category->products as $product)
+                                        <li><a href="#">{{$product->name}}</a></li>
+
+                                    @endforeach
+                                    <li class="divider"></li>
+   
+                                @endforeach 
+                                </ul>
                                             {{-- <li class="dropdown-header"> parent YZnO</li>
                                             <li><a href="#">IyDA</a></li>
                                             <li><a href="#">CYfJ</a></li>
@@ -407,9 +420,9 @@
             //     $(".dropdown-menu dropdown-menu-large row")
             //         .add('<li class="category-list col-lg-3 col-md-12 col-sm-12"><ul>'+html+'</ul></li>');
             // }
-            $("#category-list")
+            $("#category-list1")
                     .append('<li class="category-list col-lg-3 col-md-12 col-sm-12"><ul>ok</ul></li>');
-                    alert('jjj');
+                    // alert('jjj');
         }
     });
     }
