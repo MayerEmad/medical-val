@@ -15,6 +15,7 @@ return [
     'Home'=>'الصفحة الرئيسية',
     'Store'=>'متجر',
     'Products'=>'منتجات',
+    'Categories'=>'فئات',
     'About'=>'حول',
     'Contact'=>'اتصل',
     'Profile'=>'الحساب',

@@ -42,6 +42,7 @@
                     <div class="card card-primary">
                         <div class="card-body">
                             @if(count($category->subcategory))
+                                <div class="row d-flex align-items-stretch" id="searchable_div">
                                 @foreach($category->subcategory as $cat)
                                 <div class="col-12 col-sm-6 col-md-4 d-flex align-items-stretch flip-card" style="height:100%">
                                         <div class="card bg-light flip-card-inner">
@@ -71,6 +72,7 @@
                                         </div>
                                 </div>
                                 @endforeach
+                                </div>
                                 <div class="col-lg-3">
                                     <a href="{{ route('category.subcategory',['category'=>$category]) }}" class="btn btn-sm btn-success">
                                         <i class="fas fa-plus"></i> Add Sub Category
