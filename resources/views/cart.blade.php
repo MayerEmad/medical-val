@@ -52,44 +52,42 @@
                 </thead>
                 <tbody>
                 @if (Cart::count() > 0)
-@foreach (Cart::content() as $item)
+                    @foreach (Cart::content() as $item)
+                    <tr>
+                        <td class="product-thumbnail">
+                        <img src="images/product_02.png" alt="Image" class="img-fluid">
+                        </td>
+                        <td class="product-name">
+                        <h2 class="h5 text-black">{{ $item->name }}</h2>
+                        </td>
+                        <td>{{ $item->price }}</td>
+                        <td>
+                        <div class="input-group mb-3" style="width: max-content;max-width: 128px;">
+                            <div class="input-group-prepend">
+                            <button onclick=" submitFormminus('{{$item->rowId}}');" class="btn btn-outline-primary js-btn-minus"  type="button">&minus;</button>
+                            </div>
+                            <input type="text" id="item_val" class="form-control text-center" value="{{$item->qty}}" placeholder=""
+                            aria-label="Example text with button addon" aria-describedby="button-addon1">
+                            <!-- <form id="{{$item->rowId}}" action="{{ action('Client\CartController@plusButton', ['rowId' =>  $item->rowId]) }}" method="GET" style="display:none"> -->
+                            <div class="input-group-append">
 
-                  <tr>
-                    <td class="product-thumbnail">
-                      <img src="images/product_02.png" alt="Image" class="img-fluid">
-                    </td>
-                    <td class="product-name">
-                      <h2 class="h5 text-black">{{ $item->name }}</h2>
-                    </td>
-                    <td>{{ $item->price }}</td>
-                    <td>
-                      <div class="input-group mb-3" style="max-width: 120px;">
-                        <div class="input-group-prepend">
-                          <button onclick=" submitFormminus('{{$item->rowId}}');" class="btn btn-outline-primary js-btn-minus"  type="button">&minus;</button>
+                            <a onclick=" submitForm('{{$item->rowId}}');" class="btn btn-outline-primary js-btn-plus" >&plus;</a>
+                            </div>
+
+                            <!-- </form> -->
+
                         </div>
-                        <input type="text" id="item_val" class="form-control text-center" value="{{$item->qty}}" placeholder=""
-                          aria-label="Example text with button addon" aria-describedby="button-addon1">
-                        <!-- <form id="{{$item->rowId}}" action="{{ action('Client\CartController@plusButton', ['rowId' =>  $item->rowId]) }}" method="GET" style="display:none"> -->
-                        <div class="input-group-append">
 
-                        <a onclick=" submitForm('{{$item->rowId}}');" class="btn btn-outline-primary js-btn-plus" >&plus;</a>
-                        </div>
+                        </td>
+                        <td>${{ ($item->price *$item->qty)-$item->discount}}</td>
 
-                        <!-- </form> -->
-
-                      </div>
-
-                    </td>
-                    <td>${{ ($item->price *$item->qty)-$item->discount}}</td>
-
-                    <td>
-                      <a href="{{ action('Client\CartController@removeproduct', ['rowId' =>  $item->rowId]) }}" class="btn btn-primary height-auto btn-sm">X</a>
-                    </td>
-
-             <td style="display:none;">{{$item->rowId}} </td>
-                  </tr>
-                  @endforeach
-    @endif
+                        <td>
+                        <a href="{{ action('Client\CartController@removeproduct', ['rowId' =>  $item->rowId]) }}" class="btn btn-primary height-auto btn-sm">X</a>
+                        </td>
+                        <td style="display:none;">{{$item->rowId}} </td>
+                    </tr>
+                     @endforeach
+                @endif
                   <!-- <tr>
                     <td class="product-thumbnail">
                       <img src="images/product_01.png" alt="Image" class="img-fluid">
@@ -126,9 +124,9 @@
               <div class="col-md-6 mb-3 mb-md-0">
                 <button class="btn btn-primary btn-md btn-block">{{ __('message.Continue Shopping') }}</button>
               </div>
-              {{-- <div class="col-md-6">
-                <button class="btn btn-outline-primary btn-md btn-block">Continue Shopping</button>
-              </div> --}}
+                    {{-- <div class="col-md-6">
+                        <button class="btn btn-outline-primary btn-md btn-block">Continue Shopping</button>
+                    </div> --}}
             </div>
             <div class="row">
               <div class="col-md-12">
@@ -138,19 +136,19 @@
               <div class="col-md-8 mb-3 mb-md-0">
                 <input type="text" class="form-control py-3" id="coupon" placeholder={{ __('message.Code') }}>
               </div>
-              <div class="col-md-4">
+              <div class="col-md-4 mb-5">
                 <button class="btn btn-primary btn-md px-4">{{ __('message.Apply Coupon') }}</button>
               </div>
             </div>
           </div>
             @if (Cart::count() > 0)
-                <div class="col-md-6 pl-5">
+                <div class="col-md-6">
                     <div class="row justify-content-end">
-                    <div class="col-md-7">
+                    <div class="col-md-10">
                         <div class="row">
-                        <div class="col-md-12 text-right border-bottom mb-5">
-                            <h3 class="text-black h4 text-uppercase">{{ __('message.Cart Total') }}</h3>
-                        </div>
+                            <div class="col-md-12 text-right border-bottom mb-5">
+                                <h3 class="text-black h4 text-uppercase">{{ __('message.Cart Total') }}</h3>
+                            </div>
                         </div>
                         {{-- <div class="row mb-3">
                             <div class="col-md-6">
@@ -165,13 +163,13 @@
                                 <span class="text-black">{{ __('message.Total') }}</span>
                             </div>
                             <div class="col-md-6 text-right">
-                                <strong class="text-black">{{$total}}</strong>
+                                <strong class="text-black">${{$total}}</strong>
                             </div>
                         </div>
 
-                        <div class="row">
-                        <div class="col-md-12">
-                            <button class="btn btn-primary btn-lg btn-block" onclick="window.location='checkout'">
+                        <div class="row justify-content-start">
+                        <div class="col-md-12 col-lg-9 col-12">
+                            <button class="btn btn-primary btn-lg btn-block" onclick="window.location='checkout'" style="width: max-content;">
                                 {{ __('message.ProceedToCheckout') }}
                             </button>
                         </div>
@@ -245,10 +243,5 @@
       }
   });
   }
-   
-  function goToCheckOut(){
-      let url="{{ route('cart.checkout')}}";
-      $('#checkoutForm').attr('action',url);
-      $( "#checkoutForm" ).submit();
-  };
+
   </script>

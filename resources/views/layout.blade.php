@@ -50,6 +50,17 @@
                 max-width: 1180px !important;
             }
         }
+    .site-wrap{
+        overflow-x: hidden;
+    }
+    @media (max-width: 576px){
+            .container-fluid .container .row{
+                padding: 0px 20px;
+            }
+            .site-footer .container .row {
+                padding: 0px 20px;
+            }
+        }
 </style>
 <body>
     <div class="site-wrap">
@@ -59,7 +70,7 @@
             <div class="search-wrap">
                 <div class="container">
                 <a href="#" class="search-close js-search-close"
-                    @if (session()->get('locale') == 'ar') style="position:relative;float:left;" @endif
+                    @if (session()->get('locale') == 'ar') style="position:relative;float:left;margin-left: 25px;" @endif
                 >
                     <span class="icon-close2"></span>
                 </a>
@@ -86,78 +97,33 @@
                                 <li class="dropdown dropdown-large">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ __('message.Categories') }} <b class="caret"></b></a>
                                     <ul id="category-list1"class="dropdown-menu dropdown-menu-large row" style="left: -100px;">
-                                        <!-- <li class="category-list col-lg-3 col-md-12 col-sm-12"> -->
-                                        <ul>
-                                                <!-- <li><a href="#">Examples</a></li> -->
-                                      @foreach($categories as $category)
-                                    
-                                     <li class="dropdown-header"> {{$category->name}}</li>
-
-                                    @foreach($category->products as $product)
-                                        <li><a href="#">{{$product->name}}</a></li>
-
-                                    @endforeach
-                                    <li class="divider"></li>
-   
-                                @endforeach 
-                                </ul>
-                                            {{-- <li class="dropdown-header"> parent YZnO</li>
-                                            <li><a href="#">IyDA</a></li>
-                                            <li><a href="#">CYfJ</a></li>
-                                            <li><a href="#">HP6U</a></li><li>
-                                            <a href="#">4wF1</a></li>
-                                            <li class="dropdown-header"> parent CPa3</li>
-                                            <li><a href="#">q0py</a></li>
-                                            <li class="dropdown-header"> parent vG2Y</li>
-                                            <li><a href="#">HP1q</a></li>
-                                            <li><a href="#">EPXt</a></li> --}}
-
-                                            <ul>
-                                                <li class="dropdown-header">Glyphicons</li>
-                                                <li><a href="#">Available glyphs</a></li>
-                                                <li><a href="#">Examples</a></li>
-                                                <li class="divider"></li>
-                                                <li class="dropdown-header">Dropdowns</li>
-                                                <li><a href="#">Example</a></li>
-                                                <li><a href="#">Aligninment options</a></li>
-                                                <li><a href="#">Headers</a></li>
-                                                <li><a href="#">Disabled menu items</a></li>
-                                            </ul>
-                                        </li>
+                                        @if(count($categoriesArr)>0)
+                                            @for($i=0;$i<count($categoriesArr);$i+=2)
+                                                <li class="category-list col-lg-4 col-md-12 col-sm-12">
+                                                    <ul>
+                                                            <li class="dropdown-header">Parent {{$categoriesArr[$i][0]->name}}</li>
+                                                            @for($j=1;$j<count($categoriesArr[$i]);$j++)
+                                                                    <li><a href="#">Product {{$categoriesArr[$i][$j]->name}}</a></li>
+                                                            @endfor
+                                                        @if($i+1<count($categoriesArr))
+                                                            <li class="divider"></li>
+                                                            <li class="dropdown-header">Parent {{$categoriesArr[$i+1][0]->name}}</li>
+                                                            @for($j=1;$j<count($categoriesArr[$i+1]);$j++)
+                                                                    <li><a href="#">Product {{$categoriesArr[$i+1][$j]->name}}</a></li>
+                                                            @endfor
+                                                        @endif
+                                                    </ul>
+                                                </li>
+                                            @endfor
+                                        @endif
                                         <li class="category-list col-lg-3 col-md-12 col-sm-12">
                                             <ul>
                                                 <li class="dropdown-header">Button groups</li>
-                                                <li><a href="#">Basic example</a></li>
-                                                <li><a href="#">Button toolbar</a></li>
+                                                <li><a href="#">Basic exam</a></li>
+                                                <li><a href="#">Buttonbar</a></li>
                                                 <li><a href="#">Sizing</a></li>
                                                 <li><a href="#">Nesting</a></li>
-                                                <li><a href="#">Vertical variation</a></li>
-                                                <li class="divider"></li>
-                                                <li class="dropdown-header">Button dropdowns</li>
-                                                <li><a href="#">Single button dropdowns</a></li>
-                                            </ul>
-                                        </li>
-                                        <li class="category-list col-lg-3 col-md-12 col-sm-12">
-                                            <ul>
-                                                <li class="dropdown-header">Button groups</li>
-                                                <li><a href="#">Basic example</a></li>
-                                                <li><a href="#">Button toolbar</a></li>
-                                                <li><a href="#">Sizing</a></li>
-                                                <li><a href="#">Nesting</a></li>
-                                                <li><a href="#">Vertical variation</a></li>
-                                                <li class="divider"></li>
-                                                <li class="dropdown-header">Button dropdowns</li>
-                                                <li><a href="#">Single button dropdowns</a></li>
-                                            </ul>
-                                        </li>
-                                        <li class="category-list col-lg-3 col-md-12 col-sm-12">
-                                            <ul>
-                                                <li class="dropdown-header">Button groups</li>
-                                                <li><a href="#">Basic example</a></li>
-                                                <li><a href="#">Button toolbar</a></li>
-                                                <li><a href="#">Sizing</a></li>
-                                                <li><a href="#">Nesting</a></li>
-                                                <li><a href="#">Vertical variation</a></li>
+                                                <li><a href="#">Vertical</a></li>
                                                 <li class="divider"></li>
                                                 <li class="dropdown-header">Button dropdowns</li>
                                                 <li><a href="#">Single button dropdowns</a></li>
@@ -349,6 +315,9 @@
 
   <script src="js/user/main.js"></script>
 
+  <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>
+
+
   <script>
     (function($) {
         showSwal = function(type,msg) {
@@ -389,44 +358,44 @@
         $("#logoutForm").submit();
     }
 
-    function fetchCategories()
-    {
-    $.ajax({
-        url:"{{route('home.fetchCategories')}}",
-        method:"GET",
-        data:{
-            },
-        dataType:'json',
-        success:function(data)
-        {
-            $(".category-list").remove();
-            let html='';
-            // for (let i = 0; i < data.length; i++)
-            // {
-            //     let parentCategoryData=data[i];
-            //     html+='<li class="dropdown-header"> parent '+data[i][0].name+'</li>';
-            //     for (let j = 1; j < parentCategoryData.length; j++) {
-            //         let category=parentCategoryData[j];
-            //         html+='<li><a href="#">'+category.name+'</a></li>';
-            //     }
-            //     if((i+1)%2==0){
-            //         console.log(html);
-            //         $(".dropdown-menu dropdown-menu-large row")
-            //         .add('<li class="category-list col-lg-3 col-md-12 col-sm-12"><ul>'+html+'</ul></li>');
-            //         html='';
-            //     }
-            // }
-            // if(html!=''){
-            //     $(".dropdown-menu dropdown-menu-large row")
-            //         .add('<li class="category-list col-lg-3 col-md-12 col-sm-12"><ul>'+html+'</ul></li>');
-            // }
-            $("#category-list1")
-                    .append('<li class="category-list col-lg-3 col-md-12 col-sm-12"><ul>ok</ul></li>');
-                    // alert('jjj');
-        }
-    });
-    }
-    fetchCategories();
+    // function fetchCategories()
+    // {
+    //     $.ajax({
+    //         url:"{{route('home.fetchCategories')}}",
+    //         method:"GET",
+    //         data:{
+    //             },
+    //         dataType:'json',
+    //         success:function(data)
+    //         {
+    //             $(".category-list").remove();
+    //             let html='';
+    //             for (let i = 0; i < data.length; i++)
+    //             {
+    //                 let parentCategoryData=data[i];
+    //                 html+='<li class="dropdown-header"> parent '+data[i][0].name+'</li>';
+    //                 for (let j = 1; j < parentCategoryData.length; j++) {
+    //                     let category=parentCategoryData[j];
+    //                     html+='<li><a href="#">'+category.name+'</a></li>';
+    //                 }
+    //                 if((i+1)%2==0){
+    //                     console.log(html);
+    //                     $(".dropdown-menu dropdown-menu-large row")
+    //                     .add('<li class="category-list col-lg-3 col-md-12 col-sm-12"><ul>'+html+'</ul></li>');
+    //                     html='';
+    //                 }
+    //             }
+    //             if(html!=''){
+    //                 $(".dropdown-menu dropdown-menu-large row")
+    //                     .add('<li class="category-list col-lg-3 col-md-12 col-sm-12"><ul>'+html+'</ul></li>');
+    //             }
+    //             $("#category-list1")
+    //                     .append('<li class="category-list col-lg-3 col-md-12 col-sm-12"><ul>ok</ul></li>');
+
+    //         }
+    //     });
+    // }
+    //fetchCategories();
 
 </script>
 </body>

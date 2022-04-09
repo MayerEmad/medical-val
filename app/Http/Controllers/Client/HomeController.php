@@ -16,10 +16,8 @@ class HomeController extends Controller
     {
         $products = Product::paginate(5);
         $categories = Category::paginate(5);
-        $categories_all = Category::all();
-
         // return view('index')->with(array('products', 'categories'));
-        return view('index', compact('categories_all','products','categories'));
+        return view('index', compact('products','categories'));
     }
 
     public function search(Request $request)
@@ -46,22 +44,22 @@ class HomeController extends Controller
         return view('index', compact('products','categories'));
     }
 
-    public function fetchCategories()
-    {
-        $categoriesArr=[];
-        $parentCategories = Category::where('parent_id',0)->get();
-        $categories=Category::all();
+    // public function fetchCategories()
+    // {
+    //     $categoriesArr=[];
+    //     $parentCategories = Category::where('parent_id',0)->get();
+    //     $categories=Category::all();
 
-        foreach($parentCategories as $parent){
-            $arr=[];
-            $arr[]=$parent;
-            foreach($categories as $cat){
-                if($cat->parent_id==$parent->id){
-                    $arr[]=$cat;
-                }
-            }
-            array_push($categoriesArr,$arr);
-        }
-        return $categoriesArr;
-    }
+    //     foreach($parentCategories as $parent){
+    //         $arr=[];
+    //         $arr[]=$parent;
+    //         foreach($categories as $cat){
+    //             if($cat->parent_id==$parent->id){
+    //                 $arr[]=$cat;
+    //             }
+    //         }
+    //         array_push($categoriesArr,$arr);
+    //     }
+    //     return $categoriesArr;
+    // }
 }

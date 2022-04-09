@@ -28,12 +28,24 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Schema::defaultStringLength(191);
-        // $this->menuItems = ["Home", "About Us", "Contact"];
-        // $this->categories_all = Category::all();
-        $this->categories = Category::with('products')->paginate(3);
+
+        $this->categoriesArr=[];
+
+        $this->parentCategories = Category::where('parent_id',0)->get();
+        $this->categories=Category::all();
+        foreach($this->parentCategories as $parent){
+            $this->arr=[];
+            $this->arr[]=$parent;
+            foreach($this->categories as $cat){
+                if($cat->parent_id==$parent->id){
+                    $this->arr[]=$cat;
+                }
+            }
+            array_push($this->categoriesArr,$this->arr);
+        }
 
         view()->composer('layout', function($view) {
-            $view->with(['categories' =>  $this->categories]);
+            $view->with(['categoriesArr' => $this->categoriesArr ]);
         });
     }
 }
