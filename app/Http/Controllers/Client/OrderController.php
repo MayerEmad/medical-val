@@ -19,10 +19,10 @@ class OrderController extends Controller
     public function checkOrderData()
     {
         $user = Auth::user();
-        if( $user->phone=='' || $user->address=='' || $user->block=='' || $user->street=='' ||
-            $user->house_building_number=='' ){
-                return back()->with('data-error', __('message.Fill mandatory profile data to make your order.') );
-        }
+        // if( $user->phone=='' || $user->address=='' || $user->block=='' || $user->street=='' ||
+        //     $user->house_building_number=='' ){
+        //         return back()->with('data-error', __('message.Fill mandatory profile data to make your order.') );
+        // }
 
         $productsNotEnough=0;
         foreach (Cart::content() as $item){
@@ -48,18 +48,23 @@ class OrderController extends Controller
                     'total'  => $total,
                     'products'   => Cart::content(),
                 ];
-                return view('checkout')->with('data',$data);}
+                return view('checkout')->with(['data'=>$data,'product-error'=>__('some of products are not availble by the quantities you select, this your order with the availbale products.')]);
+            }
             // return back()->with('product-error',__('some of products are not availble by the quantities you select, this your order with the availbale products.') );
         }
-        return view('createInvoice');
+        return redirect()->route('createInvoice');
+
+
     }
 
     public function createInvoice()
     {
+
         $total=0;
         foreach (Cart::content() as $item){
             $total+=$item->price*$item->qty;
         }
+
         $postFields = [
             //Fill required data
             'NotificationOption' => 'Lnk', //'SMS', 'EML', or 'ALL'
@@ -76,8 +81,10 @@ class OrderController extends Controller
                 //'CustomerCivilId'    => 'CivilId',
                 //'ExpiryDate'         => '', //The Invoice expires after 3 days by default. Use 'Y-m-d\TH:i:s' format in the 'Asia/Kuwait' time zone.
         ];
+        // dd( route('paymentSuccess'));
 
         $data=(new MyFatoorahService())->sendPayment($postFields);
+
         $invoiceId   = $data->InvoiceId;
         $paymentLink = $data->InvoiceURL;
 
