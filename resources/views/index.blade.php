@@ -90,16 +90,16 @@
                 @foreach($categories as $category)
 
                   <div class="col-sm-6 col-lg-4 col-md-6 text-center mb-4">
-                    <div class="flip-card">
+                    <div class="flip-card" style="height:300px;">
                       <div class="flip-card-inner">
                         <div class="flip-card-front">
                           <img src="images/makeup.jpg" alt="Avatar" style="width:100%;height:300px;">
                         </div>
-                        <div class="flip-card-back">
-                          <h1 class="pt-4">{{$category->name}}</h1>
-                          <p class="pt-2">{{$category->description }}</p>
-                          {{-- <p>We love that guy</p> --}}
-                        </div>
+                            <div class="flip-card-back">
+                            <h1 class="pt-4">{{$category->name}}</h1>
+                            <p class="pt-2">{{$category->description }}</p>
+                            <a href="#" style="color:#2A316E;"><h3 class="pt-4">{{ __('message.Products') }}</h3></a>
+                            </div>
                       </div>
                     </div>
                   </div>

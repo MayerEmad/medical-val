@@ -16,7 +16,7 @@ return [
     'Home'=>'Home',
     'Store'=>'Store',
     'Products'=>'Products',
-    'Products'=>'Categories',
+    'Categories'=>'Categories',
     'About'=>'About',
     'Contact'=>'Contact',
     'Profile'=>'Profile',
@@ -29,8 +29,8 @@ return [
     'Sale'=>'SALE',
     //shop.blade
     'Filter by Name'=>'Filter by Name',
-    'Filter by Price'=>'Filter by Name',
-    'Filter by Sale'=>'Filter by Name',
+    'Filter by Price'=>'Filter by Price',
+    'Filter by Sale'=>'Filter by Sale',
     //cart.blade
     'Cart'=>'Cart',
     'Image'=>'Image',

@@ -50,6 +50,19 @@
                 max-width: 1180px !important;
             }
         }
+    #langpicker{
+        margin: 0;
+        font-family: inherit;
+        font-size: inherit;
+        line-height: inherit;
+        text-transform: none;
+        color:#2A326E;
+        background-image:none;
+        padding:0px;
+        -webkit-appearance: auto;
+        appearance: auto;
+        border:none;
+    }
     .site-wrap{
         overflow-x: hidden;
     }
@@ -170,9 +183,9 @@
                             @endif
 
                         </a>
-                        <select class="selectpicker changeLang" data-width="fit">
-                            <option data-content='<span class="flag-icon flag-icon-us"></span> English' value="en" {{ session()->get('locale') == 'en' ? 'selected' : '' }}>{{__('message.English')}}</option>
-                            <option  data-content='<span class="flag-icon flag-icon-mx"></span> Español'value="ar" {{ session()->get('locale') == 'ar' ? 'selected' : '' }}>{{__('message.Arabic')}}</option>
+                        <select id="langpicker" class="selectpicker changeLang" data-width="fit">
+                            <option data-content='<span class="flag-icon flag-icon-us"></span>' value="en" {{ session()->get('locale') == 'en' ? 'selected' : '' }}>{{__('message.English')}}</option>
+                            <option  data-content='<span class="flag-icon flag-icon-mx"></span>'value="ar" {{ session()->get('locale') == 'ar' ? 'selected' : '' }}>{{__('message.Arabic')}}</option>
                         </select>
 
                         <a href="#" class="site-menu-toggle js-menu-toggle ml-3 d-inline-block d-xl-none"><span
