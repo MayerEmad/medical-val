@@ -111,6 +111,8 @@ class CartController extends Controller
         //     unset($cart[$id]);
         //     session()->put('cart', $cart);
         // }
+        ShopingCart::where('product_id',$item->id)->delete();
+
         return back()->with('success', 'Successful remove operation.');
 
 
