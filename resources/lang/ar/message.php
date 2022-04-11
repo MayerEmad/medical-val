@@ -44,6 +44,7 @@ return [
     'Apply Coupon'=>'استخدام الكوبون',
     'Enter your coupon code if you have one'=>'ادخل كود الكوبون لتستخدمه',
     'ProceedToCheckout'=>'اضغط للدفع',
+    'Empty Cart'=>'سله المنتجات فرغه',
     'Code'=>'الكود',
     //wishlist.blade
     'Wishlist'=>'المفضله',

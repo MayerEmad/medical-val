@@ -157,6 +157,7 @@ class CartController extends Controller
     }
     public function checkout()
     {
+        //this statment handles empty cart from cart blade only
         if(Cart::count() > 0){
             $total=0;
             foreach (Cart::content() as $item){
@@ -168,7 +169,7 @@ class CartController extends Controller
             ];
             return view('checkout')->with('data',$data);
         }
-        return back()->with('error', 'you dont have items in your cart');
+        return back()->with('error', __('message.Empty Cart') );
     }
 
 }

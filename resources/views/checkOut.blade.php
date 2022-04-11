@@ -244,7 +244,7 @@
                             <th>{{ __('message.Total') }}</th>
                           </thead>
                           <tbody>
-                            @if(count($data["products"])>0)
+                            @if(isset($data)&&count($data["products"])>0)
                                 @foreach($data["products"] as $item)
                                  <tr>
                                     <td>{{$item->name}} <strong class="mx-2">x</strong> {{$item->qty}}</td>
@@ -257,7 +257,7 @@
                           <tr>
                             <td class="text-black font-weight-bold"><strong>{{ __('message.Order Total') }}</strong></td>
                             <td class="text-black font-weight-bold"><strong></strong></td>
-                            <td class="text-black font-weight-bold"><strong>${{$data["total"]}}</strong></td>
+                            <td class="text-black font-weight-bold"><strong>@if(isset($data))${{$data["total"]}}@endif</strong></td>
                           </tr>
                         </tbody>
                         </table>

@@ -83,7 +83,7 @@ Route::get('/index', [HomeController::class, 'index'])->name('index');
 Route::get('/search',[HomeController::class, 'search'])->name('search');
 Route::get('/filter',[HomeController::class, 'filter'])->name('filter');
 Route::get('lang/change', [HomeController::class, 'change'])->name('changeLang');
-Route::get('index/categories', [HomeController::class, 'fetchCategories'])->name('home.fetchCategories');
+//Route::get('index/categories', [HomeController::class, 'fetchCategories'])->name('home.fetchCategories');
 
 
 //shop page

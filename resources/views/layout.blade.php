@@ -47,7 +47,7 @@
 <style>
     @media (min-width: 1200px){
             .container {
-                max-width: 1180px !important;
+                max-width: 1220px !important;
             }
         }
     #langpicker{

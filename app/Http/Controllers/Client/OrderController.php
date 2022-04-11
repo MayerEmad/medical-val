@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\Order;
 use App\Models\Product;
+use App\Models\CartUser;
 use App\Models\OrderProductItem;
 use App\Services\MyFatoorahService;
 use Redirect;
@@ -19,20 +20,22 @@ class OrderController extends Controller
     public function checkOrderData()
     {
         $user = Auth::user();
-        // if( $user->phone=='' || $user->address=='' || $user->block=='' || $user->street=='' ||
-        //     $user->house_building_number=='' ){
-        //         return back()->with('data-error', __('message.Fill mandatory profile data to make your order.') );
-        // }
+        if( $user->phone=='' || $user->address=='' || $user->block=='' || $user->street=='' ||
+            $user->house_building_number=='' ){
+                return back()->with('data-error', __('message.Fill mandatory profile data to make your order.') );
+        }
 
+        if(Cart::count()==0){
+            return back()->with('data-error', __('message.Empty Cart') );
+        }
         $productsNotEnough=0;
         foreach (Cart::content() as $item){
             $product=Product::find($item->id);
-            if($item->qty > $product->quantity-1000){
+            if($item->qty > $product->quantity){
                 if($product->quantity==0){
                    Cart::remove($item->rowId);
                 }
                 else {
-
                    Cart::update($item->rowId, $product->quantity);
                 }
                 $productsNotEnough=1;
@@ -48,9 +51,10 @@ class OrderController extends Controller
                     'total'  => $total,
                     'products'   => Cart::content(),
                 ];
-                return view('checkout')->with(['data'=>$data,'product-error'=>__('some of products are not availble by the quantities you select, this your order with the availbale products.')]);
+                return back()->with(['data'=>$data,'product-error'=>__('some of products are not availble by the quantities you select, this your order with the availbale products.')]);
+            }else{
+                return back()->with('product-error',__('some of products are not availble by the quantities you select, this your order with the availbale products.'));
             }
-            // return back()->with('product-error',__('some of products are not availble by the quantities you select, this your order with the availbale products.') );
         }
         return redirect()->route('createInvoice');
 
@@ -131,6 +135,7 @@ class OrderController extends Controller
             return back()->with('error',$e->getMessage());
         }
         Cart::destroy();
+        CartUser::query()->delete();
         return redirect('thanks');
     }
 }

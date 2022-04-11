@@ -45,6 +45,7 @@ return [
     'Apply Coupon'=>'Apply Coupon',
     'Enter your coupon code if you have one'=>'Enter your coupon code if you have one',
     'ProceedToCheckout'=>'Proceed To Checkout',
+    'Empty Cart'=>'you dont have items in your cart',
     'Code'=>'Code',
     //wishlist.blade
     'Wishlist'=>'Wishlist',
