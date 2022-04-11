@@ -116,13 +116,13 @@
                                                     <ul>
                                                             <li class="dropdown-header">Parent {{$categoriesArr[$i][0]->name}}</li>
                                                             @for($j=1;$j<count($categoriesArr[$i]);$j++)
-                                                                    <li><a href="#">Product {{$categoriesArr[$i][$j]->name}}</a></li>
+                                                                    <li><a href="#">Sup {{$categoriesArr[$i][$j]->name}}</a></li>
                                                             @endfor
                                                         @if($i+1<count($categoriesArr))
                                                             <li class="divider"></li>
                                                             <li class="dropdown-header">Parent {{$categoriesArr[$i+1][0]->name}}</li>
                                                             @for($j=1;$j<count($categoriesArr[$i+1]);$j++)
-                                                                    <li><a href="#">Product {{$categoriesArr[$i+1][$j]->name}}</a></li>
+                                                                    <li><a href="#">Sup {{$categoriesArr[$i+1][$j]->name}}</a></li>
                                                             @endfor
                                                         @endif
                                                     </ul>

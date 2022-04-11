@@ -13,9 +13,9 @@ return [
     |
     */
 
-    'Register'=>'REGISTER',
-    'Login'=>'LOGIN',
-    'Logout'=>'LOGOUT',
+    'Register'=>'Register',
+    'Login'=>'Login',
+    'Logout'=>'Logout',
     'Email'=>'EMAIL',
     'Name'=>'NAME',
     'Password'=>'PASSWORD',
