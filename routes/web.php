@@ -97,7 +97,7 @@ Route::get('/shop-single',[ShopController::class, 'productDetails'])->name('shop
 //cart page
 Route::get('cart', [CartController::class, 'cart']);
 Route::get('/cart/{product}', [CartController::class, 'store'])->name('cart.store');
-Route::get('/removeproduct/{rowId}', [CartController::class, 'removeproduct'])->name('cart.removeproduct');
+Route::get('/removeproduct/{id}', [CartController::class, 'removeproduct'])->name('cart.removeproduct');
 Route::post('/plusButton', [CartController::class, 'plusButton'])->name('cart.plusButton');
 Route::post('/minusButton', [CartController::class, 'minusButton'])->name('cart.minusButton');
 

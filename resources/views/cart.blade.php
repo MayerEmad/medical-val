@@ -51,8 +51,8 @@
                   </tr>
                 </thead>
                 <tbody>
-                @if (Cart::count() > 0)
-                    @foreach (Cart::content() as $item)
+                    @foreach($products as $item)
+
                     <tr>
                         <td class="product-thumbnail">
                         <img src="images/product_02.png" alt="Image" class="img-fluid">
@@ -66,12 +66,12 @@
                             <div class="input-group-prepend">
                             <button onclick=" submitFormminus('{{$item->rowId}}');" class="btn btn-outline-primary js-btn-minus"  type="button">&minus;</button>
                             </div>
-                            <input type="text" id="item_val" class="form-control text-center" value="{{$item->qty}}" placeholder=""
+                            <input type="text" id="item_val" class="form-control text-center" value="{{$item->quantity}}" placeholder=""
                             aria-label="Example text with button addon" aria-describedby="button-addon1">
                             <!-- <form id="{{$item->rowId}}" action="{{ action('Client\CartController@plusButton', ['rowId' =>  $item->rowId]) }}" method="GET" style="display:none"> -->
                             <div class="input-group-append">
 
-                            <a onclick=" submitForm('{{$item->rowId}}');" class="btn btn-outline-primary js-btn-plus" >&plus;</a>
+                            <a onclick=" submitForm('{{$item->id}}');" class="btn btn-outline-primary js-btn-plus" >&plus;</a>
                             </div>
 
                             <!-- </form> -->
@@ -79,15 +79,14 @@
                         </div>
 
                         </td>
-                        <td>${{ ($item->price *$item->qty)-$item->discount}}</td>
+                        <td>${{ ($item->price *$item->quantity)-$item->discount}}</td>
 
                         <td>
-                        <a href="{{ action('Client\CartController@removeproduct', ['rowId' =>  $item->rowId]) }}" class="btn btn-primary height-auto btn-sm">X</a>
+                        <a href="{{ action('Client\CartController@removeproduct', ['id' =>  $item->id]) }}" class="btn btn-primary height-auto btn-sm">X</a>
                         </td>
                         <td style="display:none;">{{$item->rowId}} </td>
                     </tr>
                      @endforeach
-                @endif
                   <!-- <tr>
                     <td class="product-thumbnail">
                       <img src="images/product_01.png" alt="Image" class="img-fluid">

@@ -10,42 +10,78 @@ use Illuminate\Support\Facades\Auth;
 
 use App\Models\Product;
 use App\Models\ShopingCart;
-
+use Session;
 use Gloudemans\Shoppingcart\Facades\Cart;
 
 class CartController extends Controller
 {
+    // public function cart()
+    // {
+    //     $total=0;
+    //     if(Cart::count()){
+    //         foreach (Cart::content() as $item){
+    //             $total+=$item->price*$item->qty;
+    //         }
+    //     }
+    //     return view('cart')->with('total',$total);
+    // }
     public function cart()
     {
+        $products=[];
+        $product_ids=[];
         $total=0;
-        if(Cart::count()){
-            foreach (Cart::content() as $item){
-                $total+=$item->price*$item->qty;
-            }
+        if (Session::has('Cart')){
+            
+        $product_ids=Session::get('Cart');
+        $products=Product::whereIn('id',$product_ids)->paginate(3);
         }
-        return view('cart')->with('total',$total);
-    }
-    public function store(Product $product)
-    {
-        $duplicates = Cart::search(function ($cartItem, $rowId) use ($product) {
-            return $cartItem->id === $product->id;
-        });
-        if ($duplicates->isNotEmpty()) {
-
-            return back()->with('warning', 'Item is already in your cart!');
+        $products=Product::whereIn('id',$product_ids)->get();
+        foreach ($products as $item){
+            $total+=$item->price*$item->qty;
         }
+        return view('cart', compact('products','total'));
 
-        Cart::add($product->id, $product->name, 1, $product->price)
-            ->associate('App\Product');
-            if(Auth::user()){
-                $user= Auth::user();
-
-                $cart=ShopingCart::create(['product_id'=>$product->id,'user_id'=>$user->id,'quantity'=>1]);
-
-            }
-        return back()->with('success', 'Item was added to your cart!');
+        // return view('cart');
+    }
+//     public function store(Product $product)
+//     {
+//         $duplicates = Cart::search(function ($cartItem, $rowId) use ($product) {
+//             return $cartItem->id === $product->id;
+//         });
+//         if ($duplicates->isNotEmpty()) {
+// 
+//             return back()->with('warning', 'Item is already in your cart!');
+//         }
+// 
+//         Cart::add($product->id, $product->name, 1, $product->price)
+//             ->associate('App\Product');
+//             if(Auth::user()){
+//                 $user= Auth::user();
+// 
+//                 $cart=ShopingCart::create(['product_id'=>$product->id,'user_id'=>$user->id,'quantity'=>1]);
+// 
+//             }
+//         return back()->with('success', 'Item was added to your cart!');
+// 
+//     }
+public function store(Product $product)
+{
+    $product_ids=[];
+    array_push($product_ids,(Session::get('Cart')));
+    if(!in_array($product->id,$product_ids)){
+        Session::push('Cart', $product->id);
 
     }
+
+        if(Auth::user()){
+            $user= Auth::user();
+
+            $cart=ShopingCart::create(['product_id'=>$product->id,'user_id'=>$user->id]);
+
+        }
+    return back()->with('success', 'Item was added to your cart!');
+
+}
 
     /* addProductButton */
 //     public function addToCart($id)
@@ -97,26 +133,27 @@ class CartController extends Controller
     /* removeProductButton */
     public function removeproduct($id)
     {
-        $cart = session()->get('cart');
-        // if(!isset($cart)){
-        //     return response()->json(['message' => 'cart.unexpected error']);
-        // }
-        $item = Cart::get($id);
-        Cart::remove($id);
-        session([$item->id => null]);
+//         $cart = session()->get('cart');
+//   
+//         $item = Cart::get($id);
+//         Cart::remove($id);
+//         session([$item->id => null]);
+//         ShopingCart::where('product_id',$item->id)->delete();
+// 
+//         return back()->with('success', 'Successful remove operation.');
 
-        // dd($cart);
-        // if (isset($cart[$id])) {
-        //     $cart["productsNumber"]['number']-=$cart[$id]['quantity'];
-        //     unset($cart[$id]);
-        //     session()->put('cart', $cart);
-        // }
-        ShopingCart::where('product_id',$item->id)->delete();
-
-        return back()->with('success', 'Successful remove operation.');
-
-
-        // return response()->json(['message' => 'product removed from cart']);
+        
+           $key=array_search($id, (Session::get('Cart')));
+    
+            
+            // Session::pull('cart'.$key);
+            Session::pull('Cart.'.$key); // retrieving pen and removing
+            if(Auth::user()){
+    
+              ShopingCart::where([['product_id',$id],['user_id',Auth::user()->id]])->delete();
+            }
+            return back()->with('success', 'Item was removed from your cart!');
+    
     }
 
     /* plusButton */
