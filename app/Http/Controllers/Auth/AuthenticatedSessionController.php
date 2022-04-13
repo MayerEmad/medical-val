@@ -101,7 +101,24 @@ class AuthenticatedSessionController extends Controller
 
 
             }
+            /*update Cart after login*/
+            if(Session::get('Cart')!==null&&count(Session::get('Cart'))>0){
+                $user= Auth::user();
+    
+                foreach (Session::get('Cart') as $product_id){
+                    ShopingCart::create(['product_id'=>$product_id,'user_id'=>$user->id]);
+    
+                }
+            }else{
+                $user= Auth::user();
+                $carts=ShopingCart::where('user_id',$user->id)->get();
+                foreach ($carts as $cart){
+                    Session::push('Cart', $cart->id);
+                }
+    
+    
     }
+}
 
     /**
      * Destroy an authenticated session.

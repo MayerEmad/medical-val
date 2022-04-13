@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Product;
 use App\Models\ShopingCart;
 use Session;
+use App\Http\Resources\CartResource;
 use Gloudemans\Shoppingcart\Facades\Cart;
 
 class CartController extends Controller
@@ -33,9 +34,12 @@ class CartController extends Controller
         if (Session::has('Cart')){
             
         $product_ids=Session::get('Cart');
-        $products=Product::whereIn('id',$product_ids)->paginate(3);
+        $products=ShopingCart::with('product')->whereIn('id',$product_ids)->paginate(3);
+        // $products=Product::with('cart')->whereIn('id',$product_ids)->paginate(3);
+
         }
-        $products=Product::whereIn('id',$product_ids)->get();
+        $cart=CartResource::collection(ShopingCart::all());
+        // dd($cart);
         foreach ($products as $item){
             $total+=$item->price*$item->qty;
         }
