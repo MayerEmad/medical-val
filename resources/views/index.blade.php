@@ -143,7 +143,7 @@
                   <div class="product-option">
                   <a href="{{ action('Client\CartController@store', ['product' => $product])  }}" onclick="showSwal('auto-close')"  title="Add to cart" ><i class="fas fa-shopping-cart"></i></a>
 
-                    <!-- <a href="#" title="Add to cart" onclick="showSwal('auto-close')"><i class="fas fa-shopping-cart"></i></a> -->
+                    <!-- <a href="#" title="Add to cart" onclick="submitFormadd('{{$product->id}}')"><i class="fas fa-shopping-cart"></i></a> -->
                     <a href="#" title="Add to wishlist"><i class="fas fa-heart"></i></a>
                     <a href="#" title="Compare"><i class="far fa-copy"></i></a>
                   </div>

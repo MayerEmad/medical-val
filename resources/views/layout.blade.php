@@ -39,8 +39,8 @@
     @if (session()->get('locale') == 'ar')
         <style>
             .site-mobile-menu{
-                /* right:unset;
-                left:0; */
+                right:unset;
+                /* left:0px; */
             }
         </style>
     @endif
