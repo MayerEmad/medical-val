@@ -100,7 +100,7 @@ class ProductController extends Controller
         $validated = $request->validated();
         if($request->image!=null)
         {
-            dd($request->image);
+            // dd($request->image);
             $image_name=$this->uploadImage($request);
             $product->image = $image_name;
         }

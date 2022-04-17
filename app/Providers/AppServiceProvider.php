@@ -15,8 +15,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        // $this-app->bind(MyFatoorahService::class,function(){
-        //     return new MyFatoorahService();
+        // $this->app->bind('path.public', function() {
+        //     return base_path('../public_html'); // you given path from root
         // });
     }
 
