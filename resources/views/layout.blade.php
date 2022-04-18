@@ -169,7 +169,7 @@
                         <a href="/cart" class="icons-btn d-inline-block bag">
                             <span class="icon-shopping-cart"></span>
                             @if (Session::has('Cart'))
-                                <span class="number">{{count(Session::get('Cart'))}}</span>
+                                <span class="number" id="cart_count"></span>
                             @endif
                             <!-- <span class="number">{{Cart::count()}}</span> -->
                         </a>
@@ -412,6 +412,7 @@
     //     });
     // }
     //fetchCategories();
+    $('#cart_count').html('{{Session::has("Cart")?count(Session::get("Cart")):0}}');
 
 </script>
 </body>
