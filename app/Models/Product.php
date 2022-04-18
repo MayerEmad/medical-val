@@ -31,4 +31,10 @@ class Product extends Model
         'created_at',
         'instock'
     ];
+    
+	public function cart()
+	{
+        return $this->hasMany('App\Models\shopingcart', 'product_id','id');
+
+	}
 }

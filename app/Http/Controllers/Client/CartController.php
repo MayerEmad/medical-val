@@ -34,15 +34,16 @@ class CartController extends Controller
         if (Session::has('Cart')){
             
         $product_ids=Session::get('Cart');
-        $products=ShopingCart::with('product')->whereIn('id',$product_ids)->paginate(3);
+        $products=ShopingCart::with('product')->whereIn('product_id',$product_ids)->paginate(3);
         // $products=Product::with('cart')->whereIn('id',$product_ids)->paginate(3);
 
         }
-        $cart=CartResource::collection(ShopingCart::all());
-        // dd($cart);
+        // $cart=CartResource::collection($products);
+        // dd($products[0]->product->name);
         foreach ($products as $item){
             $total+=$item->price*$item->qty;
         }
+        // $cart_count=count(Session::get('Cart'));
         return view('cart', compact('products','total'));
 
         // return view('cart');

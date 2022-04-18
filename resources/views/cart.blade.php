@@ -58,9 +58,9 @@
                         <img src="images/product_02.png" alt="Image" class="img-fluid">
                         </td>
                         <td class="product-name">
-                        <h2 class="h5 text-black">{{ $item->name }}</h2>
+                        <h2 class="h5 text-black">{{ $item->product->name }}</h2>
                         </td>
-                        <td>{{ $item->price }}</td>
+                        <td>{{ $item->product->price }}</td>
                         <td>
                         <div class="input-group mb-3" style="width: max-content;max-width: 128px;">
                             <div class="input-group-prepend">
@@ -71,7 +71,7 @@
                             <!-- <form id="{{$item->rowId}}" action="{{ action('Client\CartController@plusButton', ['rowId' =>  $item->rowId]) }}" method="GET" style="display:none"> -->
                             <div class="input-group-append">
 
-                            <a onclick=" submitForm('{{$item->id}}');" class="btn btn-outline-primary js-btn-plus" >&plus;</a>
+                            <a onclick=" submitForm('{{$item->product->id}}');" class="btn btn-outline-primary js-btn-plus" >&plus;</a>
                             </div>
 
                             <!-- </form> -->
@@ -79,10 +79,10 @@
                         </div>
 
                         </td>
-                        <td>${{ ($item->price *$item->quantity)-$item->discount}}</td>
+                        <td>${{ ($item->product->price *$item->quantity)-$item->product->discount}}</td>
 
                         <td>
-                        <a href="{{ action('Client\CartController@removeproduct', ['id' =>  $item->id]) }}" class="btn btn-primary height-auto btn-sm">X</a>
+                        <a href="{{ action('Client\CartController@removeproduct', ['id' =>  $item->product->id]) }}" class="btn btn-primary height-auto btn-sm">X</a>
                         </td>
                         <td style="display:none;">{{$item->rowId}} </td>
                     </tr>
