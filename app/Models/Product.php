@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Product extends Model
 {
     use HasFactory;
-    
+
     protected $table = 'products';
     public $timestamps = true;
 
@@ -31,4 +31,10 @@ class Product extends Model
         'created_at',
         'instock'
     ];
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
 }
+

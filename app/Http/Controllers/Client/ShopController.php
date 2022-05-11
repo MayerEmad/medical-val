@@ -7,16 +7,18 @@ use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Category;
 
+use \DB;
 use App;
 
 
 class ShopController extends Controller
 {
-    public function shop()
+    public function shop(Category $parentCat = null , Category $subCat = null)
     {
-        $products = Product::paginate(20)->withQueryString();
+        $products = Product::paginate(30)->withQueryString();
         $categories = Category::where('parent_id',0)->get();
-        return view('shop', compact('products','categories'));
+
+        return view('shop', compact('products','categories','parentCat','subCat'));
     }
 
     public function filter(Request $request)
@@ -24,20 +26,33 @@ class ShopController extends Controller
         $output='';
         if($request->ajax())
         {
-            //$output.=$request->product_name." ".$request->price_range;
             $productName=preg_replace('/[^\pL\p{N}]/u', '', $request->product_name);
             $priceRange = preg_replace('/[^0-9-]/i', '', $request->price_range);
             $priceRange = explode('-', $priceRange);
-            $hasSale=$request->hasSale;
-            if($hasSale=="true")$hasSale=1;
-            else $hasSale=0;
-            $products = Product::wherebetween('price', $priceRange)
-                                ->wherebetween('discount', [$hasSale,999999999])
-                                ->where(function ($query) use($productName){
-                                    $query->where('name', 'LIKE', '%' . $productName . '%')
-                                        ->orWhere('ar_name', 'LIKE', '%' . $productName . '%');
-                                })
-                                ->limit(20)
+            $hasSale = ($request->hasSale==="true")? 1 : 0;
+            $parentCategoryId = preg_replace('/[^0-9]/i', '', $request->category_id);
+            $subCategoryId=preg_replace('/[^0-9-]/i', '', $request->sub_category_id); // -1 get all subCats from parentCat
+            if($subCategoryId==-1){
+                $subCategoryId = Category::where('parent_id',$parentCategoryId)->pluck('id')->all();
+            }
+            $products = Product::where(function ($query) use($subCategoryId){
+                                        if (is_array($subCategoryId) && count($subCategoryId)>1)
+                                            $query->whereIn('category_id', $subCategoryId);
+                                        else
+                                            $query->where('category_id', $subCategoryId);
+                                    })
+                                    ->wherebetween('price', $priceRange)
+                                    ->where(function ($query) use($hasSale){
+                                        if ($hasSale == 1)
+                                            $query->where('discount','<>',0);
+                                    })
+                                    ->where(function ($query) use($productName){
+                                        if (session()->get('locale') == 'ar')
+                                            $query->where('ar_name', 'LIKE', '%' . $productName . '%');
+                                        else
+                                            $query->where('name', 'LIKE', '%' . $productName . '%');
+                                    })
+                                    //->wherebetween('discount', [$hasSale,999999999])
                                 ->get();
 
                 if(count($products)>0)
@@ -55,7 +70,7 @@ class ShopController extends Controller
                             </div>';
                             if($product->discount>0)
                                 $output.='<span class="tag">'.__('message.Sale').'</span>';
-                            $output.='<img src="images/product_01.png" alt="Image">';
+                            $output.='<img src="'.asset('images/product_01.png').'" alt="Image">';
                             if (session()->get('locale') == 'ar')
                                 $output.='<h3 class="text-dark">'.$product->ar_name.'</h3>';
                             else
@@ -70,6 +85,17 @@ class ShopController extends Controller
                 echo json_encode($output);
         }
     }
+
+    public function getSubCategories(Request $request){
+        if($request->ajax())
+        {
+            $parentCategoryId = preg_replace('/[^0-9]/i', '', $request->parent_category_id);
+            $subCategories = Category::where('parent_id',$parentCategoryId)->get();
+            return $subCategories;
+            // echo json_encode($subCategories);
+        }
+    }
+
     public function productDetails(Request $request)
     {
         $product=Product::find($request->id);

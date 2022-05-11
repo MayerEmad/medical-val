@@ -31,6 +31,10 @@ return [
     'Filter by Name'=>'Filter by Name',
     'Filter by Price'=>'Filter by Price',
     'Filter by Sale'=>'Filter by Sale',
+    'Filter by Category'=>'Filter by Category',
+    'Filter by Sub Category'=>'Filter by Sub Category',
+    'All Sub Categories'=>'all',
+
     //cart.blade
     'Cart'=>'Cart',
     'Image'=>'Image',
@@ -76,5 +80,5 @@ return [
     'By_price'=>'By price',
     'New_Products'=>'New Products',
     'View_all_products'=>'View all products',
-
+    'sale_products'=>'Sale Products',
 ];

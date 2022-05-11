@@ -30,6 +30,10 @@ return [
     'Filter by Name'=>'فلتر بالاسم',
     'Filter by Price'=>'فلتر بالسعر',
     'Filter by Sale'=>'فلتر بالخصم',
+    'Filter by Category'=>'فلتر بالافئات',
+    'Filter by Sub Category'=>'فلتر بالفئات الفرعيه',
+    'All Sub Categories'=>'الكل',
+
     //cart.blade
     'Cart'=>'السله',
     'Image'=>'صوره',
@@ -76,8 +80,7 @@ return [
     'By_price'=>'بالسعر',
     'New_Products'=>'منتجات جديدة',
     'View_all_products'=>'مشاهدة جميع المنتجات',
-
-
+    'sale_products'=>'منتجات بعروض',
 
 
 ];

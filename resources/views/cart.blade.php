@@ -128,18 +128,20 @@
                         <button class="btn btn-outline-primary btn-md btn-block">Continue Shopping</button>
                     </div> --}}
             </div>
-            <div class="row">
-              <div class="col-md-12">
-                <label class="text-black h4" for="coupon">{{ __('message.Coupon') }}</label>
-                <p>{{ __('message.Enter your coupon code if you have one') }}</p>
-              </div>
-              <div class="col-md-8 mb-3 mb-md-0">
-                <input type="text" class="form-control py-3" id="coupon" placeholder={{ __('message.Code') }}>
-              </div>
-              <div class="col-md-4 mb-5">
-                <button class="btn btn-primary btn-md px-4">{{ __('message.Apply Coupon') }}</button>
-              </div>
-            </div>
+            @if (Cart::count() > 0)
+                <div class="row">
+                <div class="col-md-12">
+                    <label class="text-black h4" for="coupon">{{ __('message.Coupon') }}</label>
+                    <p>{{ __('message.Enter your coupon code if you have one') }}</p>
+                </div>
+                <div class="col-md-8 mb-3 mb-md-0">
+                    <input type="text" class="form-control py-3" id="coupon" placeholder={{ __('message.Code') }}>
+                </div>
+                <div class="col-md-4 mb-5">
+                    <button class="btn btn-primary btn-md px-4">{{ __('message.Apply Coupon') }}</button>
+                </div>
+                </div>
+            @endif
           </div>
             @if (Cart::count() > 0)
                 <div class="col-md-6">

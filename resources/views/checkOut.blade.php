@@ -360,7 +360,7 @@
       </div>
     </div>
     <form  id="createOrderForm" action="" method="GET">
-        @csrf
+        {{-- @csrf --}}
     </form>
 
    @endsection

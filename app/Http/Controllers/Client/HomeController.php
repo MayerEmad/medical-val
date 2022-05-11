@@ -15,18 +15,23 @@ class HomeController extends Controller
     public function index()
     {
         $products = Product::paginate(5);
-        $categories = Category::paginate(5);
-        // return view('index')->with(array('products', 'categories'));
-        return view('index', compact('products','categories'));
+        $saleProducts = Product::where('discount','>=',50)->get(); //dd($saleProducts);
+        $categories = Category::where('parent_id',0)->get();
+        return view('index', compact('products','categories','saleProducts'));
     }
-
     public function search(Request $request)
     {
-        $searchQuery=$request->query1;
-        $products = Product::where('name', 'LIKE', '%' . $searchQuery . '%')->orWhere('ar_name', 'LIKE', '%' . $searchQuery . '%')->get();
-        $categories = Category::where('name', 'LIKE', '%' . $searchQuery . '%')->orWhere('ar_name', 'LIKE', '%' . $searchQuery . '%')->get();
-        return view('index', compact('products','categories'));
-        }
+        $searchQuery=$request->pname;
+        $products = Product::where(function ($query) use($searchQuery){
+                                if (session()->get('locale') == 'ar')
+                                    $query->where('ar_name', 'LIKE', '%' . $searchQuery . '%');
+                                else
+                                    $query->where('name', 'LIKE', '%' . $searchQuery . '%');
+                            })->get();
+        $categories = Category::where('parent_id',0)->get();
+        $parentCat=$subCat=null;
+        return view('shop', compact('products','categories','parentCat','subCat'));
+    }
     public function change(Request $request)
     {
         App::setLocale($request->lang);

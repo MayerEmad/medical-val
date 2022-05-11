@@ -16,80 +16,16 @@
       </div>
     </div>
 
-    <div class="d-flex align-items-start">
-      {{-- <div class="nav flex-column nav-pills me-3" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-        <button class="nav-link active" id="v-pills-home-tab" data-bs-toggle="pill" data-bs-target="#v-pills-home" type="button" role="tab" aria-controls="v-pills-home" aria-selected="true">Home</button>
-        <button class="nav-link" id="v-pills-profile-tab" data-bs-toggle="pill" data-bs-target="#v-pills-profile" type="button" role="tab" aria-controls="v-pills-profile" aria-selected="false">Profile</button>
-        <button class="nav-link" id="v-pills-messages-tab" data-bs-toggle="pill" data-bs-target="#v-pills-messages" type="button" role="tab" aria-controls="v-pills-messages" aria-selected="false">Messages</button>
-        <button class="nav-link" id="v-pills-settings-tab" data-bs-toggle="pill" data-bs-target="#v-pills-settings" type="button" role="tab" aria-controls="v-pills-settings" aria-selected="false">Settings</button>
-      </div> --}}
-      {{-- <div class="tab-content" id="v-pills-tabContent">
-        <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">hhh</div>
-        <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">sss</div>
-        <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">...</div>
-        <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">...</div>
-      </div> --}}
-    </div>
-
     <div class="site-section">
       <div class="container-fluid">
         <div class="row">
-
-          <div class="col-1g-3 col-md-3 col-sm-12" style="background: #dbeaf79c">
-            <div class="title-section text-center">
-              <h2 class="text-uppercase">{{ __('message.FILTER') }}</h2>
-            </div>
-            <div class="nav flex-column nav-pills me-3 m-auto" id="v-pills-tab" role="tablist" aria-orientation="vertical" style="width: 75%;">
-              <button class="nav-link active" id="v-pills-Products-tab" data-bs-toggle="pill" data-bs-target="#v-pills-Products" type="button" role="tab" aria-controls="v-pills-Products" aria-selected="true">{{ __('message.Products') }}</button>
-              <button class="nav-link" id="v-pills-Categories-tab" data-bs-toggle="pill" data-bs-target="#v-pills-Categories" type="button" role="tab" aria-controls="v-pills-Categories" aria-selected="false">{{ __('message.Categories') }}</button>
-              <p class="lead mb-0 pl-4">{{ __('message.By_price') }}:</p>
-              <div id="slider-range" class="border-primary mt-3"></div>
-              <form action="{{ route('filter') }}"  method="GET" >
-
-              <input type="text" id="amount"  style="background: #dbeaf700" name="text" class="form-control border-0 pl-0"  />
-              <button class="btn btn-primary mb-4 p-0" id="v-pills-filter-tab" style="width: 50%;margin: auto;" data-bs-toggle="pill" data-bs-target="#v-pills-filter" type="submit" role="tab" aria-controls="v-pills-filter" aria-selected="false">{{ __('message.FILTER') }}</button>
-                            </form>
-
-              {{-- <button class="nav-link" id="v-pills-settings-tab" data-bs-toggle="pill" data-bs-target="#v-pills-settings" type="button" role="tab" aria-controls="v-pills-settings" aria-selected="false">Settings</button> --}}
-            </div>
-          </div>
-
-          <div class="col-sm-12 col-md-9 col-lg-9">
+          <div class="col-sm-12 col-md-12 col-lg-12">
             <div class="title-section text-center col-lg-9 col-sm-12 col-md-9">
-              <h2 class="text-uppercase">{{ __('message.POPULAR_PRODUCTS') }}</h2>
+              <h2 class="text-uppercase">{{ __('message.Categories') }}</h2>
             </div>
-            <div class="tab-content" id="v-pills-tabContent">
-              <div class="tab-pane fade show active" id="v-pills-Products" role="tabpanel" aria-labelledby="v-pills-Products-tab">
-                <div class="row">
-                    @foreach($products as $product)
-                    <div class="col-sm-6 col-lg-4 col-md-6 text-center item mb-4" onclick="submitForm('{{$product->id}}')">
-                        <div class="product-option">
-                            <a href="{{ action('Client\CartController@store', ['product' => $product])  }}" onclick="showSwal('auto-close','{{ __('message.Item_added') }}')"  title="Add to cart" ><i class="fas fa-shopping-cart"></i></a>
-                            <a href="{{ action('Client\WishListController@store', ['product' => $product])  }}" title="Add to wishlist"><i class="fas fa-heart"></i></a>
-                            <a href="{{ action('Client\CompareController@store', ['product' => $product])  }}" title="Compare"><i class="far fa-copy"></i></a>
-                        </div>
-                        @if($product->discount>0)
-                            <span class="tag" @if (session()->get('locale') == 'ar') style="left:7px !important;" @endif>
-                                {{ __('message.Sale') }}
-                            </span>
-                        @endif
-                         <img src="images/product_01.png" alt="Image">
-                        <h3 class="text-dark">
-                            @if (session()->get('locale') == 'ar'){{$product->ar_name}}
-                            @else{{$product->name}}
-                            @endif
-                        </h3>
-                        <p class="price"><del>{{$product->price}}</del> &mdash; ${{$product->price-$product->discount}}</p>
-                    </div>
-                @endforeach
-                </div>
-              </div>
-
-              <div class="tab-pane fade" id="v-pills-Categories" role="tabpanel" aria-labelledby="v-pills-Categories-tab">
                 <div class="row">
                 @foreach($categories as $category)
-
-                  <div class="col-sm-6 col-lg-4 col-md-6 text-center mb-4">
+                  <div class="col-sm-6 col-lg-3 col-md-4 text-center mb-4">
                     <div class="flip-card" style="height:300px;">
                       <div class="flip-card-inner">
                         <div class="flip-card-front">
@@ -98,7 +34,7 @@
                             <div class="flip-card-back">
                             <h1 class="pt-4">{{$category->name}}</h1>
                             <p class="pt-2">{{$category->description }}</p>
-                            <a href="#" style="color:#2A316E;"><h3 class="pt-4">{{ __('message.Products') }}</h3></a>
+                            <a href="{{ route('shop',['parentCat'=>$category]) }}" style="color:#2A316E;"><h3 class="pt-4">{{ __('message.Products') }}</h3></a>
                             </div>
                       </div>
                     </div>
@@ -106,17 +42,7 @@
                   @endforeach;
 
                 </div>
-              </div>
-              <div class="tab-pane fade" id="v-pills-filter" role="tabpanel" aria-labelledby="v-pills-filter-tab">...</div>
-              {{-- <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">...</div> --}}
             </div>
-          </div>
-        </div>
-
-        <div class="row mt-5">
-          <div class="col-12 text-center">
-            <a href="shop" class="btn btn-primary px-4 py-3">{{ __('message.View_all_products') }}</a>
-          </div>
         </div>
       </div>
     </div>
@@ -130,12 +56,33 @@
 
     <div class="site-section bg-light">
       <div class="container">
-        <div class="row">
-          <div class="title-section text-center col-12">
-            <h2 class="text-uppercase">{{ __('message.New_Products') }}</h2>
-          </div>
+        <div class="row" id="sale-slide">
+            <div class="title-section text-center col-12" style="background-color:#e9621e;">
+                <h2 class="text-uppercase">{{ __('message.sale_products') }}</h2>
+            </div>
+            <div class="col-md-12 block-3 products-wrap">
+              <div dir="ltr"class="nonloop-block-3 owl-carousel">
+                  @foreach($saleProducts as $product)
+                  <div class="text-center item mb-4">
+                    <div class="product-option">
+                    <a href="{{ action('Client\CartController@store', ['product' => $product])  }}" onclick="showSwal('auto-close')"  title="Add to cart" ><i class="fas fa-shopping-cart"></i></a>
+
+                      <!-- <a href="#" title="Add to cart" onclick="showSwal('auto-close')"><i class="fas fa-shopping-cart"></i></a> -->
+                      <a href="#" title="Add to wishlist"><i class="fas fa-heart"></i></a>
+                      <a href="#" title="Compare"><i class="far fa-copy"></i></a>
+                    </div>
+                    <a href="shop-single"> <img src="images/product_01.png" alt="Image"></a>
+                    <h3 class="text-dark"><a href="shop-single">{{$product->name}}</a></h3>
+                    <p class="price"><del>{{$product->price}}</del> &mdash; ${{$product->price-$product->discount}}</p>
+                  </div>
+                  @endforeach
+              </div>
+            </div>
         </div>
-        <div class="row">
+        <div class="row mt-3">
+            <div class="title-section text-center col-12">
+                <h2 class="text-uppercase">{{ __('message.New_Products') }}</h2>
+            </div>
           <div class="col-md-12 block-3 products-wrap">
             <div dir="ltr"class="nonloop-block-3 owl-carousel">
                 @foreach($products as $product)
@@ -151,7 +98,7 @@
                   <h3 class="text-dark"><a href="shop-single">{{$product->name}}</a></h3>
                   <p class="price"><del>{{$product->price}}</del> &mdash; ${{$product->price-$product->discount}}</p>
                 </div>
-                @endforeach;
+                @endforeach
 
               <div class="text-center item mb-4">
                 <a href="shop-single"> <img src="images/product_03.png" alt="Image"></a>
@@ -179,6 +126,14 @@
 
             </div>
           </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="row mt-5">
+            <div class="col-12 text-center">
+              <a href="shop" class="btn btn-primary px-4 py-3">{{ __('message.View_all_products') }}</a>
+            </div>
         </div>
       </div>
     </div>
@@ -211,19 +166,14 @@
 <script>
     function submitForm(id)
     {
-        // $('#'+id).submit();
         console.log(id);
         var form = document.createElement("form");
         var element1 = document.createElement("input");
-        // var element2 = document.createElement("input");
         form.method = "GET";
         form.action = "{{ action('Client\ShopController@productDetails') }}";
         element1.value=id;
         element1.name="id";
         form.appendChild(element1);
-        // element2.value=pw;
-        // element2.name="rowId";
-        // form.appendChild(element2);
         document.body.appendChild(form);
         form.submit();
     }

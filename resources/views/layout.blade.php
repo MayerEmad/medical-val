@@ -5,29 +5,29 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
   <link href="https://fonts.googleapis.com/css?family=Rubik:400,700|Crimson+Text:400,400i" rel="stylesheet">
-  <link rel="stylesheet" href="fonts/icomoon/style.css">
+  <link rel="stylesheet" href="{{ asset('fonts/icomoon/style.css') }}" >
 
   {{-- font awsome --}}
   <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
 
   {{-- icon Title --}}
-  <link rel="icon" href="images/logo-title.png" type="image/icon type">
+  <link rel="icon" href="{{ asset('images/logo-title.png') }}" type="image/icon type">
 
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js" integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT" crossorigin="anonymous"></script>
 
-  <link rel="stylesheet" href="css/user/bootstrap.min.css">
+  <link rel="stylesheet" href="{{ asset('css/user/bootstrap.min.css') }}">
 
-  <link rel="stylesheet" href="css/user/magnific-popup.css">
-  <link rel="stylesheet" href="css/user/jquery-ui.css">
-  <link rel="stylesheet" href="css/user/owl.carousel.min.css">
-  <link rel="stylesheet" href="css/user/owl.theme.default.min.css">
+  <link rel="stylesheet" href="{{ asset('css/user/magnific-popup.css') }}">
+  <link rel="stylesheet" href="{{ asset('css/user/jquery-ui.css') }}">
+  <link rel="stylesheet" href="{{ asset('css/user/owl.carousel.min.css') }}">
+  <link rel="stylesheet" href="{{ asset('css/user/owl.theme.default.min.css') }}">
 
 
-  <link rel="stylesheet" href="css/user/aos.css">
+  <link rel="stylesheet" href="{{ asset('css/user/aos.css') }}">
 
-  <link rel="stylesheet" href="css/user/style.css">
+  <link rel="stylesheet" href="{{ asset('css/user/style.css') }}">
   @if (session()->get('locale') == 'ar')
         <link rel="stylesheet" href="{{ asset('css/bootstrap-rtl.css') }}">
     @endif
@@ -36,11 +36,11 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
 
 </head>
-    @if (session()->get('locale') == 'ar')
+    @if (session()->get('locale') == 'en')
         <style>
-            .site-mobile-menu{
-                /* right:unset;
-                left:0; */
+            /* .site-mobile-menu{} */
+            .offcanvas-menu .site-mobile-menu {
+                left:0;
             }
         </style>
     @endif
@@ -64,7 +64,9 @@
         border:none;
     }
     .site-wrap{
+        /* to fix sticky issue */
         overflow-x: hidden;
+        /* clip-path: inset(0); */
     }
     @media (max-width: 576px){
             .container-fluid .container .row{
@@ -72,6 +74,11 @@
             }
             .site-footer .container .row {
                 padding: 0px 20px;
+            }
+        }
+        @media (max-width: 400px){
+            #sale-logo{
+                display:none;
             }
         }
 </style>
@@ -91,78 +98,16 @@
                     <input type="text" class="form-control" placeholder="Search keyword and hit enter...">
                 </form> -->
                 <form action="{{ route('search') }}" method="GET" class="search-form">
-                        <input type="text" name="query1" id="query1" value="{{ request()->input('query1') }}" class="form-control" placeholder="{{ __('message.Search keyword and hit enter') }}">
+                        <input type="text" name="pname" id="pname" value="{{ request()->input('pname') }}" class="form-control" placeholder="{{ __('message.Search keyword and hit enter') }}">
                 </form>
                 </div>
             </div>
             <div class="container">
                 <div class="d-flex align-items-center justify-content-between">
-                    <div class="logo">
-                        <div class="site-logo">
-                            <a href="index" class="js-logo-clone"><img class="mobile-image" src="images/logo.png" alt="logo" width="75px"></a>
-                        </div>
-                    </div>
-                    <div class="main-nav d-none d-xl-block">
-                        <nav class="site-navigation text-right text-md-center" role="navigation">
-                            <ul class="site-menu js-clone-nav d-none d-lg-block">
-                                <li class="nav-item"><a href="index">{{ __('message.Home') }}</a></li>
-                                <li class="nav-item"><a href="shop">{{ __('message.Store') }}</a></li>
-                                <li class="dropdown dropdown-large">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ __('message.Categories') }} <b class="caret"></b></a>
-                                    <ul id="category-list1"class="dropdown-menu dropdown-menu-large row" style="left: -100px;">
-                                        @if(count($categoriesArr)>0)
-                                            @for($i=0;$i<count($categoriesArr);$i+=2)
-                                                <li class="category-list col-lg-4 col-md-12 col-sm-12">
-                                                    <ul>
-                                                            <li class="dropdown-header">Parent {{$categoriesArr[$i][0]->name}}</li>
-                                                            @for($j=1;$j<count($categoriesArr[$i]);$j++)
-                                                                    <li><a href="#">Sup {{$categoriesArr[$i][$j]->name}}</a></li>
-                                                            @endfor
-                                                        @if($i+1<count($categoriesArr))
-                                                            <li class="divider"></li>
-                                                            <li class="dropdown-header">Parent {{$categoriesArr[$i+1][0]->name}}</li>
-                                                            @for($j=1;$j<count($categoriesArr[$i+1]);$j++)
-                                                                    <li><a href="#">Sup {{$categoriesArr[$i+1][$j]->name}}</a></li>
-                                                            @endfor
-                                                        @endif
-                                                    </ul>
-                                                </li>
-                                            @endfor
-                                        @endif
-                                        <li class="category-list col-lg-3 col-md-12 col-sm-12">
-                                            <ul>
-                                                <li class="dropdown-header">Button groups</li>
-                                                <li><a href="#">Basic exam</a></li>
-                                                <li><a href="#">Buttonbar</a></li>
-                                                <li><a href="#">Sizing</a></li>
-                                                <li><a href="#">Nesting</a></li>
-                                                <li><a href="#">Vertical</a></li>
-                                                <li class="divider"></li>
-                                                <li class="dropdown-header">Button dropdowns</li>
-                                                <li><a href="#">Single button dropdowns</a></li>
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li class="nav-item"><a href="about">{{ __('message.About') }}</a></li>
-                                <li class="nav-item"><a href="contact">{{ __('message.Contact') }}</a></li>
-                                @if (Auth::check())
-                                    <li class="nav-item"><a href="profile">{{ __('message.Profile') }}</a></li>
-                                    <li class="nav-item"><a onclick="logUserOut()">{{ __('auth.Logout') }}</a></li>
-                                    <form id="logoutForm" method="POST" action="{{ route('logout') }}" style="display:none">
-                                        @csrf
-                                    </form>
-                                    @if(!Auth::user()->hasRole('customer'))
-                                    <li class="nav-item"><a href="admin">{{ __('message.Dashboard') }}</a></li>
-                                    @endif
-                                @else
-                                    <li class="nav-item"><a href="login">{{ __('auth.Login') }}</a></li>
-                                @endif
-
-                            </ul>
-                        </nav>
-                    </div>
                     <div class="icons">
+                        <a href="#" class="site-menu-toggle js-menu-toggle mr-2 d-inline-block d-xl-none"><span
+                            class="icon-menu"></span>
+                        </a>
                         <!-- <a href="search" class="icons-btn d-inline-block js-search-open"><span class="icon-search"></span></a> -->
                         <a href="'.route('search').'" class="icons-btn d-inline-block js-search-open" type="button"><span class="icon-search"></span></a>
 
@@ -187,10 +132,88 @@
                             <option data-content='<span class="flag-icon flag-icon-us"></span>' value="en" {{ session()->get('locale') == 'en' ? 'selected' : '' }}>{{__('message.English')}}</option>
                             <option  data-content='<span class="flag-icon flag-icon-mx"></span>'value="ar" {{ session()->get('locale') == 'ar' ? 'selected' : '' }}>{{__('message.Arabic')}}</option>
                         </select>
+                    </div>
+                    <div class="main-nav d-none d-xl-block">
+                        <nav class="site-navigation text-right text-md-center" role="navigation">
+                            <ul class="site-menu js-clone-nav d-none d-lg-block">
+                                <li class="nav-item"><a href="/index">{{ __('message.Home') }}</a></li>
+                                <li class="nav-item"><a href="/shop">{{ __('message.Store') }}</a></li>
+                                <li class="dropdown dropdown-large">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ __('message.Categories') }} <b class="caret"></b></a>
+                                    <ul id="category-list1"class="dropdown-menu dropdown-menu-large row" style="left: -100px;">
+                                        @if(count($categoriesArr)>0)
+                                            @for($i=0;$i<count($categoriesArr);$i+=2)
+                                                <li class="category-list col-lg-4 col-md-12 col-sm-12">
+                                                    <ul>
+                                                            <li class="dropdown-header">
+                                                                <a href="{{ route('shop',['parentCat'=>$categoriesArr[$i][0]]) }}">Parent {{$categoriesArr[$i][0]->name}}</a>
+                                                            </li>
+                                                            @for($j=1;$j<count($categoriesArr[$i]);$j++)
+                                                                    <li>
+                                                                        <a href="{{ route('shop',['parentCat'=>$categoriesArr[$i][0] , 'subCat'=>$categoriesArr[$i][$j] ]) }}">Sup {{$categoriesArr[$i][$j]->name}}</a>
+                                                                    </li>
+                                                            @endfor
+                                                        @if($i+1<count($categoriesArr))
+                                                            <li class="divider"></li>
+                                                            <li class="dropdown-header">
+                                                                <a href="{{ route('shop',['parentCat'=>$categoriesArr[$i+1][0]])}}">Parent {{$categoriesArr[$i+1][0]->name}}</a>
+                                                            </li>
+                                                            @for($j=1;$j<count($categoriesArr[$i+1]);$j++)
+                                                                    <li>
+                                                                        <a href="{{ route('shop',['parentCat'=>$categoriesArr[$i+1][0] , 'subCat'=>$categoriesArr[$i+1][$j] ]) }}">Sup {{$categoriesArr[$i+1][$j]->name}}</a>
+                                                                    </li>
+                                                            @endfor
+                                                        @endif
+                                                    </ul>
+                                                </li>
+                                            @endfor
+                                        @endif
+                                        <li class="category-list col-lg-3 col-md-12 col-sm-12">
+                                            <ul>
+                                                <li class="dropdown-header">Button groups</li>
+                                                <li><a href="#">Basic exam</a></li>
+                                                <li><a href="#">Buttonbar</a></li>
+                                                <li><a href="#">Sizing</a></li>
+                                                <li><a href="#">Nesting</a></li>
+                                                <li><a href="#">Vertical</a></li>
+                                                <li class="divider"></li>
+                                                <li class="dropdown-header">Button dropdowns</li>
+                                                <li><a href="#">Single button dropdowns</a></li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="nav-item"><a href="/about">{{ __('message.About') }}</a></li>
+                                <li class="nav-item"><a href="/contact">{{ __('message.Contact') }}</a></li>
+                                @if (Auth::check())
+                                    <li class="nav-item"><a href="/profile">{{ __('message.Profile') }}</a></li>
+                                    <li class="nav-item"><a onclick="logUserOut()">{{ __('auth.Logout') }}</a></li>
+                                    <form id="logoutForm" method="POST" action="{{ route('logout') }}" style="display:none">
+                                        @csrf
+                                    </form>
+                                    @if(!Auth::user()->hasRole('customer'))
+                                    <li class="nav-item"><a href="/admin">{{ __('message.Dashboard') }}</a></li>
+                                    @endif
+                                @else
+                                    <li class="nav-item"><a href="/login">{{ __('auth.Login') }}</a></li>
+                                @endif
 
-                        <a href="#" class="site-menu-toggle js-menu-toggle ml-3 d-inline-block d-xl-none"><span
-                            class="icon-menu"></span>
-                        </a>
+                            </ul>
+                        </nav>
+                    </div>
+                    {{-- <div class="logo">
+                        <div class="site-logo">
+                            <a href="index" class="js-logo-clone"><img class="mobile-image" src="{{ asset('images/sale2.png') }}" alt="logo" width="75px"></a>
+                        </div>
+                    </div> --}}
+                    <div class="logo">
+                        <div class="site-logo">
+                            {{-- fixed var for show sale issue --}}
+                            @if(true)
+                            <a href="/index#sale-slide" id="sale-logo"><img class="mobile-image" src="{{ asset('images/sale2.png') }}" alt="logo" width="75px"></a>
+                            @endif
+                            <a href="index" class="js-logo-clone"><img class="mobile-image" src="{{ asset('images/logo.png') }}" alt="logo" width="75px"></a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -318,15 +341,15 @@
     </div>
 
 
-  <script src="js/user/jquery-3.3.1.min.js"></script>
-  <script src="js/user/jquery-ui.js"></script>
-  <script src="js/user/popper.min.js"></script>
-  <script src="js/user/bootstrap.min.js"></script>
-  <script src="js/user/owl.carousel.min.js"></script>
-  <script src="js/user/jquery.magnific-popup.min.js"></script>
-  <script src="js/user/aos.js"></script>
+  <script src="{{ asset('js/user/jquery-3.3.1.min.js') }}"></script>
+  <script src="{{ asset('js/user/jquery-ui.js') }}"></script>
+  <script src="{{ asset('js/user/popper.min.js') }}"></script>
+  <script src="{{ asset('js/user/bootstrap.min.js') }}"></script>
+  <script src="{{ asset('js/user/owl.carousel.min.js') }}"></script>
+  <script src="{{ asset('js/user/jquery.magnific-popup.min.js') }}"></script>
+  <script src="{{ asset('js/user/aos.js') }}"></script>
 
-  <script src="js/user/main.js"></script>
+  <script src="{{ asset('js/user/main.js') }}"></script>
 
   <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>
 

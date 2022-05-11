@@ -87,11 +87,13 @@ Route::get('index/categories', [HomeController::class, 'fetchCategories'])->name
 
 
 //shop page
-Route::get('/shop', [ShopController::class, 'shop'])->name('shop');
-//Route::get('/search',[ShopController::class, 'search'])->name('search');
 Route::get('/shop/filter',[ShopController::class, 'filter'])->name('shop.productfilter');
-//Route::get('/shop/pagination', [ShopController::class, 'filter']);
+Route::get('/shop/getSubCategories',[ShopController::class, 'getSubCategories'])->name('shop.getSubCategories');
+Route::get('/shop/{parentCat?}/{subCat?}', [ShopController::class, 'shop'])->name('shop');
+
 Route::get('/shop-single',[ShopController::class, 'productDetails'])->name('shop.productDetails');
+//Route::get('/search',[ShopController::class, 'search'])->name('search');
+//Route::get('/shop/pagination', [ShopController::class, 'filter']);
 
 
 //cart page
