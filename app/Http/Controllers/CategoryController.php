@@ -47,21 +47,21 @@ class CategoryController extends Controller
                     </div>
                     <div class="flip-card-back pt-5" style="background-color:#828282;">
                         <div class="pt-2 mb-4">
-                            <a href="'.route('category.edit',['category'=>$cat->id]).'" class="btn btn-success mr-3" type="button">
+                            <a href="'.route('category.edit',['category'=>$cat]).'" class="btn btn-success mr-3" type="button">
                                 <i class="fas fa-edit"></i> Edit
                             </a>';
                             if (Auth::user()->hasRole('superadmin')==true){
                             $output.='<a onclick="deletefunction('.$cat->id.')" class="btn btn-danger" type="button">
                                 <i class="fas fa-trash-alt"></i> Delete
                             </a>
-                            <form action="'. route('category.destroy',['category'=>$cat->id]).'" id="'.$cat->id.'" method="POST" style="display:none">
+                            <form action="'. route('category.destroy',['category'=>$cat]).'" id="'.$cat->id.'" method="POST" style="display:none">
                             @csrf @method("DELETE")
                             <button type="submit"></button>
                             </form>';
                             }
                             $output.='</div>
                     </div>
-                    <a href="'.route("category.show",["category"=>$cat->id]).'" class="btn btn-light pro-btn mb-3 mr-2 ml-2" type="button">
+                    <a href="'.route("category.show",["category"=>$cat]).'" class="btn btn-light pro-btn mb-3 mr-2 ml-2" type="button">
                         <i class="fab fa-product-hunt"></i> View Contents
                     </a>
 

@@ -13,7 +13,7 @@
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="/admin">Home</a></li>
-                        <li class="breadcrumb-item"><a href="{{ route('category.show',['category'=>$product->category_id]) }}">{{$product->name}} category</a></li>
+                        <li class="breadcrumb-item"><a href="{{ route('category.show',['category'=>$product->category]) }}">{{$product->name}} category</a></li>
                         <li class="breadcrumb-item active">Edit {{$product->name}} </li>
                         </ol>
                     </div>

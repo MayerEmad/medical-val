@@ -38,8 +38,18 @@
   <!-- summernote -->
   <link rel="stylesheet" href="{{ asset('/css/summernote-bs4.min.css') }}">
 
-
 </head>
+
+<style>
+    @media (max-width: 991px){
+        .main-sidebar {
+                display: none;
+            }
+    }
+    #DataTables_Table_0{
+        width:100% !important;
+    }
+</style>
 
 <body class="hold-transition sidebar-mini" style="font-family: 'Noto Sans JP', sans-serif;font-family: 'Poppins', sans-serif;">
 <div class="wrapper">
@@ -50,6 +60,15 @@
       <li class="nav-item">
           <a class="nav-link" href="{{route('index')}}">Site</a>
       </li>
+
+      @if(Auth::user()->hasRole('superadmin'))
+        <li class="nav-item">
+            <a class="nav-link" href="{{route('admin.ordersTablePage')}}">orders</a>
+        </li>
+        <li class="nav-item">
+          <a href="{{route('admin.tablepage')}}" class="nav-link">Admins Table</a>
+        </li>
+      @endif
      {{--- <li class="nav-item d-none d-sm-inline-block">
           <a href="{{route('admin.index')}}" class="nav-link">Dashboard</a>
       </li>

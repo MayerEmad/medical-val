@@ -203,7 +203,7 @@
                     </div>
                     {{-- <div class="logo">
                         <div class="site-logo">
-                            <a href="index" class="js-logo-clone"><img class="mobile-image" src="{{ asset('images/sale2.png') }}" alt="logo" width="75px"></a>
+                            <a href="/index" class="js-logo-clone"><img class="mobile-image" src="{{ asset('images/sale2.png') }}" alt="logo" width="75px"></a>
                         </div>
                     </div> --}}
                     <div class="logo">
@@ -212,7 +212,7 @@
                             @if(true)
                             <a href="/index#sale-slide" id="sale-logo"><img class="mobile-image" src="{{ asset('images/sale2.png') }}" alt="logo" width="75px"></a>
                             @endif
-                            <a href="index" class="js-logo-clone"><img class="mobile-image" src="{{ asset('images/logo.png') }}" alt="logo" width="75px"></a>
+                            <a href="/index" class="js-logo-clone"><img class="mobile-image" src="{{ asset('images/logo.png') }}" alt="logo" width="75px"></a>
                         </div>
                     </div>
                 </div>
